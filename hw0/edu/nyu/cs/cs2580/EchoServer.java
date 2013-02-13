@@ -3,6 +3,7 @@ package edu.nyu.cs.cs2580;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
+import java.net.URI;
 import java.util.concurrent.Executors;
 
 import com.sun.net.httpserver.Headers;
@@ -40,26 +41,28 @@ public class EchoServer {
 class EchoHandler implements HttpHandler {
   private static String plainResponse =
       "Request received, but I am not smart enough to echo yet!\n";
+  private String parseQuery(String query) {
+	  String ret = "";
+      String[] tmps = query.split("[=+]");
+      for (int i = 1; i<tmps.length;i++) {
+    	  ret = ret + tmps[i];
+    	  if (i !=tmps.length-1)
+    		  ret = ret + " ";
+  		  else 
+  			  ret = ret + "\n";
+  	   }		
+      return ret;
+  }
   
   public void handle(HttpExchange exchange) throws IOException {
       
     String requestMethod = exchange.getRequestMethod();
-    
-    String tmp = exchange.getRequestURI().toString();
-    String []tmps = tmp.split("[?]");
-    
-    if (tmps[0].equals("/search")) {
-    	tmps = tmps[1].split("[=]");
-    	tmps = tmps[1].split("[+]");
-    	plainResponse = "";
-    	for (int i = 0; i<tmps.length;i++) {
-    		plainResponse = plainResponse + tmps[i];
-    		if (i !=tmps.length-1)
-    			plainResponse = plainResponse+ " ";
-    		else 
-    			plainResponse = plainResponse+ "\n";
-    	}
+
+    URI uri= exchange.getRequestURI();
+    if (uri.getPath().equals("/search")) {
+        plainResponse =  parseQuery(uri.getQuery());
     }
+
     if (!requestMethod.equalsIgnoreCase("GET")) {  // GET requests only.
       return;
     }
