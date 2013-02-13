@@ -19,7 +19,7 @@ public class EchoServer {
 
   // @CS2580: please use a port number 258XX, where XX corresponds
   // to your group number.
-  private static int port = 25800;
+  private static int port = 25809;
 
   public static void main(String[] args) throws IOException {
     // Create the server.
@@ -42,7 +42,24 @@ class EchoHandler implements HttpHandler {
       "Request received, but I am not smart enough to echo yet!\n";
   
   public void handle(HttpExchange exchange) throws IOException {
+      
     String requestMethod = exchange.getRequestMethod();
+    
+    String tmp = exchange.getRequestURI().toString();
+    String []tmps = tmp.split("[?]");
+    
+    if (tmps[0].equals("/search")) {
+    	tmps = tmps[1].split("[=]");
+    	tmps = tmps[1].split("[+]");
+    	plainResponse = "";
+    	for (int i = 0; i<tmps.length;i++) {
+    		plainResponse = plainResponse + tmps[i];
+    		if (i !=tmps.length-1)
+    			plainResponse = plainResponse+ " ";
+    		else 
+    			plainResponse = plainResponse+ "\n";
+    	}
+    }
     if (!requestMethod.equalsIgnoreCase("GET")) {  // GET requests only.
       return;
     }
