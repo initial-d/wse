@@ -18,19 +18,20 @@ class Ranker {
     }
     return retrieval_results;
   }
-
+    public Vector <String> ParseQuery (String query) {
+        Scanner s = new Scanner(query);
+        s.useDelimiter("[+]");
+        Vector < String > qv = new Vector < String > ();
+        while (s.hasNext()){
+            String term = s.next();
+            qv.add(term);
+        }
+        return qv;
+    }
   public ScoredDocument runquery(String query, int did){
 
     // Build query vector
-    Scanner s = new Scanner(query);
-    s.useDelimiter("[+]");
-    System.out.println("xxx");
-    Vector < String > qv = new Vector < String > ();
-    while (s.hasNext()){
-      String term = s.next();
-      qv.add(term);
-      System.out.println("qv:"+term);
-    }
+    Vector < String > qv = ParseQuery(query);
 
     // Get the document vector. For hw1, you don't have to worry about the
     // details of how index works.
