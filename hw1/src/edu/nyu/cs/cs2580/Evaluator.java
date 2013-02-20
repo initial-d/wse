@@ -72,20 +72,20 @@ class Evaluator {
         Scanner s = new Scanner(line).useDelimiter("\t");
         String query = s.next();
         int did = Integer.parseInt(s.next());
-      	String title = s.next();
-      	double rel = Double.parseDouble(s.next());
-      	if (relevance_judgments.containsKey(query) == false){
-      	  throw new IOException("query not found");
-      	}
-      	HashMap < Integer , Double > qr = relevance_judgments.get(query);
-      	if (qr.containsKey(did) != false){
-      	  RR += qr.get(did);					
-      	}
-      	++N;
+        String title = s.next();
+        double rel = Double.parseDouble(s.next());
+        if (relevance_judgments.containsKey(query) == false){
+            throw new IOException("query not found");
+        }
+        HashMap < Integer , Double > qr = relevance_judgments.get(query);
+        if (qr.containsKey(did) != false){
+            RR += qr.get(did);					
+        }
+        ++N;
       }
       System.out.println(Double.toString(RR/N));
     } catch (Exception e){
-      System.err.println("Error:" + e.getMessage());
+        System.err.println("Error:" + e.getMessage());
     }
   }
 }

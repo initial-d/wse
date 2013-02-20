@@ -2,6 +2,7 @@ package edu.nyu.cs.cs2580;
 
 import java.util.Vector;
 import java.util.Scanner;
+import java.io.OutputStream;
 
 class Ranker {
   private Index _index;
@@ -22,10 +23,13 @@ class Ranker {
 
     // Build query vector
     Scanner s = new Scanner(query);
+    s.useDelimiter("[+]");
+    System.out.println("xxx");
     Vector < String > qv = new Vector < String > ();
     while (s.hasNext()){
       String term = s.next();
       qv.add(term);
+      System.out.println("qv:"+term);
     }
 
     // Get the document vector. For hw1, you don't have to worry about the

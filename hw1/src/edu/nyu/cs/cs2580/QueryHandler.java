@@ -21,17 +21,17 @@ class QueryHandler implements HttpHandler {
     _ranker = ranker;
   }
 
-  public static Map<String, String> getQueryMap(String query){  
-    String[] params = query.split("&");  
-    Map<String, String> map = new HashMap<String, String>();  
-    for (String param : params){  
-      String name = param.split("=")[0];  
-      String value = param.split("=")[1];  
-      map.put(name, value);  
+  public static Map<String, String> getQueryMap(String query){
+    String[] params = query.split("&");
+    Map<String, String> map = new HashMap<String, String>();
+    for (String param : params){
+      String name = param.split("=")[0];
+      String value = param.split("=")[1];
+      map.put(name, value);
     }
-    return map;  
-  } 
-  
+    return map;
+  }
+
   public void handle(HttpExchange exchange) throws IOException {
     String requestMethod = exchange.getRequestMethod();
     if (!requestMethod.equalsIgnoreCase("GET")){  // GET requests only.
@@ -45,7 +45,7 @@ class QueryHandler implements HttpHandler {
       System.out.print(key + ":" + requestHeaders.get(key) + "; ");
     }
     System.out.println();
-    String queryResponse = "";  
+    String queryResponse = "";
     String uriQuery = exchange.getRequestURI().getQuery();
     String uriPath = exchange.getRequestURI().getPath();
 
