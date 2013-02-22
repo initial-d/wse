@@ -66,11 +66,21 @@ class QueryHandler implements HttpHandler {
                     outputPath = "hw1.1-vsm.tsv";
                     System.out.println("cosie ranker");
                 } else if (ranker_type.equals("QL")){
-                    queryResponse = (ranker_type + " not implemented.");
+                    sds = _ranker.runqueryWithJMS(query_map.get("query"));
+                    outputPath = "hw1.1-ql.tsv";
+                    System.out.println("QL ranker");
                 } else if (ranker_type.equals("phrase")){
-                    queryResponse = (ranker_type + " not implemented.");
+                    sds = _ranker.runqueryWithPhrase(query_map.get("query"));
+                    outputPath = "hw1.1-phrase.tsv";
+                    System.out.println("Phrase ranker");
+                } else if (ranker_type.equals("nviews")) {
+                    sds = _ranker.runqueryWithViews(query_map.get("query"));
+                    outputPath = "hw1.1-numviews.tsv";
+                    System.out.println("Num views ranker");
                 } else if (ranker_type.equals("linear")){
-                    queryResponse = (ranker_type + " not implemented.");
+                    sds = _ranker.runqueryWithViews(query_map.get("query"));
+                    outputPath = "hw1.2-linear.tsv";
+                    System.out.println("Num views ranker");
                 } else {
                     queryResponse = (ranker_type+" not implemented.");
                 }

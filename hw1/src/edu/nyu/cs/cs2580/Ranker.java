@@ -6,6 +6,11 @@ import java.io.OutputStream;
 import java.lang.Math;
 
 class Ranker {
+    private static final double lambda = 0.5;
+    private static final double betacos = 0.5;
+    private static final double betalmp = 0.5;
+    private static final double betaphrase = 0.5;
+    private static final double betanviews = 0.5;
     private Index _index;
 
     public Ranker(String index_source){
@@ -35,9 +40,22 @@ class Ranker {
         double ret = 0;
         Document d = _index.getDoc(did);
         Vector<String> body = d.get_body_vector();
-        for (int i = 0; i<body.size(); i++)
+        for (int i = 0; i<body.size(); i++) {
             if (qv.equals(body.get(i)))
                 ret ++;
+        }
+        return ret;
+    }
+
+
+    private double countBigram (String qv1,String qv2, int did){
+        double ret = 0;
+        Document d = _index.getDoc(did);
+        Vector<String> body = d.get_body_vector();
+        for (int i = 0; i<body.size()-1; i++) {
+            if (qv1.equals(body.get(i))&&qv2.equals(body.get(i+1)))
+                ret ++;
+        }
         return ret;
     }
 
@@ -45,12 +63,13 @@ class Ranker {
         double n = _index.numDocs();
         double ret = Document.documentFrequency(qv);
         if (ret != 0) {
-            ret = Math.log(n/ret)/Math.log(2)+1;
+            ret = Math.log(n/ret)/Math.log(2.0)+1.0;
         }
         return ret;
     }
 
     private Vector<Double> normalize( Vector<Double> input) {
+
         Vector<Double> output = new Vector<Double>();
         double sum = 0;
         for (int i = 0; i<input.size();i++) 
@@ -70,13 +89,15 @@ class Ranker {
         Document d = _index.getDoc(did);
 
         for (int j = 0; j < qv.size(); ++j) {
-            ret.add(getTf(qv.get(j),did)*getIdf(qv.get(j)));
+            double tf = getTf(qv.get(j),did);
+            double idf = getIdf(qv.get(j));
+            ret.add(tf*idf);
         }
         ret = normalize(ret);
         return ret;
     }
 
-    public ScoredDocument runqueryWithCosine(String query, int did){
+    private double cosineScore (String query,int did) {
         Vector<Double> tfIdf = getTFidf(query,did);
         double upper=0;
         double lower=0;
@@ -89,6 +110,12 @@ class Ranker {
         double score=0;
         if (lower != 0)
             score = upper/lower;
+        return score;
+    }
+
+    public ScoredDocument runqueryWithCosine(String query, int did){
+        Document d = _index.getDoc(did);
+        double score = cosineScore(query, did);
         return new ScoredDocument(did, d.get_title_string(), score);
     }
 
@@ -102,7 +129,6 @@ class Ranker {
 
 
     private double JMS(String qv, int did) {
-        double lambda = 0.5;
         double ret;
         double D = _index.getDoc(did).get_body_vector().size();
         double fq = getTf(qv,did);
@@ -111,15 +137,87 @@ class Ranker {
         ret = Math.log((1-lambda)*fq/D + lambda*cq/C);
         return ret;
     }
-
-
-    public double lmpWithJMS(String query, int did) {
+    private double jmsScore (String query, int did) {
         Vector<String> qv = ParseQuery(query);
-        double ret = 0;
+        double score = 0;
         for (int i=0; i<qv.size();i++)
-            ret += JMS(qv.get(i),did);
-        return ret;
+            score += JMS(qv.get(i),did);
+        return score;
     }
+    public ScoredDocument runqueryWithJMS(String query, int did){
+        double score = jmsScore(query,did);
+        Document d = _index.getDoc(did);
+        return new ScoredDocument(did, d.get_title_string(), score);
+    }
+
+    public Vector < ScoredDocument > runqueryWithJMS(String query){
+        Vector < ScoredDocument > retrieval_results = new Vector < ScoredDocument > ();
+        for (int i = 0; i < _index.numDocs(); ++i){
+            retrieval_results.add(runqueryWithJMS(query, i));
+        }
+        return retrieval_results;
+    }
+
+    private double phraseScore(String query, int did) {
+        Vector<String> qv = ParseQuery(query);
+        double score = 0;
+        if (qv.size()==1)
+            score = getTf(qv.get(0),did);
+        else {
+            for (int i = 0; i<qv.size()-1;i++)
+                score = score + countBigram(qv.get(i),qv.get(i+1),did);
+        }
+        return score;
+    }
+
+    public ScoredDocument runqueryWithPhrase(String query, int did){
+        double score = phraseScore(query,did);
+        Document d = _index.getDoc(did);
+        return new ScoredDocument(did, d.get_title_string(), score);
+    }
+
+    public Vector < ScoredDocument > runqueryWithPhrase(String query){
+        Vector < ScoredDocument > retrieval_results = new Vector < ScoredDocument > ();
+        for (int i = 0; i < _index.numDocs(); ++i){
+            retrieval_results.add(runqueryWithPhrase(query, i));
+        }
+        return retrieval_results;
+    }
+
+    public double viewsScore(String query, int did){
+        return _index.getDoc(did).get_numviews();
+    }
+
+    public ScoredDocument runqueryWithViews(String query, int did){
+        double score = viewsScore(query,did);
+        Document d = _index.getDoc(did);
+        return new ScoredDocument(did, d.get_title_string(), score);
+    }
+    public Vector < ScoredDocument > runqueryWithViews(String query){
+        Vector < ScoredDocument > retrieval_results = new Vector < ScoredDocument > ();
+        for (int i = 0; i < _index.numDocs(); ++i){
+            retrieval_results.add(runqueryWithViews(query, i));
+        }
+        return retrieval_results;
+    }
+
+    public ScoredDocument runqueryWithLinear(String query, int did){
+        double score = betacos*cosineScore(query,did) +
+            betalmp*jmsScore(query,did) +
+            betaphrase*phraseScore(query,did) +
+            betanviews*viewsScore(query,did);
+        Document d = _index.getDoc(did);
+        return new ScoredDocument(did, d.get_title_string(), score);
+    }
+
+    public Vector < ScoredDocument > runqueryWithLinear(String query){
+        Vector < ScoredDocument > retrieval_results = new Vector < ScoredDocument > ();
+        for (int i = 0; i < _index.numDocs(); ++i){
+            retrieval_results.add(runqueryWithLinear(query, i));
+        }
+        return retrieval_results;
+    }
+
     public ScoredDocument runquery(String query, int did){
 
         // Build query vector
