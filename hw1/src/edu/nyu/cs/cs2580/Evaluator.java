@@ -64,7 +64,7 @@ class Evaluator {
     // only consider one query per call    
     try {
       BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-      
+
       String line = null;
       double RR = 0.0;
       double N = 0.0;
@@ -79,7 +79,7 @@ class Evaluator {
         }
         HashMap < Integer , Double > qr = relevance_judgments.get(query);
         if (qr.containsKey(did) != false){
-            RR += qr.get(did);					
+            RR += qr.get(did);
         }
         ++N;
       }

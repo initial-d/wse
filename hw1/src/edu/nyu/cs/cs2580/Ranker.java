@@ -22,7 +22,7 @@ class Ranker {
 
     public Vector <String> ParseQuery (String query) {
         Scanner s = new Scanner(query);
-        s.useDelimiter("[+]");
+        s.useDelimiter("[ ]");
         Vector < String > qv = new Vector < String > ();
         while (s.hasNext()){
             String term = s.next();
@@ -56,12 +56,13 @@ class Ranker {
         for (int i = 0; i<input.size();i++) 
             sum = sum + input.get(i)*input.get(i);
         sum = Math.sqrt(sum);
+        if (sum!=0)
         for (int i = 0; i<input.size();i++)
             output.add(input.get(i)/sum);
         return output;
     }
 
-    public Vector<Double>  getTFidf(String query,int did) {
+    private Vector<Double>  getTFidf(String query,int did) {
         // Get the document vector. For hw1, you don't have to worry about the
         // details of how index works.
         Vector < String > qv = ParseQuery(query);
@@ -75,6 +76,50 @@ class Ranker {
         return ret;
     }
 
+    public ScoredDocument runqueryWithCosine(String query, int did){
+        Vector<Double> tfIdf = getTFidf(query,did);
+        double upper=0;
+        double lower=0;
+        Document d = _index.getDoc(did);
+        for (int i = 0; i<tfIdf.size();i++) {
+            upper = upper + tfIdf.get(i);
+            lower = lower + tfIdf.get(i)*tfIdf.get(i);
+        }
+        lower = Math.sqrt(lower);
+        double score=0;
+        if (lower != 0)
+            score = upper/lower;
+        return new ScoredDocument(did, d.get_title_string(), score);
+    }
+
+    public Vector < ScoredDocument > runqueryWithCosine(String query){
+        Vector < ScoredDocument > retrieval_results = new Vector < ScoredDocument > ();
+        for (int i = 0; i < _index.numDocs(); ++i){
+            retrieval_results.add(runqueryWithCosine(query, i));
+        }
+        return retrieval_results;
+    }
+
+
+    private double JMS(String qv, int did) {
+        double lambda = 0.5;
+        double ret;
+        double D = _index.getDoc(did).get_body_vector().size();
+        double fq = getTf(qv,did);
+        double cq = Document.termFrequency(qv);
+        double C = Document.termFrequency();
+        ret = Math.log((1-lambda)*fq/D + lambda*cq/C);
+        return ret;
+    }
+
+
+    public double lmpWithJMS(String query, int did) {
+        Vector<String> qv = ParseQuery(query);
+        double ret = 0;
+        for (int i=0; i<qv.size();i++)
+            ret += JMS(qv.get(i),did);
+        return ret;
+    }
     public ScoredDocument runquery(String query, int did){
 
         // Build query vector
