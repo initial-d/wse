@@ -88,13 +88,12 @@ class QueryHandler implements HttpHandler {
         }
       }
     }
-    
-      // Construct a simple response.
-      Headers responseHeaders = exchange.getResponseHeaders();
-      responseHeaders.set("Content-Type", "text/plain");
-      exchange.sendResponseHeaders(200, 0);  // arbitrary number of bytes
-      OutputStream responseBody = exchange.getResponseBody();
-      responseBody.write(queryResponse.getBytes());
-      responseBody.close();
+    // Construct a simple response.
+    Headers responseHeaders = exchange.getResponseHeaders();
+    responseHeaders.set("Content-Type", "text/plain");
+    exchange.sendResponseHeaders(200, 0);  // arbitrary number of bytes
+    OutputStream responseBody = exchange.getResponseBody();
+    responseBody.write(queryResponse.getBytes());
+    responseBody.close();
   }
 }

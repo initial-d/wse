@@ -46,5 +46,5 @@ class Index {
 
   public Document getDoc(int did){
     return (did >= _documents.size() || did < 0) ? null : _documents.get(did);
-  } 
+  }
 }

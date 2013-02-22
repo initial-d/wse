@@ -17,12 +17,12 @@ class Document {
   private static HashMap < Integer , Integer > _df = new HashMap < Integer , Integer >();
   private static HashMap < Integer , Integer > _tf = new HashMap < Integer , Integer >();
   private static int _total_tf = 0;
-  
+
   private Vector < Integer > _body;
   private Vector < Integer > _title;
   private String _titleString;
   private int _numviews;
-  
+
   public static int documentFrequency(String s){
     return _dictionary.containsKey(s) ? _df.get(_dictionary.get(s)) : 0;
   }
@@ -34,7 +34,7 @@ class Document {
   public static int termFrequency(){
     return _total_tf;
   }
-  
+
   public Document(int did, String content){
     Scanner s = new Scanner(content).useDelimiter("\t");
 
@@ -44,7 +44,7 @@ class Document {
 
     readTermVector(_titleString, _title);
     readTermVector(s.next(), _body);
-    
+
     HashSet < Integer > unique_terms = new HashSet < Integer >();
     for (int i = 0; i < _title.size(); ++i){
       int idx = _title.get(i);
@@ -69,7 +69,7 @@ class Document {
     _numviews = Integer.parseInt(s.next());
     _docid = did;
   }
-  
+
   public String get_title_string(){
     return _titleString;
   }
