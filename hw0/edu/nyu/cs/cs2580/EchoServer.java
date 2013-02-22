@@ -14,7 +14,7 @@ import com.sun.net.httpserver.HttpServer;
 /*
  * Instructors' simple version.  As implemented now, this version does not
  * "echo" the user query.  It simply returns the same string and logs the
- * user request every time.
+ * user request every time.uuuuuuu
  */
 public class EchoServer {
 
