@@ -8,6 +8,7 @@ import java.util.Iterator;
 
 // @CS2580: This is a simple implementation that you will be changing
 // in homework 2.  For this homework, don't worry about how this is done.
+
 class Document {
   public int _docid;
 
