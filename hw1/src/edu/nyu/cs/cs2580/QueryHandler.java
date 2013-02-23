@@ -1,5 +1,4 @@
 package edu.nyu.cs.cs2580;
-
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.*;
@@ -7,16 +6,28 @@ import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import java.util.HashMap;
+
 import java.util.Map;
 import java.util.Set;
 import java.util.Iterator;
 import java.util.Vector;
+import java.util.Comparator;
+import java.util.Collections;
 
 class QueryHandler implements HttpHandler {
   private static String plainResponse =
       "Request received, but I am not smart enough to echo yet!\n";
 
   private Ranker _ranker;
+
+  static class SdComparator implements Comparator<ScoredDocument> {
+      @Override
+          public int compare(ScoredDocument arg0, ScoredDocument arg1) {
+          if(arg0._score < arg1._score)  return 1;
+          else if(arg0._score > arg1._score)  return -1;
+          else  return 0;
+      }
+  }
 
   public QueryHandler(Ranker ranker){
     _ranker = ranker;
@@ -78,7 +89,7 @@ class QueryHandler implements HttpHandler {
                     outputPath = "hw1.1-numviews.tsv";
                     System.out.println("Num views ranker");
                 } else if (ranker_type.equals("linear")){
-                    sds = _ranker.runqueryWithViews(query_map.get("query"));
+                    sds = _ranker.runqueryWithLinear(query_map.get("query"));
                     outputPath = "hw1.2-linear.tsv";
                     System.out.println("Num views ranker");
                 } else {
@@ -87,6 +98,7 @@ class QueryHandler implements HttpHandler {
             } else {
                 sds = _ranker.runquery(query_map.get("query"));
             }
+            Collections.sort(sds, new SdComparator());
             Iterator < ScoredDocument > itr = sds.iterator();
             while (itr.hasNext()){
                 ScoredDocument sd = itr.next();

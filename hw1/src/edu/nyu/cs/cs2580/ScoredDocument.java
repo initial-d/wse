@@ -1,5 +1,5 @@
 package edu.nyu.cs.cs2580;
-
+import java.util.*;
 // @CS2580: this class should not be changed.
 class ScoredDocument {
   public int _did;
