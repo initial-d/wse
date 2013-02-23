@@ -68,6 +68,7 @@ class QueryHandler implements HttpHandler {
         Map<String,String> query_map = getQueryMap(uriQuery);
         Set<String> keys = query_map.keySet();
         if (keys.contains("query")){
+            Boolean implementedQuery = true;
             String outputPath = "defaultRanker.tsv";
             Vector < ScoredDocument > sds = new Vector<ScoredDocument>();
             if (keys.contains("ranker")){
@@ -93,28 +94,33 @@ class QueryHandler implements HttpHandler {
                     outputPath = "hw1.2-linear.tsv";
                     System.out.println("Num views ranker");
                 } else {
-                    queryResponse = (ranker_type+" not implemented.");
+                    implementedQuery = false;
+                    queryResponse = (ranker_type+" not implemented.Please use cosine | QL | phrase | nviews | linear\n");
                 }
             } else {
                 sds = _ranker.runquery(query_map.get("query"));
             }
-            Collections.sort(sds, new SdComparator());
-            Iterator < ScoredDocument > itr = sds.iterator();
-            while (itr.hasNext()){
-                ScoredDocument sd = itr.next();
+            if (implementedQuery) {
+                Collections.sort(sds, new SdComparator());
+                Iterator < ScoredDocument > itr = sds.iterator();
+                while (itr.hasNext()){
+                    ScoredDocument sd = itr.next();
+                    if (queryResponse.length() > 0){
+                        queryResponse = queryResponse + "\n";
+                    }
+                    queryResponse = queryResponse + query_map.get("query") + "\t" + sd.asString();
+                }
                 if (queryResponse.length() > 0){
                     queryResponse = queryResponse + "\n";
                 }
-                queryResponse = queryResponse + query_map.get("query") + "\t" + sd.asString();
+                FileWriter fstream = new FileWriter("../results/"+outputPath);
+                BufferedWriter out = new BufferedWriter(fstream);
+                out.write(queryResponse);
+                out.close();
             }
-            if (queryResponse.length() > 0){
-                queryResponse = queryResponse + "\n";
+            else {
+                System.out.println(queryResponse);
             }
-            FileWriter fstream = new FileWriter(outputPath);
-            BufferedWriter out = new BufferedWriter(fstream);
-            out.write(queryResponse);
-            //Close the output stream
-            out.close();
         }
       }
     }

@@ -134,15 +134,15 @@ class Ranker {
         double fq = getTf(qv,did);
         double cq = Document.termFrequency(qv);
         double C = Document.termFrequency();
-        //        ret = Math.log((1-lambda)*fq/D + lambda*cq/C);
-        ret = (1-lambda)*fq/D + lambda*cq/C;
+        ret = Math.log((1-lambda)*fq/D + lambda*cq/C);
+        //ret = (1-lambda)*fq/D + lambda*cq/C;
         return ret;
     }
     private double jmsScore (String query, int did) {
         Vector<String> qv = ParseQuery(query);
-        double score = 1.0;
+        double score = 0;
         for (int i=0; i<qv.size();i++)
-            score *= JMS(qv.get(i),did);
+            score += JMS(qv.get(i),did);
         return score;
     }
     public ScoredDocument runqueryWithJMS(String query, int did){

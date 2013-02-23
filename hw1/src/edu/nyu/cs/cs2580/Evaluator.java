@@ -61,7 +61,7 @@ class Evaluator {
 
   public static void evaluateStdin(
     HashMap < String , HashMap < Integer , Double > > relevance_judgments){
-    // only consider one query per call    
+    // only consider one query per call
     try {
       BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
