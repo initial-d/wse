@@ -76,8 +76,8 @@ class Ranker {
             sum = sum + input.get(i)*input.get(i);
         sum = Math.sqrt(sum);
         if (sum!=0)
-        for (int i = 0; i<input.size();i++)
-            output.add(input.get(i)/sum);
+            for (int i = 0; i<input.size();i++)
+                output.add(input.get(i)/sum);
         return output;
     }
 
