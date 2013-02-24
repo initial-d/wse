@@ -138,7 +138,7 @@ class Evaluator {
       Vector<Double> reli = new Vector<Double>();
       for (int i = 0; i<=10; i++)
           pAtR.add(0.0);
-      pAtR.set(0,1.0);
+      //      pAtR.set(0,1.0);
 
       int relevance_count = 0;
       int levelReach = 0;
@@ -216,7 +216,7 @@ class Evaluator {
                   Collections.reverse(sortedReli);
                   System.out.println("sortedReli");
                   for (int i = 0; i<reli.size();i++)
-                      System.out.print(sortedReli.get(i).toString()+" ");
+                  System.out.print(sortedReli.get(i).toString()+" ");
                   Double dcg = calculateDCG(reli);
                   Double idcg = calculateDCG(sortedReli);
                   System.out.println("\n");
@@ -234,19 +234,31 @@ class Evaluator {
       response = query + "\t";
       for (int i = 0; i<precision.size();i++)
           response= response+precision.get(i).toString()+"\t";
+      response = response + "\n";
+
       for (int i = 0; i<recall.size();i++)
           response= response+recall.get(i).toString()+"\t";
+      response = response + "\n";
+
       for (int i = 0; i<fmeasure.size();i++)
           response= response+fmeasure.get(i).toString()+"\t";
+      response = response + "\n";
+
       for (int i = 0; i<pAtR.size();i++)
           response= response+pAtR.get(i).toString()+"\t";
+      response = response + "\n";
+
       averagePrecision = sumForAveragePrecision / relevance_count;
       response = response + averagePrecision.toString() + "\t";
+      response = response + "\n";
+
       for (int i= 0; i<ndcg.size();i++)
           response = response + ndcg.get(i) + "\t";
+      response = response + "\n";
+
       response = response+reciprocal.toString();
       System.out.println(response);
-      //      System.out.println(Double.toString(RR/N));
+
     } catch (Exception e){
         System.err.println("Error:" + e.getMessage());
     }

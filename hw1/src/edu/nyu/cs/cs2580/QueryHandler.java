@@ -113,7 +113,7 @@ class QueryHandler implements HttpHandler {
                 if (queryResponse.length() > 0){
                     queryResponse = queryResponse + "\n";
                 }
-                FileWriter fstream = new FileWriter("../results/"+outputPath);
+                FileWriter fstream = new FileWriter("../results/"+outputPath,true);
                 BufferedWriter out = new BufferedWriter(fstream);
                 out.write(queryResponse);
                 out.close();
