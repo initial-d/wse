@@ -85,7 +85,7 @@ class QueryHandler implements HttpHandler {
                     sds = _ranker.runqueryWithPhrase(query_map.get("query"));
                     outputPath = "hw1.1-phrase.tsv";
                     System.out.println("Phrase ranker");
-                } else if (ranker_type.equals("nviews")) {
+                } else if (ranker_type.equals("numviews")) {
                     sds = _ranker.runqueryWithViews(query_map.get("query"));
                     outputPath = "hw1.1-numviews.tsv";
                     System.out.println("Num views ranker");
@@ -95,7 +95,7 @@ class QueryHandler implements HttpHandler {
                     System.out.println("Num views ranker");
                 } else {
                     implementedQuery = false;
-                    queryResponse = (ranker_type+" not implemented.Please use cosine | QL | phrase | nviews | linear\n");
+                    queryResponse = (ranker_type+" not implemented.Please use cosine | QL | phrase | numviews | linear\n");
                 }
             } else {
                 sds = _ranker.runquery(query_map.get("query"));
@@ -112,6 +112,15 @@ class QueryHandler implements HttpHandler {
                 }
                 if (queryResponse.length() > 0){
                     queryResponse = queryResponse + "\n";
+                }
+                if (keys.contains("format")&&query_map.get("format").equals("html")) {
+                    FileWriter fstream = new FileWriter("../results/"+outputPath+".html");
+                    BufferedWriter out = new BufferedWriter(fstream);
+                    String tmp =queryResponse.substring(0);
+                    tmp=tmp.replaceAll("\n","</p><p>");
+                    String output = "<!DOCTYPE html><html><body><p>"+tmp+"</p></body></html>";
+                    out.write(output);
+                    out.close();
                 }
                 FileWriter fstream = new FileWriter("../results/"+outputPath,true);
                 BufferedWriter out = new BufferedWriter(fstream);

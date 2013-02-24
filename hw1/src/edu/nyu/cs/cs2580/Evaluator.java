@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.InputStreamReader;
 import java.io.BufferedReader;
+import java.io.*;
 import java.util.Vector;
 import java.util.HashMap;
 import java.util.Map;
@@ -23,8 +24,23 @@ class Evaluator {
     String p = args[0];
     // first read the relevance judgments into the HashMap
     readRelevanceJudgments(p,relevance_judgments);
-    // now evaluate the results from stdin
-    evaluateStdin(relevance_judgments);
+
+    String outputPath = "unknownRanker.tsv";
+    if (args.length>1 ) {
+        if (args[1].equals("cosine")) {
+            outputPath = "hw1.3-vsm.tsv";
+        } else if (args[1].equals("QL")) {
+            outputPath = "hw1.3-ql.tsv";
+        } else if (args[1].equals("phrase")) {
+            outputPath = "hw1.3-phrase.tsv";
+        } else if (args[1].equals("nviews")) {
+            outputPath = "hw1.3-numviews.tsv";
+        } else if (args[1].equals("linear")) {
+            outputPath = "hw1.3-linear.tsv";
+        }
+    }
+    outputPath = "../results/"+outputPath;
+    evaluateStdin(relevance_judgments,outputPath);
   }
 
     /*  private static Vector<Double> calculatePrecision (Vector<Integer> level,
@@ -114,7 +130,7 @@ class Evaluator {
   }
 
   public static void evaluateStdin(
-    HashMap < String , HashMap < Integer , Double > > relevance_judgments){
+                                   HashMap < String , HashMap < Integer , Double > > relevance_judgments,String outputPath){
     // only consider one query per call
     try {
       BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -175,7 +191,10 @@ class Evaluator {
               relevance_count++;
           }
           currentPrecision = (double)relevance_count/(double)lineCount;
-          currentRecall = (double)relevance_count/(double)numRelevant;
+          if (numRelevant == 0)
+              currentRecall = 0.0;
+          else
+              currentRecall = (double)relevance_count/(double)numRelevant;
 
           if (qr.containsKey(did)&&qr.get(did) > 1.0) {
               sumForAveragePrecision += currentPrecision;
@@ -234,30 +253,37 @@ class Evaluator {
       response = query + "\t";
       for (int i = 0; i<precision.size();i++)
           response= response+precision.get(i).toString()+"\t";
-      response = response + "\n";
+      //      response = response + "\n";
 
       for (int i = 0; i<recall.size();i++)
           response= response+recall.get(i).toString()+"\t";
-      response = response + "\n";
+      //      response = response + "\n";
 
       for (int i = 0; i<fmeasure.size();i++)
           response= response+fmeasure.get(i).toString()+"\t";
-      response = response + "\n";
+      //      response = response + "\n";
 
       for (int i = 0; i<pAtR.size();i++)
           response= response+pAtR.get(i).toString()+"\t";
-      response = response + "\n";
-
-      averagePrecision = sumForAveragePrecision / relevance_count;
+      //      response = response + "\n";
+      if (relevance_count == 0)
+          averagePrecision = 0.0;
+      else
+          averagePrecision = sumForAveragePrecision / relevance_count;
       response = response + averagePrecision.toString() + "\t";
-      response = response + "\n";
+      //      response = response + "\n";
 
       for (int i= 0; i<ndcg.size();i++)
           response = response + ndcg.get(i) + "\t";
-      response = response + "\n";
+      //response = response + "\n";
 
-      response = response+reciprocal.toString();
+      response = response+reciprocal.toString() + "\n";
       System.out.println(response);
+      FileWriter fstream = new FileWriter(outputPath,true);
+      BufferedWriter out = new BufferedWriter(fstream);
+      out.write(response);
+      out.close();
+
 
     } catch (Exception e){
         System.err.println("Error:" + e.getMessage());
