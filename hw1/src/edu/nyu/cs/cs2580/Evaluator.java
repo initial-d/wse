@@ -164,7 +164,7 @@ class Evaluator {
       Double averagePrecision = 0.0;
       String query = "";
       Double reciprocal = 0.0;
-      while ((line = reader.readLine()) != null){
+      while ((line = reader.readLine()) != null&&!line.equals("")){
           Scanner s = new Scanner(line).useDelimiter("\t");
           query = s.next();
           int did = Integer.parseInt(s.next());
@@ -176,11 +176,6 @@ class Evaluator {
           }
           HashMap < Integer , Double > qr = relevance_judgments.get(query);
 
-          /*          if (qr.containsKey(did) != false){
-                      RR += qr.get(did);
-                      }
-
-                      ++N;*/
           if (numRelevant == -1)
               numRelevant = countRelevant(qr);
 
