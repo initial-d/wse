@@ -92,30 +92,22 @@ class QueryHandler implements HttpHandler {
           }
           if (implementedQuery) {
               Collections.sort(sds, new SdComparator());
-              Iterator < ScoredDocument > itr = sds.iterator();
-              while (itr.hasNext()){
-                  ScoredDocument sd = itr.next();
-                  if (queryResponse.length() > 0){
-                      queryResponse = queryResponse + "\n";
-                  }
-                  queryResponse = queryResponse + query_map.get("query") + "\t" + sd.asString();
-              }
-              if (queryResponse.length() > 0){
-                  queryResponse = queryResponse + "\n";
-              }
+              queryResponse = generateQueryResponse(sds,query_map.get("query"));
+
               if (keys.contains("format")&&query_map.get("format").equals("html")) {
                   writeToHTML(outputPath,queryResponse);
               }
+              /// write result to text file
               FileWriter fstream = new FileWriter("../results/"+outputPath,true);
               BufferedWriter out = new BufferedWriter(fstream);
               out.write(queryResponse);
               out.close();
-
+              /// update session id
               Integer sid = _sessionID++;
               _sessions.put(sid,query_map.get("query"));
               System.out.println("sessionID="+sid);
               queryResponse = queryResponse + "\nsessionID="+sid.toString()+"\n";
-
+              /// make top 10 to render the log
               for (int i = 0; i<10 && i<sds.size();i++)
                   makeLog(sid,query_map.get("query"),sds.get(i)._did,"render");
           }
@@ -124,6 +116,21 @@ class QueryHandler implements HttpHandler {
           }
         }
       return queryResponse;
+  }
+  private String generateQueryResponse(Vector<ScoredDocument> sds,String query) {
+      String queryResponse = "";
+      Iterator < ScoredDocument > itr = sds.iterator();
+      while (itr.hasNext()){
+          ScoredDocument sd = itr.next();
+          if (queryResponse.length() > 0){
+              queryResponse = queryResponse + "\n";
+          }
+          queryResponse = queryResponse + query + "\t" + sd.asString();
+      }
+      if (queryResponse.length() > 0){
+          queryResponse = queryResponse + "\n";
+      }
+      return queryResponse; 
   }
   private void writeToHTML (String outputPath,String queryResponse) throws IOException {
       FileWriter fstream = new FileWriter("../results/"+outputPath+".html");
