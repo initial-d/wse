@@ -9,7 +9,12 @@ linear_score = beta1(1.0)*cosine_score +
                beta3(0.1)* log2(phrase_score) +
                beta4(0.05)* log2(numviews_score)
 
-2.bonus:
+2. bash script
+
+In src/folder, there is a evaluator.sh, it will run over each queries with each ranker, and do the evaluation.
+simply use src/evaluator.sh to run it
+
+3.bonus:
 
 use following instruction to simulate a click:
 
