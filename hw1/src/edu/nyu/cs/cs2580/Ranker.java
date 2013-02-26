@@ -7,10 +7,10 @@ import java.lang.Math;
 
 class Ranker {
     private static final double lambda = 0.5;
-    private static final double betacos = 0.5;
-    private static final double betalmp = 0.5;
-    private static final double betaphrase = 0.5;
-    private static final double betanviews = 0.5;
+    private static final double betacos = 1.0;
+    private static final double betalmp = 0.1;
+    private static final double betaphrase = 0.1;
+    private static final double betanviews = 0.05;
     private Index _index;
 
     public Ranker(String index_source){
@@ -44,6 +44,11 @@ class Ranker {
             if (qv.equals(body.get(i)))
                 ret ++;
         }
+        Vector<String> title = d.get_title_vector();
+        for (int i = 0; i<title.size(); i++) {
+            if (qv.equals(title.get(i)))
+                ret ++;
+        }
         return ret;
     }
 
@@ -54,6 +59,11 @@ class Ranker {
         Vector<String> body = d.get_body_vector();
         for (int i = 0; i<body.size()-1; i++) {
             if (qv1.equals(body.get(i))&&qv2.equals(body.get(i+1)))
+                ret ++;
+        }
+        Vector<String> title = d.get_title_vector();
+        for (int i = 0; i<title.size()-1; i++) {
+            if (qv1.equals(title.get(i))&&qv2.equals(title.get(i+1)))
                 ret ++;
         }
         return ret;
@@ -130,19 +140,21 @@ class Ranker {
 
     private double JMS(String qv, int did) {
         double ret;
-        double D = _index.getDoc(did).get_body_vector().size();
+        double D = _index.getDoc(did).get_body_vector().size()+
+            _index.getDoc(did).get_title_vector().size();
         double fq = getTf(qv,did);
         double cq = Document.termFrequency(qv);
         double C = Document.termFrequency();
-        ret = Math.log((1-lambda)*fq/D + lambda*cq/C);
-        //ret = (1-lambda)*fq/D + lambda*cq/C;
+        //ret = Math.log((1-lambda)*fq/D + lambda*cq/C);
+        ret = (1-lambda)*fq/D + lambda*cq/C;
         return ret;
     }
     private double jmsScore (String query, int did) {
         Vector<String> qv = ParseQuery(query);
-        double score = 0;
+        double score = 1.0;
         for (int i=0; i<qv.size();i++)
-            score += JMS(qv.get(i),did);
+            score *= JMS(qv.get(i),did);
+        //        score = Math.log(score)/Math.log(2.0);
         return score;
     }
     public ScoredDocument runqueryWithJMS(String query, int did){
@@ -174,6 +186,7 @@ class Ranker {
     public ScoredDocument runqueryWithPhrase(String query, int did){
         double score = phraseScore(query,did);
         Document d = _index.getDoc(did);
+        //        score = Math.log(score+1)/Math.log(2.0);
         return new ScoredDocument(did, d.get_title_string(), score);
     }
 
@@ -192,6 +205,7 @@ class Ranker {
     public ScoredDocument runqueryWithViews(String query, int did){
         double score = viewsScore(query,did);
         Document d = _index.getDoc(did);
+        //        score = Math.log(score+1)/Math.log(2);
         return new ScoredDocument(did, d.get_title_string(), score);
     }
     public Vector < ScoredDocument > runqueryWithViews(String query){
@@ -204,9 +218,9 @@ class Ranker {
 
     public ScoredDocument runqueryWithLinear(String query, int did){
         double score = betacos*cosineScore(query,did) +
-            betalmp*jmsScore(query,did) +
-            betaphrase*phraseScore(query,did) +
-            betanviews*viewsScore(query,did);
+            betalmp*Math.log(jmsScore(query,did))/Math.log(2.0) +
+            betaphrase*Math.log(phraseScore(query,did)+1)/Math.log(2.0) +
+            betanviews*Math.log(viewsScore(query,did)+1)/Math.log(2.0);
         Document d = _index.getDoc(did);
         return new ScoredDocument(did, d.get_title_string(), score);
     }

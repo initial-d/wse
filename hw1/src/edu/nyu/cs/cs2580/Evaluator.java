@@ -33,7 +33,7 @@ class Evaluator {
             outputPath = "hw1.3-ql.tsv";
         } else if (args[1].equals("phrase")) {
             outputPath = "hw1.3-phrase.tsv";
-        } else if (args[1].equals("nviews")) {
+        } else if (args[1].equals("numviews")) {
             outputPath = "hw1.3-numviews.tsv";
         } else if (args[1].equals("linear")) {
             outputPath = "hw1.3-linear.tsv";

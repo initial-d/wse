@@ -46,7 +46,7 @@ class QueryHandler implements HttpHandler {
     for (String param : params){
       String name = param.split("=")[0];
       String value = param.split("=")[1];
-      value = value.replace('+',' ');
+      value = value.replaceAll("%20"," ");
       System.out.println(name+':'+value);
       map.put(name, value);
     }
