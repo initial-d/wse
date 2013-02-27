@@ -221,25 +221,25 @@ class Evaluator {
                   Vector<Double> sortedReli = new Vector<Double>();
                   for (int i = 0; i<reli.size();i++)
                       sortedReli.add(reli.get(i));
-                  System.out.println("reli");
-                  for (Integer i = 0; i<reli.size();i++) {
+		  //                  System.out.println("reli");
+		  /*                  for (Integer i = 0; i<reli.size();i++) {
                       System.out.print(reli.get(i).toString()+" ");
-                  }
+		      }*/
 
                   Collections.sort(sortedReli);
                   Collections.reverse(sortedReli);
-                  System.out.println("sortedReli");
-                  for (int i = 0; i<reli.size();i++)
-                  System.out.print(sortedReli.get(i).toString()+" ");
+		  //                  System.out.println("sortedReli");
+		  //                  for (int i = 0; i<reli.size();i++)
+		  //                 System.out.print(sortedReli.get(i).toString()+" ");
                   Double dcg = calculateDCG(reli);
                   Double idcg = calculateDCG(sortedReli);
-                  System.out.println("\n");
-                  System.out.println("dcg="+dcg.toString()+" idcg="+idcg.toString());
+		  //                  System.out.println("\n");
+		  //                  System.out.println("dcg="+dcg.toString()+" idcg="+idcg.toString());
                   if (idcg!=0)
                       ndcg.add(dcg/idcg);
                   else
                       ndcg.add(0.0);
-                  System.out.println("ndcg="+ndcg.get(ndcg.size()-1).toString());
+		  //                  System.out.println("ndcg="+ndcg.get(ndcg.size()-1).toString());
               }
           }
       }

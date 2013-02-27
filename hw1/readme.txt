@@ -14,6 +14,16 @@ linear_score = beta1(1.0)*cosine_score +
 In src/folder, there is a evaluator.sh, it will run over each queries with each ranker, and do the evaluation.
 simply use src/evaluator.sh to run it
 
+3. for evaluator's output
+
+you can either is >> to direct stdout to file
+
+e.g java edu.nyu.cs.cs2580.Evaluator ../data/qrels.tsv >> ../result/hw1.3-linear.tsv
+
+or you can give evaluator a ranker type parameter,so that evaluator will automatically output the result to corresponding file
+
+e.g java edu.nyu.cs.cs2580.Evaluator ../data/qrels.tsv cosine
+
 3.bonus:
 
 use following instruction to simulate a click:
