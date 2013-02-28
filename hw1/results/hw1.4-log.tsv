@@ -1,1751 +1,505 @@
-0	bing	21	render	2013-02-27 13:21:07
-0	bing	35	render	2013-02-27 13:21:07
-0	bing	45	render	2013-02-27 13:21:07
-0	bing	52	render	2013-02-27 13:21:07
-0	bing	75	render	2013-02-27 13:21:07
-0	bing	98	render	2013-02-27 13:21:07
-0	bing	117	render	2013-02-27 13:21:07
-0	bing	152	render	2013-02-27 13:21:07
-0	bing	187	render	2013-02-27 13:21:07
-0	bing	194	render	2013-02-27 13:21:07
-1	data mining	202	render	2013-02-27 13:21:08
-1	data mining	384	render	2013-02-27 13:21:08
-1	data mining	152	render	2013-02-27 13:21:08
-1	data mining	501	render	2013-02-27 13:21:08
-1	data mining	32	render	2013-02-27 13:21:08
-1	data mining	55	render	2013-02-27 13:21:08
-1	data mining	92	render	2013-02-27 13:21:08
-1	data mining	280	render	2013-02-27 13:21:08
-1	data mining	323	render	2013-02-27 13:21:08
-1	data mining	331	render	2013-02-27 13:21:08
-2	google	1	render	2013-02-27 13:21:09
-2	google	4	render	2013-02-27 13:21:09
-2	google	5	render	2013-02-27 13:21:09
-2	google	7	render	2013-02-27 13:21:09
-2	google	8	render	2013-02-27 13:21:09
-2	google	9	render	2013-02-27 13:21:09
-2	google	12	render	2013-02-27 13:21:09
-2	google	15	render	2013-02-27 13:21:09
-2	google	16	render	2013-02-27 13:21:09
-2	google	18	render	2013-02-27 13:21:09
-3	salsa	433	render	2013-02-27 13:21:10
-3	salsa	0	render	2013-02-27 13:21:10
-3	salsa	1	render	2013-02-27 13:21:10
-3	salsa	2	render	2013-02-27 13:21:10
-3	salsa	3	render	2013-02-27 13:21:10
-3	salsa	4	render	2013-02-27 13:21:10
-3	salsa	5	render	2013-02-27 13:21:10
-3	salsa	6	render	2013-02-27 13:21:10
-3	salsa	7	render	2013-02-27 13:21:10
-3	salsa	8	render	2013-02-27 13:21:10
-4	web search	492	render	2013-02-27 13:21:12
-4	web search	493	render	2013-02-27 13:21:12
-4	web search	33	render	2013-02-27 13:21:12
-4	web search	34	render	2013-02-27 13:21:12
-4	web search	48	render	2013-02-27 13:21:12
-4	web search	90	render	2013-02-27 13:21:12
-4	web search	135	render	2013-02-27 13:21:12
-4	web search	161	render	2013-02-27 13:21:12
-4	web search	206	render	2013-02-27 13:21:12
-4	web search	211	render	2013-02-27 13:21:12
-5	bing	52	render	2013-02-27 13:21:13
-5	bing	344	render	2013-02-27 13:21:13
-5	bing	354	render	2013-02-27 13:21:13
-5	bing	98	render	2013-02-27 13:21:13
-5	bing	277	render	2013-02-27 13:21:13
-5	bing	381	render	2013-02-27 13:21:13
-5	bing	343	render	2013-02-27 13:21:13
-5	bing	656	render	2013-02-27 13:21:13
-5	bing	245	render	2013-02-27 13:21:13
-5	bing	637	render	2013-02-27 13:21:13
-6	data mining	138	render	2013-02-27 13:21:15
-6	data mining	314	render	2013-02-27 13:21:15
-6	data mining	424	render	2013-02-27 13:21:15
-6	data mining	196	render	2013-02-27 13:21:15
-6	data mining	152	render	2013-02-27 13:21:15
-6	data mining	476	render	2013-02-27 13:21:15
-6	data mining	501	render	2013-02-27 13:21:15
-6	data mining	139	render	2013-02-27 13:21:15
-6	data mining	128	render	2013-02-27 13:21:15
-6	data mining	70	render	2013-02-27 13:21:15
-7	google	249	render	2013-02-27 13:21:16
-7	google	247	render	2013-02-27 13:21:16
-7	google	250	render	2013-02-27 13:21:16
-7	google	420	render	2013-02-27 13:21:16
-7	google	248	render	2013-02-27 13:21:16
-7	google	98	render	2013-02-27 13:21:16
-7	google	326	render	2013-02-27 13:21:16
-7	google	519	render	2013-02-27 13:21:16
-7	google	619	render	2013-02-27 13:21:16
-7	google	433	render	2013-02-27 13:21:16
-8	salsa	433	render	2013-02-27 13:21:17
-8	salsa	0	render	2013-02-27 13:21:17
-8	salsa	1	render	2013-02-27 13:21:17
-8	salsa	2	render	2013-02-27 13:21:17
-8	salsa	3	render	2013-02-27 13:21:17
-8	salsa	4	render	2013-02-27 13:21:17
-8	salsa	5	render	2013-02-27 13:21:17
-8	salsa	6	render	2013-02-27 13:21:17
-8	salsa	7	render	2013-02-27 13:21:17
-8	salsa	8	render	2013-02-27 13:21:17
-9	web search	415	render	2013-02-27 13:21:20
-9	web search	630	render	2013-02-27 13:21:20
-9	web search	618	render	2013-02-27 13:21:20
-9	web search	388	render	2013-02-27 13:21:20
-9	web search	516	render	2013-02-27 13:21:20
-9	web search	547	render	2013-02-27 13:21:20
-9	web search	515	render	2013-02-27 13:21:20
-9	web search	371	render	2013-02-27 13:21:20
-9	web search	612	render	2013-02-27 13:21:20
-9	web search	533	render	2013-02-27 13:21:20
-10	bing	52	render	2013-02-27 13:21:22
-10	bing	344	render	2013-02-27 13:21:22
-10	bing	354	render	2013-02-27 13:21:22
-10	bing	637	render	2013-02-27 13:21:22
-10	bing	326	render	2013-02-27 13:21:22
-10	bing	519	render	2013-02-27 13:21:22
-10	bing	343	render	2013-02-27 13:21:22
-10	bing	98	render	2013-02-27 13:21:22
-10	bing	373	render	2013-02-27 13:21:22
-10	bing	447	render	2013-02-27 13:21:22
-11	data mining	152	render	2013-02-27 13:21:23
-11	data mining	424	render	2013-02-27 13:21:23
-11	data mining	37	render	2013-02-27 13:21:23
-11	data mining	38	render	2013-02-27 13:21:23
-11	data mining	39	render	2013-02-27 13:21:23
-11	data mining	40	render	2013-02-27 13:21:23
-11	data mining	196	render	2013-02-27 13:21:23
-11	data mining	487	render	2013-02-27 13:21:23
-11	data mining	153	render	2013-02-27 13:21:23
-11	data mining	128	render	2013-02-27 13:21:23
-12	google	247	render	2013-02-27 13:21:25
-12	google	250	render	2013-02-27 13:21:25
-12	google	249	render	2013-02-27 13:21:25
-12	google	248	render	2013-02-27 13:21:25
-12	google	433	render	2013-02-27 13:21:25
-12	google	326	render	2013-02-27 13:21:25
-12	google	519	render	2013-02-27 13:21:25
-12	google	52	render	2013-02-27 13:21:25
-12	google	344	render	2013-02-27 13:21:25
-12	google	354	render	2013-02-27 13:21:25
-13	salsa	433	render	2013-02-27 13:21:28
-13	salsa	0	render	2013-02-27 13:21:29
-13	salsa	1	render	2013-02-27 13:21:29
-13	salsa	2	render	2013-02-27 13:21:29
-13	salsa	3	render	2013-02-27 13:21:29
-13	salsa	4	render	2013-02-27 13:21:29
-13	salsa	5	render	2013-02-27 13:21:29
-13	salsa	6	render	2013-02-27 13:21:29
-13	salsa	7	render	2013-02-27 13:21:29
-13	salsa	8	render	2013-02-27 13:21:29
-14	web search	573	render	2013-02-27 13:21:31
-14	web search	637	render	2013-02-27 13:21:31
-14	web search	250	render	2013-02-27 13:21:31
-14	web search	638	render	2013-02-27 13:21:31
-14	web search	92	render	2013-02-27 13:21:31
-14	web search	644	render	2013-02-27 13:21:31
-14	web search	201	render	2013-02-27 13:21:31
-14	web search	634	render	2013-02-27 13:21:31
-14	web search	52	render	2013-02-27 13:21:31
-14	web search	344	render	2013-02-27 13:21:31
-15	bing	357	render	2013-02-27 13:21:32
-15	bing	219	render	2013-02-27 13:21:32
-15	bing	247	render	2013-02-27 13:21:32
-15	bing	648	render	2013-02-27 13:21:32
-15	bing	257	render	2013-02-27 13:21:32
-15	bing	373	render	2013-02-27 13:21:32
-15	bing	535	render	2013-02-27 13:21:32
-15	bing	506	render	2013-02-27 13:21:32
-15	bing	224	render	2013-02-27 13:21:32
-15	bing	135	render	2013-02-27 13:21:32
-16	data mining	357	render	2013-02-27 13:21:34
-16	data mining	219	render	2013-02-27 13:21:34
-16	data mining	247	render	2013-02-27 13:21:34
-16	data mining	648	render	2013-02-27 13:21:34
-16	data mining	257	render	2013-02-27 13:21:34
-16	data mining	373	render	2013-02-27 13:21:34
-16	data mining	535	render	2013-02-27 13:21:34
-16	data mining	506	render	2013-02-27 13:21:34
-16	data mining	224	render	2013-02-27 13:21:34
-16	data mining	135	render	2013-02-27 13:21:34
-17	google	357	render	2013-02-27 13:21:38
-17	google	219	render	2013-02-27 13:21:38
-17	google	247	render	2013-02-27 13:21:40
-17	google	648	render	2013-02-27 13:21:40
-17	google	257	render	2013-02-27 13:21:40
-17	google	373	render	2013-02-27 13:21:40
-17	google	535	render	2013-02-27 13:21:40
-17	google	506	render	2013-02-27 13:21:40
-17	google	224	render	2013-02-27 13:21:40
-17	google	135	render	2013-02-27 13:21:40
-18	salsa	357	render	2013-02-27 13:21:40
-18	salsa	219	render	2013-02-27 13:21:40
-18	salsa	247	render	2013-02-27 13:21:40
-18	salsa	648	render	2013-02-27 13:21:40
-18	salsa	257	render	2013-02-27 13:21:40
-18	salsa	373	render	2013-02-27 13:21:40
-18	salsa	535	render	2013-02-27 13:21:40
-18	salsa	506	render	2013-02-27 13:21:40
-18	salsa	224	render	2013-02-27 13:21:40
-18	salsa	135	render	2013-02-27 13:21:40
-19	web search	357	render	2013-02-27 13:21:42
-19	web search	219	render	2013-02-27 13:21:42
-19	web search	247	render	2013-02-27 13:21:42
-19	web search	648	render	2013-02-27 13:21:42
-19	web search	257	render	2013-02-27 13:21:42
-19	web search	373	render	2013-02-27 13:21:42
-19	web search	535	render	2013-02-27 13:21:42
-19	web search	506	render	2013-02-27 13:21:42
-19	web search	224	render	2013-02-27 13:21:42
-19	web search	135	render	2013-02-27 13:21:42
-20	bing	52	render	2013-02-27 13:21:45
-20	bing	344	render	2013-02-27 13:21:46
-20	bing	354	render	2013-02-27 13:21:47
-20	bing	373	render	2013-02-27 13:21:47
-20	bing	98	render	2013-02-27 13:21:47
-20	bing	637	render	2013-02-27 13:21:47
-20	bing	343	render	2013-02-27 13:21:47
-20	bing	247	render	2013-02-27 13:21:47
-20	bing	492	render	2013-02-27 13:21:47
-20	bing	381	render	2013-02-27 13:21:47
-21	data mining	152	render	2013-02-27 13:21:52
-21	data mining	424	render	2013-02-27 13:21:52
-21	data mining	138	render	2013-02-27 13:21:52
-21	data mining	314	render	2013-02-27 13:21:52
-21	data mining	476	render	2013-02-27 13:21:52
-21	data mining	196	render	2013-02-27 13:21:52
-21	data mining	128	render	2013-02-27 13:21:52
-21	data mining	501	render	2013-02-27 13:21:52
-21	data mining	70	render	2013-02-27 13:21:52
-21	data mining	487	render	2013-02-27 13:21:52
-22	google	247	render	2013-02-27 13:21:54
-22	google	249	render	2013-02-27 13:21:54
-22	google	250	render	2013-02-27 13:21:54
-22	google	433	render	2013-02-27 13:21:54
-22	google	248	render	2013-02-27 13:21:54
-22	google	52	render	2013-02-27 13:21:54
-22	google	219	render	2013-02-27 13:21:54
-22	google	519	render	2013-02-27 13:21:54
-22	google	326	render	2013-02-27 13:21:54
-22	google	373	render	2013-02-27 13:21:54
-23	salsa	433	render	2013-02-27 13:21:57
-23	salsa	357	render	2013-02-27 13:21:57
-23	salsa	219	render	2013-02-27 13:21:57
-23	salsa	247	render	2013-02-27 13:21:57
-23	salsa	648	render	2013-02-27 13:21:57
-23	salsa	257	render	2013-02-27 13:21:57
-23	salsa	373	render	2013-02-27 13:21:57
-23	salsa	535	render	2013-02-27 13:21:57
-23	salsa	506	render	2013-02-27 13:21:57
-23	salsa	224	render	2013-02-27 13:21:57
-24	web search	630	render	2013-02-27 13:22:00
-24	web search	415	render	2013-02-27 13:22:00
-24	web search	247	render	2013-02-27 13:22:00
-24	web search	634	render	2013-02-27 13:22:00
-24	web search	638	render	2013-02-27 13:22:00
-24	web search	637	render	2013-02-27 13:22:00
-24	web search	547	render	2013-02-27 13:22:00
-24	web search	433	render	2013-02-27 13:22:00
-24	web search	654	render	2013-02-27 13:22:00
-24	web search	250	render	2013-02-27 13:22:00
-24	web search	630	click	2013-02-27 13:23:48
-0	bing	21	render	2013-02-27 13:29:10
-0	bing	35	render	2013-02-27 13:29:10
-0	bing	45	render	2013-02-27 13:29:10
-0	bing	52	render	2013-02-27 13:29:10
-0	bing	75	render	2013-02-27 13:29:10
-0	bing	98	render	2013-02-27 13:29:10
-0	bing	117	render	2013-02-27 13:29:10
-0	bing	152	render	2013-02-27 13:29:10
-0	bing	187	render	2013-02-27 13:29:10
-0	bing	194	render	2013-02-27 13:29:10
-1	data mining	202	render	2013-02-27 13:29:13
-1	data mining	384	render	2013-02-27 13:29:13
-1	data mining	152	render	2013-02-27 13:29:13
-1	data mining	501	render	2013-02-27 13:29:13
-1	data mining	32	render	2013-02-27 13:29:13
-1	data mining	55	render	2013-02-27 13:29:13
-1	data mining	92	render	2013-02-27 13:29:13
-1	data mining	280	render	2013-02-27 13:29:13
-1	data mining	323	render	2013-02-27 13:29:13
-1	data mining	331	render	2013-02-27 13:29:13
-2	google	1	render	2013-02-27 13:29:15
-2	google	4	render	2013-02-27 13:29:15
-2	google	5	render	2013-02-27 13:29:15
-2	google	7	render	2013-02-27 13:29:15
-2	google	8	render	2013-02-27 13:29:15
-2	google	9	render	2013-02-27 13:29:15
-2	google	12	render	2013-02-27 13:29:15
-2	google	15	render	2013-02-27 13:29:15
-2	google	16	render	2013-02-27 13:29:15
-2	google	18	render	2013-02-27 13:29:15
-3	salsa	433	render	2013-02-27 13:29:16
-3	salsa	0	render	2013-02-27 13:29:16
-3	salsa	1	render	2013-02-27 13:29:16
-3	salsa	2	render	2013-02-27 13:29:16
-3	salsa	3	render	2013-02-27 13:29:16
-3	salsa	4	render	2013-02-27 13:29:16
-3	salsa	5	render	2013-02-27 13:29:16
-3	salsa	6	render	2013-02-27 13:29:16
-3	salsa	7	render	2013-02-27 13:29:16
-3	salsa	8	render	2013-02-27 13:29:16
-4	web search	492	render	2013-02-27 13:29:18
-4	web search	493	render	2013-02-27 13:29:18
-4	web search	33	render	2013-02-27 13:29:18
-4	web search	34	render	2013-02-27 13:29:18
-4	web search	48	render	2013-02-27 13:29:18
-4	web search	90	render	2013-02-27 13:29:18
-4	web search	135	render	2013-02-27 13:29:18
-4	web search	161	render	2013-02-27 13:29:18
-4	web search	206	render	2013-02-27 13:29:18
-4	web search	211	render	2013-02-27 13:29:18
-5	bing	52	render	2013-02-27 13:29:20
-5	bing	344	render	2013-02-27 13:29:20
-5	bing	354	render	2013-02-27 13:29:20
-5	bing	98	render	2013-02-27 13:29:20
-5	bing	277	render	2013-02-27 13:29:20
-5	bing	381	render	2013-02-27 13:29:20
-5	bing	343	render	2013-02-27 13:29:20
-5	bing	656	render	2013-02-27 13:29:20
-5	bing	245	render	2013-02-27 13:29:20
-5	bing	637	render	2013-02-27 13:29:20
-6	data mining	138	render	2013-02-27 13:29:22
-6	data mining	314	render	2013-02-27 13:29:22
-6	data mining	424	render	2013-02-27 13:29:22
-6	data mining	196	render	2013-02-27 13:29:22
-6	data mining	152	render	2013-02-27 13:29:22
-6	data mining	476	render	2013-02-27 13:29:22
-6	data mining	501	render	2013-02-27 13:29:22
-6	data mining	139	render	2013-02-27 13:29:22
-6	data mining	128	render	2013-02-27 13:29:22
-6	data mining	70	render	2013-02-27 13:29:22
-7	google	249	render	2013-02-27 13:29:24
-7	google	247	render	2013-02-27 13:29:24
-7	google	250	render	2013-02-27 13:29:24
-7	google	420	render	2013-02-27 13:29:24
-7	google	248	render	2013-02-27 13:29:24
-7	google	98	render	2013-02-27 13:29:24
-7	google	326	render	2013-02-27 13:29:24
-7	google	519	render	2013-02-27 13:29:24
-7	google	619	render	2013-02-27 13:29:24
-7	google	433	render	2013-02-27 13:29:24
-8	salsa	433	render	2013-02-27 13:29:25
-8	salsa	0	render	2013-02-27 13:29:25
-8	salsa	1	render	2013-02-27 13:29:25
-8	salsa	2	render	2013-02-27 13:29:25
-8	salsa	3	render	2013-02-27 13:29:25
-8	salsa	4	render	2013-02-27 13:29:25
-8	salsa	5	render	2013-02-27 13:29:25
-8	salsa	6	render	2013-02-27 13:29:25
-8	salsa	7	render	2013-02-27 13:29:25
-8	salsa	8	render	2013-02-27 13:29:25
-9	web search	415	render	2013-02-27 13:29:27
-9	web search	630	render	2013-02-27 13:29:27
-9	web search	618	render	2013-02-27 13:29:27
-9	web search	388	render	2013-02-27 13:29:27
-9	web search	516	render	2013-02-27 13:29:27
-9	web search	547	render	2013-02-27 13:29:27
-9	web search	515	render	2013-02-27 13:29:27
-9	web search	371	render	2013-02-27 13:29:27
-9	web search	612	render	2013-02-27 13:29:27
-9	web search	533	render	2013-02-27 13:29:27
-10	bing	52	render	2013-02-27 13:29:28
-10	bing	344	render	2013-02-27 13:29:28
-10	bing	354	render	2013-02-27 13:29:28
-10	bing	637	render	2013-02-27 13:29:28
-10	bing	326	render	2013-02-27 13:29:28
-10	bing	519	render	2013-02-27 13:29:28
-10	bing	343	render	2013-02-27 13:29:28
-10	bing	98	render	2013-02-27 13:29:28
-10	bing	373	render	2013-02-27 13:29:28
-10	bing	447	render	2013-02-27 13:29:28
-11	data mining	152	render	2013-02-27 13:29:29
-11	data mining	424	render	2013-02-27 13:29:29
-11	data mining	37	render	2013-02-27 13:29:29
-11	data mining	38	render	2013-02-27 13:29:29
-11	data mining	39	render	2013-02-27 13:29:29
-11	data mining	40	render	2013-02-27 13:29:29
-11	data mining	196	render	2013-02-27 13:29:29
-11	data mining	487	render	2013-02-27 13:29:29
-11	data mining	153	render	2013-02-27 13:29:29
-11	data mining	128	render	2013-02-27 13:29:29
-12	google	247	render	2013-02-27 13:29:30
-12	google	250	render	2013-02-27 13:29:30
-12	google	249	render	2013-02-27 13:29:30
-12	google	248	render	2013-02-27 13:29:30
-12	google	433	render	2013-02-27 13:29:30
-12	google	326	render	2013-02-27 13:29:30
-12	google	519	render	2013-02-27 13:29:30
-12	google	52	render	2013-02-27 13:29:30
-12	google	344	render	2013-02-27 13:29:30
-12	google	354	render	2013-02-27 13:29:30
-13	salsa	433	render	2013-02-27 13:29:32
-13	salsa	0	render	2013-02-27 13:29:32
-13	salsa	1	render	2013-02-27 13:29:32
-13	salsa	2	render	2013-02-27 13:29:32
-13	salsa	3	render	2013-02-27 13:29:32
-13	salsa	4	render	2013-02-27 13:29:32
-13	salsa	5	render	2013-02-27 13:29:32
-13	salsa	6	render	2013-02-27 13:29:32
-13	salsa	7	render	2013-02-27 13:29:32
-13	salsa	8	render	2013-02-27 13:29:32
-14	web search	573	render	2013-02-27 13:29:33
-14	web search	637	render	2013-02-27 13:29:33
-14	web search	250	render	2013-02-27 13:29:33
-14	web search	638	render	2013-02-27 13:29:33
-14	web search	92	render	2013-02-27 13:29:33
-14	web search	644	render	2013-02-27 13:29:33
-14	web search	201	render	2013-02-27 13:29:33
-14	web search	634	render	2013-02-27 13:29:33
-14	web search	52	render	2013-02-27 13:29:33
-14	web search	344	render	2013-02-27 13:29:33
-15	bing	357	render	2013-02-27 13:29:34
-15	bing	219	render	2013-02-27 13:29:34
-15	bing	247	render	2013-02-27 13:29:34
-15	bing	648	render	2013-02-27 13:29:34
-15	bing	257	render	2013-02-27 13:29:34
-15	bing	373	render	2013-02-27 13:29:34
-15	bing	535	render	2013-02-27 13:29:34
-15	bing	506	render	2013-02-27 13:29:34
-15	bing	224	render	2013-02-27 13:29:34
-15	bing	135	render	2013-02-27 13:29:34
-16	data mining	357	render	2013-02-27 13:29:34
-16	data mining	219	render	2013-02-27 13:29:34
-16	data mining	247	render	2013-02-27 13:29:34
-16	data mining	648	render	2013-02-27 13:29:34
-16	data mining	257	render	2013-02-27 13:29:34
-16	data mining	373	render	2013-02-27 13:29:34
-16	data mining	535	render	2013-02-27 13:29:34
-16	data mining	506	render	2013-02-27 13:29:34
-16	data mining	224	render	2013-02-27 13:29:34
-16	data mining	135	render	2013-02-27 13:29:34
-17	google	357	render	2013-02-27 13:29:35
-17	google	219	render	2013-02-27 13:29:35
-17	google	247	render	2013-02-27 13:29:35
-17	google	648	render	2013-02-27 13:29:35
-17	google	257	render	2013-02-27 13:29:35
-17	google	373	render	2013-02-27 13:29:35
-17	google	535	render	2013-02-27 13:29:35
-17	google	506	render	2013-02-27 13:29:35
-17	google	224	render	2013-02-27 13:29:35
-17	google	135	render	2013-02-27 13:29:35
-18	salsa	357	render	2013-02-27 13:29:35
-18	salsa	219	render	2013-02-27 13:29:36
-18	salsa	247	render	2013-02-27 13:29:36
-18	salsa	648	render	2013-02-27 13:29:36
-18	salsa	257	render	2013-02-27 13:29:36
-18	salsa	373	render	2013-02-27 13:29:36
-18	salsa	535	render	2013-02-27 13:29:36
-18	salsa	506	render	2013-02-27 13:29:36
-18	salsa	224	render	2013-02-27 13:29:36
-18	salsa	135	render	2013-02-27 13:29:36
-19	web search	357	render	2013-02-27 13:29:36
-19	web search	219	render	2013-02-27 13:29:36
-19	web search	247	render	2013-02-27 13:29:36
-19	web search	648	render	2013-02-27 13:29:36
-19	web search	257	render	2013-02-27 13:29:36
-19	web search	373	render	2013-02-27 13:29:36
-19	web search	535	render	2013-02-27 13:29:36
-19	web search	506	render	2013-02-27 13:29:36
-19	web search	224	render	2013-02-27 13:29:36
-19	web search	135	render	2013-02-27 13:29:36
-20	bing	52	render	2013-02-27 13:29:37
-20	bing	344	render	2013-02-27 13:29:37
-20	bing	354	render	2013-02-27 13:29:37
-20	bing	373	render	2013-02-27 13:29:37
-20	bing	98	render	2013-02-27 13:29:37
-20	bing	637	render	2013-02-27 13:29:37
-20	bing	343	render	2013-02-27 13:29:37
-20	bing	247	render	2013-02-27 13:29:37
-20	bing	492	render	2013-02-27 13:29:37
-20	bing	381	render	2013-02-27 13:29:37
-21	data mining	152	render	2013-02-27 13:29:39
-21	data mining	424	render	2013-02-27 13:29:39
-21	data mining	138	render	2013-02-27 13:29:39
-21	data mining	314	render	2013-02-27 13:29:39
-21	data mining	476	render	2013-02-27 13:29:39
-21	data mining	196	render	2013-02-27 13:29:39
-21	data mining	128	render	2013-02-27 13:29:39
-21	data mining	501	render	2013-02-27 13:29:39
-21	data mining	70	render	2013-02-27 13:29:39
-21	data mining	487	render	2013-02-27 13:29:39
-22	google	247	render	2013-02-27 13:29:41
-22	google	249	render	2013-02-27 13:29:41
-22	google	250	render	2013-02-27 13:29:41
-22	google	433	render	2013-02-27 13:29:41
-22	google	248	render	2013-02-27 13:29:41
-22	google	52	render	2013-02-27 13:29:41
-22	google	219	render	2013-02-27 13:29:41
-22	google	519	render	2013-02-27 13:29:41
-22	google	326	render	2013-02-27 13:29:41
-22	google	373	render	2013-02-27 13:29:41
-23	salsa	433	render	2013-02-27 13:29:42
-23	salsa	357	render	2013-02-27 13:29:42
-23	salsa	219	render	2013-02-27 13:29:42
-23	salsa	247	render	2013-02-27 13:29:42
-23	salsa	648	render	2013-02-27 13:29:42
-23	salsa	257	render	2013-02-27 13:29:42
-23	salsa	373	render	2013-02-27 13:29:42
-23	salsa	535	render	2013-02-27 13:29:42
-23	salsa	506	render	2013-02-27 13:29:42
-23	salsa	224	render	2013-02-27 13:29:42
-24	web search	630	render	2013-02-27 13:29:44
-24	web search	415	render	2013-02-27 13:29:44
-24	web search	247	render	2013-02-27 13:29:44
-24	web search	634	render	2013-02-27 13:29:44
-24	web search	638	render	2013-02-27 13:29:44
-24	web search	637	render	2013-02-27 13:29:44
-24	web search	547	render	2013-02-27 13:29:44
-24	web search	433	render	2013-02-27 13:29:44
-24	web search	654	render	2013-02-27 13:29:44
-24	web search	250	render	2013-02-27 13:29:44
-25	bing	21	render	2013-02-27 13:31:03
-25	bing	35	render	2013-02-27 13:31:03
-25	bing	45	render	2013-02-27 13:31:03
-25	bing	52	render	2013-02-27 13:31:03
-25	bing	75	render	2013-02-27 13:31:03
-25	bing	98	render	2013-02-27 13:31:03
-25	bing	117	render	2013-02-27 13:31:03
-25	bing	152	render	2013-02-27 13:31:03
-25	bing	187	render	2013-02-27 13:31:03
-25	bing	194	render	2013-02-27 13:31:03
-26	data mining	202	render	2013-02-27 13:31:06
-26	data mining	384	render	2013-02-27 13:31:06
-26	data mining	152	render	2013-02-27 13:31:06
-26	data mining	501	render	2013-02-27 13:31:06
-26	data mining	32	render	2013-02-27 13:31:06
-26	data mining	55	render	2013-02-27 13:31:06
-26	data mining	92	render	2013-02-27 13:31:06
-26	data mining	280	render	2013-02-27 13:31:06
-26	data mining	323	render	2013-02-27 13:31:06
-26	data mining	331	render	2013-02-27 13:31:06
-27	google	1	render	2013-02-27 13:31:07
-27	google	4	render	2013-02-27 13:31:07
-27	google	5	render	2013-02-27 13:31:07
-27	google	7	render	2013-02-27 13:31:07
-27	google	8	render	2013-02-27 13:31:07
-27	google	9	render	2013-02-27 13:31:07
-27	google	12	render	2013-02-27 13:31:07
-27	google	15	render	2013-02-27 13:31:07
-27	google	16	render	2013-02-27 13:31:07
-27	google	18	render	2013-02-27 13:31:07
-28	salsa	433	render	2013-02-27 13:31:10
-28	salsa	0	render	2013-02-27 13:31:10
-28	salsa	1	render	2013-02-27 13:31:10
-28	salsa	2	render	2013-02-27 13:31:10
-28	salsa	3	render	2013-02-27 13:31:10
-28	salsa	4	render	2013-02-27 13:31:10
-28	salsa	5	render	2013-02-27 13:31:10
-28	salsa	6	render	2013-02-27 13:31:10
-28	salsa	7	render	2013-02-27 13:31:10
-28	salsa	8	render	2013-02-27 13:31:10
-29	web search	492	render	2013-02-27 13:31:12
-29	web search	493	render	2013-02-27 13:31:12
-29	web search	33	render	2013-02-27 13:31:12
-29	web search	34	render	2013-02-27 13:31:12
-29	web search	48	render	2013-02-27 13:31:12
-29	web search	90	render	2013-02-27 13:31:13
-29	web search	135	render	2013-02-27 13:31:13
-29	web search	161	render	2013-02-27 13:31:13
-29	web search	206	render	2013-02-27 13:31:13
-29	web search	211	render	2013-02-27 13:31:13
-30	bing	52	render	2013-02-27 13:31:14
-30	bing	344	render	2013-02-27 13:31:14
-30	bing	354	render	2013-02-27 13:31:14
-30	bing	98	render	2013-02-27 13:31:14
-30	bing	277	render	2013-02-27 13:31:14
-30	bing	381	render	2013-02-27 13:31:14
-30	bing	343	render	2013-02-27 13:31:14
-30	bing	656	render	2013-02-27 13:31:14
-30	bing	245	render	2013-02-27 13:31:14
-30	bing	637	render	2013-02-27 13:31:14
-31	data mining	138	render	2013-02-27 13:31:15
-31	data mining	314	render	2013-02-27 13:31:15
-31	data mining	424	render	2013-02-27 13:31:15
-31	data mining	196	render	2013-02-27 13:31:15
-31	data mining	152	render	2013-02-27 13:31:15
-31	data mining	476	render	2013-02-27 13:31:15
-31	data mining	501	render	2013-02-27 13:31:15
-31	data mining	139	render	2013-02-27 13:31:15
-31	data mining	128	render	2013-02-27 13:31:15
-31	data mining	70	render	2013-02-27 13:31:15
-32	google	249	render	2013-02-27 13:31:16
-32	google	247	render	2013-02-27 13:31:16
-32	google	250	render	2013-02-27 13:31:16
-32	google	420	render	2013-02-27 13:31:16
-32	google	248	render	2013-02-27 13:31:16
-32	google	98	render	2013-02-27 13:31:16
-32	google	326	render	2013-02-27 13:31:16
-32	google	519	render	2013-02-27 13:31:16
-32	google	619	render	2013-02-27 13:31:16
-32	google	433	render	2013-02-27 13:31:16
-33	salsa	433	render	2013-02-27 13:31:17
-33	salsa	0	render	2013-02-27 13:31:17
-33	salsa	1	render	2013-02-27 13:31:17
-33	salsa	2	render	2013-02-27 13:31:17
-33	salsa	3	render	2013-02-27 13:31:17
-33	salsa	4	render	2013-02-27 13:31:17
-33	salsa	5	render	2013-02-27 13:31:17
-33	salsa	6	render	2013-02-27 13:31:17
-33	salsa	7	render	2013-02-27 13:31:17
-33	salsa	8	render	2013-02-27 13:31:17
-34	web search	415	render	2013-02-27 13:31:19
-34	web search	630	render	2013-02-27 13:31:19
-34	web search	618	render	2013-02-27 13:31:19
-34	web search	388	render	2013-02-27 13:31:19
-34	web search	516	render	2013-02-27 13:31:19
-34	web search	547	render	2013-02-27 13:31:19
-34	web search	515	render	2013-02-27 13:31:19
-34	web search	371	render	2013-02-27 13:31:19
-34	web search	612	render	2013-02-27 13:31:19
-34	web search	533	render	2013-02-27 13:31:19
-35	bing	52	render	2013-02-27 13:31:19
-35	bing	344	render	2013-02-27 13:31:19
-35	bing	354	render	2013-02-27 13:31:19
-35	bing	637	render	2013-02-27 13:31:19
-35	bing	326	render	2013-02-27 13:31:19
-35	bing	519	render	2013-02-27 13:31:19
-35	bing	343	render	2013-02-27 13:31:19
-35	bing	98	render	2013-02-27 13:31:19
-35	bing	373	render	2013-02-27 13:31:19
-35	bing	447	render	2013-02-27 13:31:19
-36	data mining	152	render	2013-02-27 13:31:20
-36	data mining	424	render	2013-02-27 13:31:20
-36	data mining	37	render	2013-02-27 13:31:20
-36	data mining	38	render	2013-02-27 13:31:20
-36	data mining	39	render	2013-02-27 13:31:20
-36	data mining	40	render	2013-02-27 13:31:20
-36	data mining	196	render	2013-02-27 13:31:20
-36	data mining	487	render	2013-02-27 13:31:20
-36	data mining	153	render	2013-02-27 13:31:20
-36	data mining	128	render	2013-02-27 13:31:20
-37	google	247	render	2013-02-27 13:31:20
-37	google	250	render	2013-02-27 13:31:20
-37	google	249	render	2013-02-27 13:31:20
-37	google	248	render	2013-02-27 13:31:20
-37	google	433	render	2013-02-27 13:31:20
-37	google	326	render	2013-02-27 13:31:20
-37	google	519	render	2013-02-27 13:31:20
-37	google	52	render	2013-02-27 13:31:20
-37	google	344	render	2013-02-27 13:31:20
-37	google	354	render	2013-02-27 13:31:20
-38	salsa	433	render	2013-02-27 13:31:21
-38	salsa	0	render	2013-02-27 13:31:21
-38	salsa	1	render	2013-02-27 13:31:21
-38	salsa	2	render	2013-02-27 13:31:21
-38	salsa	3	render	2013-02-27 13:31:21
-38	salsa	4	render	2013-02-27 13:31:21
-38	salsa	5	render	2013-02-27 13:31:21
-38	salsa	6	render	2013-02-27 13:31:21
-38	salsa	7	render	2013-02-27 13:31:21
-38	salsa	8	render	2013-02-27 13:31:21
-39	web search	573	render	2013-02-27 13:31:22
-39	web search	637	render	2013-02-27 13:31:22
-39	web search	250	render	2013-02-27 13:31:22
-39	web search	638	render	2013-02-27 13:31:22
-39	web search	92	render	2013-02-27 13:31:22
-39	web search	644	render	2013-02-27 13:31:22
-39	web search	201	render	2013-02-27 13:31:22
-39	web search	634	render	2013-02-27 13:31:22
-39	web search	52	render	2013-02-27 13:31:22
-39	web search	344	render	2013-02-27 13:31:22
-40	bing	357	render	2013-02-27 13:31:22
-40	bing	219	render	2013-02-27 13:31:22
-40	bing	247	render	2013-02-27 13:31:22
-40	bing	648	render	2013-02-27 13:31:22
-40	bing	257	render	2013-02-27 13:31:22
-40	bing	373	render	2013-02-27 13:31:22
-40	bing	535	render	2013-02-27 13:31:22
-40	bing	506	render	2013-02-27 13:31:22
-40	bing	224	render	2013-02-27 13:31:22
-40	bing	135	render	2013-02-27 13:31:22
-41	data mining	357	render	2013-02-27 13:31:22
-41	data mining	219	render	2013-02-27 13:31:22
-41	data mining	247	render	2013-02-27 13:31:22
-41	data mining	648	render	2013-02-27 13:31:22
-41	data mining	257	render	2013-02-27 13:31:22
-41	data mining	373	render	2013-02-27 13:31:22
-41	data mining	535	render	2013-02-27 13:31:22
-41	data mining	506	render	2013-02-27 13:31:22
-41	data mining	224	render	2013-02-27 13:31:22
-41	data mining	135	render	2013-02-27 13:31:22
-42	google	357	render	2013-02-27 13:31:23
-42	google	219	render	2013-02-27 13:31:23
-42	google	247	render	2013-02-27 13:31:23
-42	google	648	render	2013-02-27 13:31:23
-42	google	257	render	2013-02-27 13:31:23
-42	google	373	render	2013-02-27 13:31:23
-42	google	535	render	2013-02-27 13:31:23
-42	google	506	render	2013-02-27 13:31:23
-42	google	224	render	2013-02-27 13:31:23
-42	google	135	render	2013-02-27 13:31:23
-43	salsa	357	render	2013-02-27 13:31:23
-43	salsa	219	render	2013-02-27 13:31:23
-43	salsa	247	render	2013-02-27 13:31:23
-43	salsa	648	render	2013-02-27 13:31:23
-43	salsa	257	render	2013-02-27 13:31:23
-43	salsa	373	render	2013-02-27 13:31:23
-43	salsa	535	render	2013-02-27 13:31:23
-43	salsa	506	render	2013-02-27 13:31:23
-43	salsa	224	render	2013-02-27 13:31:23
-43	salsa	135	render	2013-02-27 13:31:23
-44	web search	357	render	2013-02-27 13:31:24
-44	web search	219	render	2013-02-27 13:31:24
-44	web search	247	render	2013-02-27 13:31:24
-44	web search	648	render	2013-02-27 13:31:24
-44	web search	257	render	2013-02-27 13:31:24
-44	web search	373	render	2013-02-27 13:31:24
-44	web search	535	render	2013-02-27 13:31:24
-44	web search	506	render	2013-02-27 13:31:24
-44	web search	224	render	2013-02-27 13:31:24
-44	web search	135	render	2013-02-27 13:31:24
-45	bing	52	render	2013-02-27 13:31:25
-45	bing	344	render	2013-02-27 13:31:25
-45	bing	354	render	2013-02-27 13:31:25
-45	bing	373	render	2013-02-27 13:31:25
-45	bing	98	render	2013-02-27 13:31:25
-45	bing	637	render	2013-02-27 13:31:25
-45	bing	343	render	2013-02-27 13:31:25
-45	bing	247	render	2013-02-27 13:31:25
-45	bing	492	render	2013-02-27 13:31:25
-45	bing	381	render	2013-02-27 13:31:25
-46	data mining	152	render	2013-02-27 13:31:27
-46	data mining	424	render	2013-02-27 13:31:27
-46	data mining	138	render	2013-02-27 13:31:27
-46	data mining	314	render	2013-02-27 13:31:27
-46	data mining	476	render	2013-02-27 13:31:27
-46	data mining	196	render	2013-02-27 13:31:27
-46	data mining	128	render	2013-02-27 13:31:27
-46	data mining	501	render	2013-02-27 13:31:27
-46	data mining	70	render	2013-02-27 13:31:27
-46	data mining	487	render	2013-02-27 13:31:27
-47	google	247	render	2013-02-27 13:31:29
-47	google	249	render	2013-02-27 13:31:29
-47	google	250	render	2013-02-27 13:31:29
-47	google	433	render	2013-02-27 13:31:29
-47	google	248	render	2013-02-27 13:31:29
-47	google	52	render	2013-02-27 13:31:29
-47	google	219	render	2013-02-27 13:31:29
-47	google	519	render	2013-02-27 13:31:29
-47	google	326	render	2013-02-27 13:31:29
-47	google	373	render	2013-02-27 13:31:29
-48	salsa	433	render	2013-02-27 13:31:30
-48	salsa	357	render	2013-02-27 13:31:30
-48	salsa	219	render	2013-02-27 13:31:30
-48	salsa	247	render	2013-02-27 13:31:30
-48	salsa	648	render	2013-02-27 13:31:30
-48	salsa	257	render	2013-02-27 13:31:30
-48	salsa	373	render	2013-02-27 13:31:30
-48	salsa	535	render	2013-02-27 13:31:30
-48	salsa	506	render	2013-02-27 13:31:30
-48	salsa	224	render	2013-02-27 13:31:30
-49	web search	630	render	2013-02-27 13:31:32
-49	web search	415	render	2013-02-27 13:31:32
-49	web search	247	render	2013-02-27 13:31:32
-49	web search	634	render	2013-02-27 13:31:32
-49	web search	638	render	2013-02-27 13:31:32
-49	web search	637	render	2013-02-27 13:31:32
-49	web search	547	render	2013-02-27 13:31:32
-49	web search	433	render	2013-02-27 13:31:32
-49	web search	654	render	2013-02-27 13:31:32
-49	web search	250	render	2013-02-27 13:31:32
-0	bing	21	render	2013-02-27 13:39:29
-0	bing	35	render	2013-02-27 13:39:30
-0	bing	45	render	2013-02-27 13:39:30
-0	bing	52	render	2013-02-27 13:39:31
-0	bing	75	render	2013-02-27 13:39:32
-0	bing	98	render	2013-02-27 13:39:32
-0	bing	117	render	2013-02-27 13:39:32
-0	bing	152	render	2013-02-27 13:39:32
-0	bing	187	render	2013-02-27 13:39:33
-0	bing	194	render	2013-02-27 13:39:33
-1	data mining	202	render	2013-02-27 13:39:35
-1	data mining	384	render	2013-02-27 13:39:35
-1	data mining	152	render	2013-02-27 13:39:35
-1	data mining	501	render	2013-02-27 13:39:35
-1	data mining	32	render	2013-02-27 13:39:35
-1	data mining	55	render	2013-02-27 13:39:35
-1	data mining	92	render	2013-02-27 13:39:35
-1	data mining	280	render	2013-02-27 13:39:35
-1	data mining	323	render	2013-02-27 13:39:35
-1	data mining	331	render	2013-02-27 13:39:35
-2	google	1	render	2013-02-27 13:39:36
-2	google	4	render	2013-02-27 13:39:36
-2	google	5	render	2013-02-27 13:39:36
-2	google	7	render	2013-02-27 13:39:36
-2	google	8	render	2013-02-27 13:39:36
-2	google	9	render	2013-02-27 13:39:36
-2	google	12	render	2013-02-27 13:39:36
-2	google	15	render	2013-02-27 13:39:36
-2	google	16	render	2013-02-27 13:39:36
-2	google	18	render	2013-02-27 13:39:36
-3	salsa	433	render	2013-02-27 13:39:37
-3	salsa	0	render	2013-02-27 13:39:37
-3	salsa	1	render	2013-02-27 13:39:37
-3	salsa	2	render	2013-02-27 13:39:37
-3	salsa	3	render	2013-02-27 13:39:37
-3	salsa	4	render	2013-02-27 13:39:37
-3	salsa	5	render	2013-02-27 13:39:37
-3	salsa	6	render	2013-02-27 13:39:37
-3	salsa	7	render	2013-02-27 13:39:37
-3	salsa	8	render	2013-02-27 13:39:37
-4	web search	492	render	2013-02-27 13:39:38
-4	web search	493	render	2013-02-27 13:39:38
-4	web search	33	render	2013-02-27 13:39:38
-4	web search	34	render	2013-02-27 13:39:38
-4	web search	48	render	2013-02-27 13:39:38
-4	web search	90	render	2013-02-27 13:39:38
-4	web search	135	render	2013-02-27 13:39:38
-4	web search	161	render	2013-02-27 13:39:38
-4	web search	206	render	2013-02-27 13:39:38
-4	web search	211	render	2013-02-27 13:39:38
-5	bing	52	render	2013-02-27 13:39:39
-5	bing	344	render	2013-02-27 13:39:39
-5	bing	354	render	2013-02-27 13:39:39
-5	bing	98	render	2013-02-27 13:39:39
-5	bing	277	render	2013-02-27 13:39:39
-5	bing	381	render	2013-02-27 13:39:39
-5	bing	343	render	2013-02-27 13:39:39
-5	bing	656	render	2013-02-27 13:39:39
-5	bing	245	render	2013-02-27 13:39:39
-5	bing	637	render	2013-02-27 13:39:39
-6	data mining	138	render	2013-02-27 13:39:41
-6	data mining	314	render	2013-02-27 13:39:41
-6	data mining	424	render	2013-02-27 13:39:41
-6	data mining	196	render	2013-02-27 13:39:41
-6	data mining	152	render	2013-02-27 13:39:41
-6	data mining	476	render	2013-02-27 13:39:41
-6	data mining	501	render	2013-02-27 13:39:41
-6	data mining	139	render	2013-02-27 13:39:41
-6	data mining	128	render	2013-02-27 13:39:41
-6	data mining	70	render	2013-02-27 13:39:41
-7	google	249	render	2013-02-27 13:39:42
-7	google	247	render	2013-02-27 13:39:42
-7	google	250	render	2013-02-27 13:39:42
-7	google	420	render	2013-02-27 13:39:42
-7	google	248	render	2013-02-27 13:39:42
-7	google	98	render	2013-02-27 13:39:42
-7	google	326	render	2013-02-27 13:39:42
-7	google	519	render	2013-02-27 13:39:42
-7	google	619	render	2013-02-27 13:39:42
-7	google	433	render	2013-02-27 13:39:42
-8	salsa	433	render	2013-02-27 13:39:43
-8	salsa	0	render	2013-02-27 13:39:43
-8	salsa	1	render	2013-02-27 13:39:43
-8	salsa	2	render	2013-02-27 13:39:43
-8	salsa	3	render	2013-02-27 13:39:43
-8	salsa	4	render	2013-02-27 13:39:43
-8	salsa	5	render	2013-02-27 13:39:43
-8	salsa	6	render	2013-02-27 13:39:43
-8	salsa	7	render	2013-02-27 13:39:43
-8	salsa	8	render	2013-02-27 13:39:43
-9	web search	415	render	2013-02-27 13:39:44
-9	web search	630	render	2013-02-27 13:39:44
-9	web search	618	render	2013-02-27 13:39:44
-9	web search	388	render	2013-02-27 13:39:44
-9	web search	516	render	2013-02-27 13:39:44
-9	web search	547	render	2013-02-27 13:39:44
-9	web search	515	render	2013-02-27 13:39:44
-9	web search	371	render	2013-02-27 13:39:44
-9	web search	612	render	2013-02-27 13:39:44
-9	web search	533	render	2013-02-27 13:39:44
-10	bing	52	render	2013-02-27 13:39:45
-10	bing	344	render	2013-02-27 13:39:45
-10	bing	354	render	2013-02-27 13:39:45
-10	bing	637	render	2013-02-27 13:39:45
-10	bing	326	render	2013-02-27 13:39:45
-10	bing	519	render	2013-02-27 13:39:45
-10	bing	343	render	2013-02-27 13:39:45
-10	bing	98	render	2013-02-27 13:39:45
-10	bing	373	render	2013-02-27 13:39:45
-10	bing	447	render	2013-02-27 13:39:45
-11	data mining	152	render	2013-02-27 13:39:46
-11	data mining	424	render	2013-02-27 13:39:46
-11	data mining	37	render	2013-02-27 13:39:46
-11	data mining	38	render	2013-02-27 13:39:46
-11	data mining	39	render	2013-02-27 13:39:46
-11	data mining	40	render	2013-02-27 13:39:46
-11	data mining	196	render	2013-02-27 13:39:46
-11	data mining	487	render	2013-02-27 13:39:46
-11	data mining	153	render	2013-02-27 13:39:46
-11	data mining	128	render	2013-02-27 13:39:46
-12	google	247	render	2013-02-27 13:39:46
-12	google	250	render	2013-02-27 13:39:46
-12	google	249	render	2013-02-27 13:39:46
-12	google	248	render	2013-02-27 13:39:46
-12	google	433	render	2013-02-27 13:39:46
-12	google	326	render	2013-02-27 13:39:46
-12	google	519	render	2013-02-27 13:39:46
-12	google	52	render	2013-02-27 13:39:46
-12	google	344	render	2013-02-27 13:39:46
-12	google	354	render	2013-02-27 13:39:46
-13	salsa	433	render	2013-02-27 13:39:47
-13	salsa	0	render	2013-02-27 13:39:47
-13	salsa	1	render	2013-02-27 13:39:47
-13	salsa	2	render	2013-02-27 13:39:47
-13	salsa	3	render	2013-02-27 13:39:47
-13	salsa	4	render	2013-02-27 13:39:47
-13	salsa	5	render	2013-02-27 13:39:47
-13	salsa	6	render	2013-02-27 13:39:47
-13	salsa	7	render	2013-02-27 13:39:47
-13	salsa	8	render	2013-02-27 13:39:47
-14	web search	573	render	2013-02-27 13:39:48
-14	web search	637	render	2013-02-27 13:39:48
-14	web search	250	render	2013-02-27 13:39:48
-14	web search	638	render	2013-02-27 13:39:48
-14	web search	92	render	2013-02-27 13:39:48
-14	web search	644	render	2013-02-27 13:39:48
-14	web search	201	render	2013-02-27 13:39:48
-14	web search	634	render	2013-02-27 13:39:48
-14	web search	52	render	2013-02-27 13:39:48
-14	web search	344	render	2013-02-27 13:39:48
-15	bing	357	render	2013-02-27 13:39:48
-15	bing	219	render	2013-02-27 13:39:48
-15	bing	247	render	2013-02-27 13:39:48
-15	bing	648	render	2013-02-27 13:39:48
-15	bing	257	render	2013-02-27 13:39:48
-15	bing	373	render	2013-02-27 13:39:48
-15	bing	535	render	2013-02-27 13:39:48
-15	bing	506	render	2013-02-27 13:39:48
-15	bing	224	render	2013-02-27 13:39:48
-15	bing	135	render	2013-02-27 13:39:48
-16	data mining	357	render	2013-02-27 13:39:49
-16	data mining	219	render	2013-02-27 13:39:49
-16	data mining	247	render	2013-02-27 13:39:49
-16	data mining	648	render	2013-02-27 13:39:49
-16	data mining	257	render	2013-02-27 13:39:49
-16	data mining	373	render	2013-02-27 13:39:49
-16	data mining	535	render	2013-02-27 13:39:49
-16	data mining	506	render	2013-02-27 13:39:49
-16	data mining	224	render	2013-02-27 13:39:49
-16	data mining	135	render	2013-02-27 13:39:49
-17	google	357	render	2013-02-27 13:39:49
-17	google	219	render	2013-02-27 13:39:49
-17	google	247	render	2013-02-27 13:39:49
-17	google	648	render	2013-02-27 13:39:49
-17	google	257	render	2013-02-27 13:39:49
-17	google	373	render	2013-02-27 13:39:49
-17	google	535	render	2013-02-27 13:39:49
-17	google	506	render	2013-02-27 13:39:49
-17	google	224	render	2013-02-27 13:39:49
-17	google	135	render	2013-02-27 13:39:49
-18	salsa	357	render	2013-02-27 13:39:49
-18	salsa	219	render	2013-02-27 13:39:49
-18	salsa	247	render	2013-02-27 13:39:50
-18	salsa	648	render	2013-02-27 13:39:50
-18	salsa	257	render	2013-02-27 13:39:50
-18	salsa	373	render	2013-02-27 13:39:50
-18	salsa	535	render	2013-02-27 13:39:50
-18	salsa	506	render	2013-02-27 13:39:50
-18	salsa	224	render	2013-02-27 13:39:50
-18	salsa	135	render	2013-02-27 13:39:50
-19	web search	357	render	2013-02-27 13:39:50
-19	web search	219	render	2013-02-27 13:39:50
-19	web search	247	render	2013-02-27 13:39:50
-19	web search	648	render	2013-02-27 13:39:50
-19	web search	257	render	2013-02-27 13:39:50
-19	web search	373	render	2013-02-27 13:39:50
-19	web search	535	render	2013-02-27 13:39:50
-19	web search	506	render	2013-02-27 13:39:50
-19	web search	224	render	2013-02-27 13:39:50
-19	web search	135	render	2013-02-27 13:39:50
-20	bing	52	render	2013-02-27 13:39:51
-20	bing	344	render	2013-02-27 13:39:51
-20	bing	354	render	2013-02-27 13:39:51
-20	bing	373	render	2013-02-27 13:39:51
-20	bing	98	render	2013-02-27 13:39:51
-20	bing	637	render	2013-02-27 13:39:51
-20	bing	343	render	2013-02-27 13:39:51
-20	bing	247	render	2013-02-27 13:39:51
-20	bing	492	render	2013-02-27 13:39:51
-20	bing	381	render	2013-02-27 13:39:51
-21	data mining	152	render	2013-02-27 13:39:53
-21	data mining	424	render	2013-02-27 13:39:53
-21	data mining	138	render	2013-02-27 13:39:53
-21	data mining	314	render	2013-02-27 13:39:53
-21	data mining	476	render	2013-02-27 13:39:53
-21	data mining	196	render	2013-02-27 13:39:53
-21	data mining	128	render	2013-02-27 13:39:53
-21	data mining	501	render	2013-02-27 13:39:53
-21	data mining	70	render	2013-02-27 13:39:53
-21	data mining	487	render	2013-02-27 13:39:53
-22	google	247	render	2013-02-27 13:39:55
-22	google	249	render	2013-02-27 13:39:55
-22	google	250	render	2013-02-27 13:39:55
-22	google	433	render	2013-02-27 13:39:55
-22	google	248	render	2013-02-27 13:39:55
-22	google	52	render	2013-02-27 13:39:55
-22	google	219	render	2013-02-27 13:39:55
-22	google	519	render	2013-02-27 13:39:55
-22	google	326	render	2013-02-27 13:39:55
-22	google	373	render	2013-02-27 13:39:55
-23	salsa	433	render	2013-02-27 13:39:56
-23	salsa	357	render	2013-02-27 13:39:56
-23	salsa	219	render	2013-02-27 13:39:56
-23	salsa	247	render	2013-02-27 13:39:56
-23	salsa	648	render	2013-02-27 13:39:56
-23	salsa	257	render	2013-02-27 13:39:56
-23	salsa	373	render	2013-02-27 13:39:56
-23	salsa	535	render	2013-02-27 13:39:56
-23	salsa	506	render	2013-02-27 13:39:56
-23	salsa	224	render	2013-02-27 13:39:56
-24	web search	630	render	2013-02-27 13:39:58
-24	web search	415	render	2013-02-27 13:39:58
-24	web search	247	render	2013-02-27 13:39:58
-24	web search	634	render	2013-02-27 13:39:58
-24	web search	638	render	2013-02-27 13:39:58
-24	web search	637	render	2013-02-27 13:39:58
-24	web search	547	render	2013-02-27 13:39:58
-24	web search	433	render	2013-02-27 13:39:58
-24	web search	654	render	2013-02-27 13:39:58
-24	web search	250	render	2013-02-27 13:39:58
-25	bing	21	render	2013-02-27 13:40:47
-25	bing	35	render	2013-02-27 13:40:47
-25	bing	45	render	2013-02-27 13:40:47
-25	bing	52	render	2013-02-27 13:40:47
-25	bing	75	render	2013-02-27 13:40:47
-25	bing	98	render	2013-02-27 13:40:48
-25	bing	117	render	2013-02-27 13:40:48
-25	bing	152	render	2013-02-27 13:40:48
-25	bing	187	render	2013-02-27 13:40:48
-25	bing	194	render	2013-02-27 13:40:48
-26	data mining	202	render	2013-02-27 13:40:49
-26	data mining	384	render	2013-02-27 13:40:49
-26	data mining	152	render	2013-02-27 13:40:49
-26	data mining	501	render	2013-02-27 13:40:49
-26	data mining	32	render	2013-02-27 13:40:49
-26	data mining	55	render	2013-02-27 13:40:49
-26	data mining	92	render	2013-02-27 13:40:49
-26	data mining	280	render	2013-02-27 13:40:49
-26	data mining	323	render	2013-02-27 13:40:49
-26	data mining	331	render	2013-02-27 13:40:49
-27	google	1	render	2013-02-27 13:40:50
-27	google	4	render	2013-02-27 13:40:50
-27	google	5	render	2013-02-27 13:40:50
-27	google	7	render	2013-02-27 13:40:50
-27	google	8	render	2013-02-27 13:40:50
-27	google	9	render	2013-02-27 13:40:50
-27	google	12	render	2013-02-27 13:40:50
-27	google	15	render	2013-02-27 13:40:50
-27	google	16	render	2013-02-27 13:40:50
-27	google	18	render	2013-02-27 13:40:50
-28	salsa	433	render	2013-02-27 13:40:51
-28	salsa	0	render	2013-02-27 13:40:51
-28	salsa	1	render	2013-02-27 13:40:51
-28	salsa	2	render	2013-02-27 13:40:51
-28	salsa	3	render	2013-02-27 13:40:51
-28	salsa	4	render	2013-02-27 13:40:51
-28	salsa	5	render	2013-02-27 13:40:51
-28	salsa	6	render	2013-02-27 13:40:51
-28	salsa	7	render	2013-02-27 13:40:51
-28	salsa	8	render	2013-02-27 13:40:51
-29	web search	492	render	2013-02-27 13:40:51
-29	web search	493	render	2013-02-27 13:40:51
-29	web search	33	render	2013-02-27 13:40:51
-29	web search	34	render	2013-02-27 13:40:51
-29	web search	48	render	2013-02-27 13:40:51
-29	web search	90	render	2013-02-27 13:40:51
-29	web search	135	render	2013-02-27 13:40:51
-29	web search	161	render	2013-02-27 13:40:51
-29	web search	206	render	2013-02-27 13:40:51
-29	web search	211	render	2013-02-27 13:40:51
-30	bing	52	render	2013-02-27 13:40:52
-30	bing	344	render	2013-02-27 13:40:52
-30	bing	354	render	2013-02-27 13:40:52
-30	bing	98	render	2013-02-27 13:40:52
-30	bing	277	render	2013-02-27 13:40:52
-30	bing	381	render	2013-02-27 13:40:52
-30	bing	343	render	2013-02-27 13:40:52
-30	bing	656	render	2013-02-27 13:40:52
-30	bing	245	render	2013-02-27 13:40:52
-30	bing	637	render	2013-02-27 13:40:52
-31	data mining	138	render	2013-02-27 13:40:54
-31	data mining	314	render	2013-02-27 13:40:54
-31	data mining	424	render	2013-02-27 13:40:54
-31	data mining	196	render	2013-02-27 13:40:54
-31	data mining	152	render	2013-02-27 13:40:54
-31	data mining	476	render	2013-02-27 13:40:54
-31	data mining	501	render	2013-02-27 13:40:54
-31	data mining	139	render	2013-02-27 13:40:54
-31	data mining	128	render	2013-02-27 13:40:54
-31	data mining	70	render	2013-02-27 13:40:54
-32	google	249	render	2013-02-27 13:40:55
-32	google	247	render	2013-02-27 13:40:55
-32	google	250	render	2013-02-27 13:40:55
-32	google	420	render	2013-02-27 13:40:55
-32	google	248	render	2013-02-27 13:40:55
-32	google	98	render	2013-02-27 13:40:55
-32	google	326	render	2013-02-27 13:40:55
-32	google	519	render	2013-02-27 13:40:55
-32	google	619	render	2013-02-27 13:40:55
-32	google	433	render	2013-02-27 13:40:55
-33	salsa	433	render	2013-02-27 13:40:56
-33	salsa	0	render	2013-02-27 13:40:56
-33	salsa	1	render	2013-02-27 13:40:56
-33	salsa	2	render	2013-02-27 13:40:56
-33	salsa	3	render	2013-02-27 13:40:56
-33	salsa	4	render	2013-02-27 13:40:56
-33	salsa	5	render	2013-02-27 13:40:56
-33	salsa	6	render	2013-02-27 13:40:56
-33	salsa	7	render	2013-02-27 13:40:56
-33	salsa	8	render	2013-02-27 13:40:56
-34	web search	415	render	2013-02-27 13:40:57
-34	web search	630	render	2013-02-27 13:40:57
-34	web search	618	render	2013-02-27 13:40:57
-34	web search	388	render	2013-02-27 13:40:57
-34	web search	516	render	2013-02-27 13:40:57
-34	web search	547	render	2013-02-27 13:40:57
-34	web search	515	render	2013-02-27 13:40:57
-34	web search	371	render	2013-02-27 13:40:57
-34	web search	612	render	2013-02-27 13:40:57
-34	web search	533	render	2013-02-27 13:40:57
-35	bing	52	render	2013-02-27 13:40:58
-35	bing	344	render	2013-02-27 13:40:58
-35	bing	354	render	2013-02-27 13:40:58
-35	bing	637	render	2013-02-27 13:40:58
-35	bing	326	render	2013-02-27 13:40:58
-35	bing	519	render	2013-02-27 13:40:58
-35	bing	343	render	2013-02-27 13:40:58
-35	bing	98	render	2013-02-27 13:40:58
-35	bing	373	render	2013-02-27 13:40:58
-35	bing	447	render	2013-02-27 13:40:58
-36	data mining	152	render	2013-02-27 13:40:58
-36	data mining	424	render	2013-02-27 13:40:58
-36	data mining	37	render	2013-02-27 13:40:58
-36	data mining	38	render	2013-02-27 13:40:58
-36	data mining	39	render	2013-02-27 13:40:58
-36	data mining	40	render	2013-02-27 13:40:58
-36	data mining	196	render	2013-02-27 13:40:58
-36	data mining	487	render	2013-02-27 13:40:58
-36	data mining	153	render	2013-02-27 13:40:58
-36	data mining	128	render	2013-02-27 13:40:58
-37	google	247	render	2013-02-27 13:40:59
-37	google	250	render	2013-02-27 13:40:59
-37	google	249	render	2013-02-27 13:40:59
-37	google	248	render	2013-02-27 13:40:59
-37	google	433	render	2013-02-27 13:40:59
-37	google	326	render	2013-02-27 13:40:59
-37	google	519	render	2013-02-27 13:40:59
-37	google	52	render	2013-02-27 13:40:59
-37	google	344	render	2013-02-27 13:40:59
-37	google	354	render	2013-02-27 13:40:59
-38	salsa	433	render	2013-02-27 13:41:00
-38	salsa	0	render	2013-02-27 13:41:00
-38	salsa	1	render	2013-02-27 13:41:00
-38	salsa	2	render	2013-02-27 13:41:00
-38	salsa	3	render	2013-02-27 13:41:00
-38	salsa	4	render	2013-02-27 13:41:00
-38	salsa	5	render	2013-02-27 13:41:00
-38	salsa	6	render	2013-02-27 13:41:00
-38	salsa	7	render	2013-02-27 13:41:00
-38	salsa	8	render	2013-02-27 13:41:00
-39	web search	573	render	2013-02-27 13:41:00
-39	web search	637	render	2013-02-27 13:41:00
-39	web search	250	render	2013-02-27 13:41:00
-39	web search	638	render	2013-02-27 13:41:00
-39	web search	92	render	2013-02-27 13:41:00
-39	web search	644	render	2013-02-27 13:41:00
-39	web search	201	render	2013-02-27 13:41:00
-39	web search	634	render	2013-02-27 13:41:00
-39	web search	52	render	2013-02-27 13:41:00
-39	web search	344	render	2013-02-27 13:41:00
-40	bing	357	render	2013-02-27 13:41:01
-40	bing	219	render	2013-02-27 13:41:01
-40	bing	247	render	2013-02-27 13:41:01
-40	bing	648	render	2013-02-27 13:41:01
-40	bing	257	render	2013-02-27 13:41:01
-40	bing	373	render	2013-02-27 13:41:01
-40	bing	535	render	2013-02-27 13:41:01
-40	bing	506	render	2013-02-27 13:41:01
-40	bing	224	render	2013-02-27 13:41:01
-40	bing	135	render	2013-02-27 13:41:01
-41	data mining	357	render	2013-02-27 13:41:01
-41	data mining	219	render	2013-02-27 13:41:01
-41	data mining	247	render	2013-02-27 13:41:01
-41	data mining	648	render	2013-02-27 13:41:01
-41	data mining	257	render	2013-02-27 13:41:01
-41	data mining	373	render	2013-02-27 13:41:01
-41	data mining	535	render	2013-02-27 13:41:01
-41	data mining	506	render	2013-02-27 13:41:01
-41	data mining	224	render	2013-02-27 13:41:01
-41	data mining	135	render	2013-02-27 13:41:01
-42	google	357	render	2013-02-27 13:41:01
-42	google	219	render	2013-02-27 13:41:01
-42	google	247	render	2013-02-27 13:41:01
-42	google	648	render	2013-02-27 13:41:01
-42	google	257	render	2013-02-27 13:41:01
-42	google	373	render	2013-02-27 13:41:01
-42	google	535	render	2013-02-27 13:41:01
-42	google	506	render	2013-02-27 13:41:01
-42	google	224	render	2013-02-27 13:41:01
-42	google	135	render	2013-02-27 13:41:01
-43	salsa	357	render	2013-02-27 13:41:02
-43	salsa	219	render	2013-02-27 13:41:02
-43	salsa	247	render	2013-02-27 13:41:02
-43	salsa	648	render	2013-02-27 13:41:02
-43	salsa	257	render	2013-02-27 13:41:02
-43	salsa	373	render	2013-02-27 13:41:02
-43	salsa	535	render	2013-02-27 13:41:02
-43	salsa	506	render	2013-02-27 13:41:02
-43	salsa	224	render	2013-02-27 13:41:02
-43	salsa	135	render	2013-02-27 13:41:02
-44	web search	357	render	2013-02-27 13:41:02
-44	web search	219	render	2013-02-27 13:41:02
-44	web search	247	render	2013-02-27 13:41:02
-44	web search	648	render	2013-02-27 13:41:02
-44	web search	257	render	2013-02-27 13:41:02
-44	web search	373	render	2013-02-27 13:41:02
-44	web search	535	render	2013-02-27 13:41:02
-44	web search	506	render	2013-02-27 13:41:02
-44	web search	224	render	2013-02-27 13:41:02
-44	web search	135	render	2013-02-27 13:41:02
-45	bing	52	render	2013-02-27 13:41:04
-45	bing	344	render	2013-02-27 13:41:04
-45	bing	354	render	2013-02-27 13:41:04
-45	bing	373	render	2013-02-27 13:41:04
-45	bing	98	render	2013-02-27 13:41:04
-45	bing	637	render	2013-02-27 13:41:04
-45	bing	343	render	2013-02-27 13:41:04
-45	bing	247	render	2013-02-27 13:41:04
-45	bing	492	render	2013-02-27 13:41:04
-45	bing	381	render	2013-02-27 13:41:04
-46	data mining	152	render	2013-02-27 13:41:06
-46	data mining	424	render	2013-02-27 13:41:06
-46	data mining	138	render	2013-02-27 13:41:06
-46	data mining	314	render	2013-02-27 13:41:06
-46	data mining	476	render	2013-02-27 13:41:06
-46	data mining	196	render	2013-02-27 13:41:06
-46	data mining	128	render	2013-02-27 13:41:06
-46	data mining	501	render	2013-02-27 13:41:06
-46	data mining	70	render	2013-02-27 13:41:06
-46	data mining	487	render	2013-02-27 13:41:06
-47	google	247	render	2013-02-27 13:41:07
-47	google	249	render	2013-02-27 13:41:07
-47	google	250	render	2013-02-27 13:41:07
-47	google	433	render	2013-02-27 13:41:07
-47	google	248	render	2013-02-27 13:41:07
-47	google	52	render	2013-02-27 13:41:07
-47	google	219	render	2013-02-27 13:41:07
-47	google	519	render	2013-02-27 13:41:07
-47	google	326	render	2013-02-27 13:41:07
-47	google	373	render	2013-02-27 13:41:07
-48	salsa	433	render	2013-02-27 13:41:08
-48	salsa	357	render	2013-02-27 13:41:08
-48	salsa	219	render	2013-02-27 13:41:08
-48	salsa	247	render	2013-02-27 13:41:08
-48	salsa	648	render	2013-02-27 13:41:08
-48	salsa	257	render	2013-02-27 13:41:08
-48	salsa	373	render	2013-02-27 13:41:08
-48	salsa	535	render	2013-02-27 13:41:08
-48	salsa	506	render	2013-02-27 13:41:08
-48	salsa	224	render	2013-02-27 13:41:08
-49	web search	630	render	2013-02-27 13:41:10
-49	web search	415	render	2013-02-27 13:41:10
-49	web search	247	render	2013-02-27 13:41:10
-49	web search	634	render	2013-02-27 13:41:10
-49	web search	638	render	2013-02-27 13:41:10
-49	web search	637	render	2013-02-27 13:41:10
-49	web search	547	render	2013-02-27 13:41:10
-49	web search	433	render	2013-02-27 13:41:10
-49	web search	654	render	2013-02-27 13:41:10
-49	web search	250	render	2013-02-27 13:41:10
-50	bing	21	render	2013-02-27 13:46:45
-50	bing	35	render	2013-02-27 13:46:45
-50	bing	45	render	2013-02-27 13:46:45
-50	bing	52	render	2013-02-27 13:46:45
-50	bing	75	render	2013-02-27 13:46:45
-50	bing	98	render	2013-02-27 13:46:45
-50	bing	117	render	2013-02-27 13:46:45
-50	bing	152	render	2013-02-27 13:46:45
-50	bing	187	render	2013-02-27 13:46:45
-50	bing	194	render	2013-02-27 13:46:45
-51	data mining	202	render	2013-02-27 13:46:47
-51	data mining	384	render	2013-02-27 13:46:47
-51	data mining	152	render	2013-02-27 13:46:47
-51	data mining	501	render	2013-02-27 13:46:47
-51	data mining	32	render	2013-02-27 13:46:47
-51	data mining	55	render	2013-02-27 13:46:47
-51	data mining	92	render	2013-02-27 13:46:47
-51	data mining	280	render	2013-02-27 13:46:47
-51	data mining	323	render	2013-02-27 13:46:47
-51	data mining	331	render	2013-02-27 13:46:47
-52	google	1	render	2013-02-27 13:46:47
-52	google	4	render	2013-02-27 13:46:47
-52	google	5	render	2013-02-27 13:46:47
-52	google	7	render	2013-02-27 13:46:47
-52	google	8	render	2013-02-27 13:46:47
-52	google	9	render	2013-02-27 13:46:47
-52	google	12	render	2013-02-27 13:46:47
-52	google	15	render	2013-02-27 13:46:47
-52	google	16	render	2013-02-27 13:46:47
-52	google	18	render	2013-02-27 13:46:47
-53	salsa	433	render	2013-02-27 13:46:48
-53	salsa	0	render	2013-02-27 13:46:48
-53	salsa	1	render	2013-02-27 13:46:48
-53	salsa	2	render	2013-02-27 13:46:48
-53	salsa	3	render	2013-02-27 13:46:48
-53	salsa	4	render	2013-02-27 13:46:48
-53	salsa	5	render	2013-02-27 13:46:48
-53	salsa	6	render	2013-02-27 13:46:48
-53	salsa	7	render	2013-02-27 13:46:48
-53	salsa	8	render	2013-02-27 13:46:48
-54	web search	492	render	2013-02-27 13:46:49
-54	web search	493	render	2013-02-27 13:46:49
-54	web search	33	render	2013-02-27 13:46:49
-54	web search	34	render	2013-02-27 13:46:49
-54	web search	48	render	2013-02-27 13:46:49
-54	web search	90	render	2013-02-27 13:46:49
-54	web search	135	render	2013-02-27 13:46:49
-54	web search	161	render	2013-02-27 13:46:49
-54	web search	206	render	2013-02-27 13:46:49
-54	web search	211	render	2013-02-27 13:46:49
-55	bing	52	render	2013-02-27 13:46:50
-55	bing	344	render	2013-02-27 13:46:50
-55	bing	354	render	2013-02-27 13:46:50
-55	bing	98	render	2013-02-27 13:46:50
-55	bing	277	render	2013-02-27 13:46:50
-55	bing	381	render	2013-02-27 13:46:50
-55	bing	343	render	2013-02-27 13:46:50
-55	bing	656	render	2013-02-27 13:46:50
-55	bing	245	render	2013-02-27 13:46:50
-55	bing	637	render	2013-02-27 13:46:50
-56	data mining	138	render	2013-02-27 13:46:51
-56	data mining	314	render	2013-02-27 13:46:51
-56	data mining	424	render	2013-02-27 13:46:51
-56	data mining	196	render	2013-02-27 13:46:51
-56	data mining	152	render	2013-02-27 13:46:51
-56	data mining	476	render	2013-02-27 13:46:51
-56	data mining	501	render	2013-02-27 13:46:51
-56	data mining	139	render	2013-02-27 13:46:51
-56	data mining	128	render	2013-02-27 13:46:51
-56	data mining	70	render	2013-02-27 13:46:51
-57	google	249	render	2013-02-27 13:46:52
-57	google	247	render	2013-02-27 13:46:52
-57	google	250	render	2013-02-27 13:46:52
-57	google	420	render	2013-02-27 13:46:52
-57	google	248	render	2013-02-27 13:46:52
-57	google	98	render	2013-02-27 13:46:52
-57	google	326	render	2013-02-27 13:46:52
-57	google	519	render	2013-02-27 13:46:52
-57	google	619	render	2013-02-27 13:46:52
-57	google	433	render	2013-02-27 13:46:52
-58	salsa	433	render	2013-02-27 13:46:53
-58	salsa	0	render	2013-02-27 13:46:53
-58	salsa	1	render	2013-02-27 13:46:53
-58	salsa	2	render	2013-02-27 13:46:53
-58	salsa	3	render	2013-02-27 13:46:53
-58	salsa	4	render	2013-02-27 13:46:53
-58	salsa	5	render	2013-02-27 13:46:53
-58	salsa	6	render	2013-02-27 13:46:53
-58	salsa	7	render	2013-02-27 13:46:53
-58	salsa	8	render	2013-02-27 13:46:53
-59	web search	415	render	2013-02-27 13:46:54
-59	web search	630	render	2013-02-27 13:46:54
-59	web search	618	render	2013-02-27 13:46:54
-59	web search	388	render	2013-02-27 13:46:54
-59	web search	516	render	2013-02-27 13:46:54
-59	web search	547	render	2013-02-27 13:46:54
-59	web search	515	render	2013-02-27 13:46:54
-59	web search	371	render	2013-02-27 13:46:54
-59	web search	612	render	2013-02-27 13:46:54
-59	web search	533	render	2013-02-27 13:46:54
-60	bing	52	render	2013-02-27 13:46:55
-60	bing	344	render	2013-02-27 13:46:55
-60	bing	354	render	2013-02-27 13:46:55
-60	bing	637	render	2013-02-27 13:46:55
-60	bing	326	render	2013-02-27 13:46:55
-60	bing	519	render	2013-02-27 13:46:55
-60	bing	343	render	2013-02-27 13:46:55
-60	bing	98	render	2013-02-27 13:46:55
-60	bing	373	render	2013-02-27 13:46:55
-60	bing	447	render	2013-02-27 13:46:55
-61	data mining	152	render	2013-02-27 13:46:55
-61	data mining	424	render	2013-02-27 13:46:55
-61	data mining	37	render	2013-02-27 13:46:55
-61	data mining	38	render	2013-02-27 13:46:55
-61	data mining	39	render	2013-02-27 13:46:55
-61	data mining	40	render	2013-02-27 13:46:55
-61	data mining	196	render	2013-02-27 13:46:55
-61	data mining	487	render	2013-02-27 13:46:55
-61	data mining	153	render	2013-02-27 13:46:55
-61	data mining	128	render	2013-02-27 13:46:55
-62	google	247	render	2013-02-27 13:46:56
-62	google	250	render	2013-02-27 13:46:56
-62	google	249	render	2013-02-27 13:46:56
-62	google	248	render	2013-02-27 13:46:56
-62	google	433	render	2013-02-27 13:46:56
-62	google	326	render	2013-02-27 13:46:56
-62	google	519	render	2013-02-27 13:46:56
-62	google	52	render	2013-02-27 13:46:56
-62	google	344	render	2013-02-27 13:46:56
-62	google	354	render	2013-02-27 13:46:56
-63	salsa	433	render	2013-02-27 13:46:57
-63	salsa	0	render	2013-02-27 13:46:57
-63	salsa	1	render	2013-02-27 13:46:57
-63	salsa	2	render	2013-02-27 13:46:57
-63	salsa	3	render	2013-02-27 13:46:57
-63	salsa	4	render	2013-02-27 13:46:57
-63	salsa	5	render	2013-02-27 13:46:57
-63	salsa	6	render	2013-02-27 13:46:57
-63	salsa	7	render	2013-02-27 13:46:57
-63	salsa	8	render	2013-02-27 13:46:57
-64	web search	573	render	2013-02-27 13:46:57
-64	web search	637	render	2013-02-27 13:46:57
-64	web search	250	render	2013-02-27 13:46:57
-64	web search	638	render	2013-02-27 13:46:57
-64	web search	92	render	2013-02-27 13:46:57
-64	web search	644	render	2013-02-27 13:46:57
-64	web search	201	render	2013-02-27 13:46:57
-64	web search	634	render	2013-02-27 13:46:57
-64	web search	52	render	2013-02-27 13:46:57
-64	web search	344	render	2013-02-27 13:46:57
-65	bing	357	render	2013-02-27 13:46:58
-65	bing	219	render	2013-02-27 13:46:58
-65	bing	247	render	2013-02-27 13:46:58
-65	bing	648	render	2013-02-27 13:46:58
-65	bing	257	render	2013-02-27 13:46:58
-65	bing	373	render	2013-02-27 13:46:58
-65	bing	535	render	2013-02-27 13:46:58
-65	bing	506	render	2013-02-27 13:46:58
-65	bing	224	render	2013-02-27 13:46:58
-65	bing	135	render	2013-02-27 13:46:58
-66	data mining	357	render	2013-02-27 13:46:58
-66	data mining	219	render	2013-02-27 13:46:58
-66	data mining	247	render	2013-02-27 13:46:58
-66	data mining	648	render	2013-02-27 13:46:58
-66	data mining	257	render	2013-02-27 13:46:58
-66	data mining	373	render	2013-02-27 13:46:58
-66	data mining	535	render	2013-02-27 13:46:58
-66	data mining	506	render	2013-02-27 13:46:58
-66	data mining	224	render	2013-02-27 13:46:58
-66	data mining	135	render	2013-02-27 13:46:58
-67	google	357	render	2013-02-27 13:46:58
-67	google	219	render	2013-02-27 13:46:58
-67	google	247	render	2013-02-27 13:46:58
-67	google	648	render	2013-02-27 13:46:58
-67	google	257	render	2013-02-27 13:46:58
-67	google	373	render	2013-02-27 13:46:58
-67	google	535	render	2013-02-27 13:46:58
-67	google	506	render	2013-02-27 13:46:58
-67	google	224	render	2013-02-27 13:46:58
-67	google	135	render	2013-02-27 13:46:58
-68	salsa	357	render	2013-02-27 13:46:59
-68	salsa	219	render	2013-02-27 13:46:59
-68	salsa	247	render	2013-02-27 13:46:59
-68	salsa	648	render	2013-02-27 13:46:59
-68	salsa	257	render	2013-02-27 13:46:59
-68	salsa	373	render	2013-02-27 13:46:59
-68	salsa	535	render	2013-02-27 13:46:59
-68	salsa	506	render	2013-02-27 13:46:59
-68	salsa	224	render	2013-02-27 13:46:59
-68	salsa	135	render	2013-02-27 13:46:59
-69	web search	357	render	2013-02-27 13:46:59
-69	web search	219	render	2013-02-27 13:46:59
-69	web search	247	render	2013-02-27 13:46:59
-69	web search	648	render	2013-02-27 13:46:59
-69	web search	257	render	2013-02-27 13:46:59
-69	web search	373	render	2013-02-27 13:46:59
-69	web search	535	render	2013-02-27 13:46:59
-69	web search	506	render	2013-02-27 13:46:59
-69	web search	224	render	2013-02-27 13:46:59
-69	web search	135	render	2013-02-27 13:46:59
-70	bing	52	render	2013-02-27 13:47:01
-70	bing	344	render	2013-02-27 13:47:01
-70	bing	354	render	2013-02-27 13:47:01
-70	bing	373	render	2013-02-27 13:47:01
-70	bing	98	render	2013-02-27 13:47:01
-70	bing	637	render	2013-02-27 13:47:01
-70	bing	343	render	2013-02-27 13:47:01
-70	bing	247	render	2013-02-27 13:47:01
-70	bing	492	render	2013-02-27 13:47:01
-70	bing	381	render	2013-02-27 13:47:01
-71	data mining	152	render	2013-02-27 13:47:03
-71	data mining	424	render	2013-02-27 13:47:03
-71	data mining	138	render	2013-02-27 13:47:03
-71	data mining	314	render	2013-02-27 13:47:03
-71	data mining	476	render	2013-02-27 13:47:03
-71	data mining	196	render	2013-02-27 13:47:03
-71	data mining	128	render	2013-02-27 13:47:03
-71	data mining	501	render	2013-02-27 13:47:03
-71	data mining	70	render	2013-02-27 13:47:03
-71	data mining	487	render	2013-02-27 13:47:03
-72	google	247	render	2013-02-27 13:47:04
-72	google	249	render	2013-02-27 13:47:04
-72	google	250	render	2013-02-27 13:47:04
-72	google	433	render	2013-02-27 13:47:04
-72	google	248	render	2013-02-27 13:47:04
-72	google	52	render	2013-02-27 13:47:04
-72	google	219	render	2013-02-27 13:47:04
-72	google	519	render	2013-02-27 13:47:04
-72	google	326	render	2013-02-27 13:47:04
-72	google	373	render	2013-02-27 13:47:04
-73	salsa	433	render	2013-02-27 13:47:05
-73	salsa	357	render	2013-02-27 13:47:05
-73	salsa	219	render	2013-02-27 13:47:05
-73	salsa	247	render	2013-02-27 13:47:05
-73	salsa	648	render	2013-02-27 13:47:05
-73	salsa	257	render	2013-02-27 13:47:05
-73	salsa	373	render	2013-02-27 13:47:05
-73	salsa	535	render	2013-02-27 13:47:05
-73	salsa	506	render	2013-02-27 13:47:05
-73	salsa	224	render	2013-02-27 13:47:05
-74	web search	630	render	2013-02-27 13:47:07
-74	web search	415	render	2013-02-27 13:47:07
-74	web search	247	render	2013-02-27 13:47:07
-74	web search	634	render	2013-02-27 13:47:07
-74	web search	638	render	2013-02-27 13:47:07
-74	web search	637	render	2013-02-27 13:47:07
-74	web search	547	render	2013-02-27 13:47:07
-74	web search	433	render	2013-02-27 13:47:07
-74	web search	654	render	2013-02-27 13:47:07
-74	web search	250	render	2013-02-27 13:47:07
-75	bing	21	render	2013-02-27 13:48:01
-75	bing	35	render	2013-02-27 13:48:01
-75	bing	45	render	2013-02-27 13:48:01
-75	bing	52	render	2013-02-27 13:48:01
-75	bing	75	render	2013-02-27 13:48:01
-75	bing	98	render	2013-02-27 13:48:01
-75	bing	117	render	2013-02-27 13:48:01
-75	bing	152	render	2013-02-27 13:48:01
-75	bing	187	render	2013-02-27 13:48:01
-75	bing	194	render	2013-02-27 13:48:01
-76	data mining	202	render	2013-02-27 13:48:02
-76	data mining	384	render	2013-02-27 13:48:02
-76	data mining	152	render	2013-02-27 13:48:02
-76	data mining	501	render	2013-02-27 13:48:02
-76	data mining	32	render	2013-02-27 13:48:02
-76	data mining	55	render	2013-02-27 13:48:02
-76	data mining	92	render	2013-02-27 13:48:02
-76	data mining	280	render	2013-02-27 13:48:02
-76	data mining	323	render	2013-02-27 13:48:02
-76	data mining	331	render	2013-02-27 13:48:02
-77	google	1	render	2013-02-27 13:48:03
-77	google	4	render	2013-02-27 13:48:03
-77	google	5	render	2013-02-27 13:48:03
-77	google	7	render	2013-02-27 13:48:03
-77	google	8	render	2013-02-27 13:48:03
-77	google	9	render	2013-02-27 13:48:03
-77	google	12	render	2013-02-27 13:48:03
-77	google	15	render	2013-02-27 13:48:03
-77	google	16	render	2013-02-27 13:48:03
-77	google	18	render	2013-02-27 13:48:03
-78	salsa	433	render	2013-02-27 13:48:04
-78	salsa	0	render	2013-02-27 13:48:04
-78	salsa	1	render	2013-02-27 13:48:04
-78	salsa	2	render	2013-02-27 13:48:04
-78	salsa	3	render	2013-02-27 13:48:04
-78	salsa	4	render	2013-02-27 13:48:04
-78	salsa	5	render	2013-02-27 13:48:04
-78	salsa	6	render	2013-02-27 13:48:04
-78	salsa	7	render	2013-02-27 13:48:04
-78	salsa	8	render	2013-02-27 13:48:04
-79	web search	492	render	2013-02-27 13:48:04
-79	web search	493	render	2013-02-27 13:48:04
-79	web search	33	render	2013-02-27 13:48:04
-79	web search	34	render	2013-02-27 13:48:05
-79	web search	48	render	2013-02-27 13:48:05
-79	web search	90	render	2013-02-27 13:48:05
-79	web search	135	render	2013-02-27 13:48:05
-79	web search	161	render	2013-02-27 13:48:05
-79	web search	206	render	2013-02-27 13:48:05
-79	web search	211	render	2013-02-27 13:48:05
-80	bing	52	render	2013-02-27 13:48:05
-80	bing	344	render	2013-02-27 13:48:05
-80	bing	354	render	2013-02-27 13:48:05
-80	bing	98	render	2013-02-27 13:48:05
-80	bing	277	render	2013-02-27 13:48:05
-80	bing	381	render	2013-02-27 13:48:05
-80	bing	343	render	2013-02-27 13:48:05
-80	bing	656	render	2013-02-27 13:48:05
-80	bing	245	render	2013-02-27 13:48:05
-80	bing	637	render	2013-02-27 13:48:05
-81	data mining	138	render	2013-02-27 13:48:07
-81	data mining	314	render	2013-02-27 13:48:07
-81	data mining	424	render	2013-02-27 13:48:07
-81	data mining	196	render	2013-02-27 13:48:07
-81	data mining	152	render	2013-02-27 13:48:07
-81	data mining	476	render	2013-02-27 13:48:07
-81	data mining	501	render	2013-02-27 13:48:07
-81	data mining	139	render	2013-02-27 13:48:07
-81	data mining	128	render	2013-02-27 13:48:07
-81	data mining	70	render	2013-02-27 13:48:07
-82	google	249	render	2013-02-27 13:48:08
-82	google	247	render	2013-02-27 13:48:08
-82	google	250	render	2013-02-27 13:48:08
-82	google	420	render	2013-02-27 13:48:08
-82	google	248	render	2013-02-27 13:48:08
-82	google	98	render	2013-02-27 13:48:08
-82	google	326	render	2013-02-27 13:48:08
-82	google	519	render	2013-02-27 13:48:08
-82	google	619	render	2013-02-27 13:48:08
-82	google	433	render	2013-02-27 13:48:08
-83	salsa	433	render	2013-02-27 13:48:08
-83	salsa	0	render	2013-02-27 13:48:08
-83	salsa	1	render	2013-02-27 13:48:08
-83	salsa	2	render	2013-02-27 13:48:08
-83	salsa	3	render	2013-02-27 13:48:08
-83	salsa	4	render	2013-02-27 13:48:08
-83	salsa	5	render	2013-02-27 13:48:08
-83	salsa	6	render	2013-02-27 13:48:08
-83	salsa	7	render	2013-02-27 13:48:08
-83	salsa	8	render	2013-02-27 13:48:08
-84	web search	415	render	2013-02-27 13:48:10
-84	web search	630	render	2013-02-27 13:48:10
-84	web search	618	render	2013-02-27 13:48:10
-84	web search	388	render	2013-02-27 13:48:10
-84	web search	516	render	2013-02-27 13:48:10
-84	web search	547	render	2013-02-27 13:48:10
-84	web search	515	render	2013-02-27 13:48:10
-84	web search	371	render	2013-02-27 13:48:10
-84	web search	612	render	2013-02-27 13:48:10
-84	web search	533	render	2013-02-27 13:48:10
-85	bing	52	render	2013-02-27 13:48:10
-85	bing	344	render	2013-02-27 13:48:10
-85	bing	354	render	2013-02-27 13:48:10
-85	bing	637	render	2013-02-27 13:48:10
-85	bing	326	render	2013-02-27 13:48:10
-85	bing	519	render	2013-02-27 13:48:10
-85	bing	343	render	2013-02-27 13:48:10
-85	bing	98	render	2013-02-27 13:48:10
-85	bing	373	render	2013-02-27 13:48:10
-85	bing	447	render	2013-02-27 13:48:10
-86	data mining	152	render	2013-02-27 13:48:11
-86	data mining	424	render	2013-02-27 13:48:11
-86	data mining	37	render	2013-02-27 13:48:11
-86	data mining	38	render	2013-02-27 13:48:11
-86	data mining	39	render	2013-02-27 13:48:11
-86	data mining	40	render	2013-02-27 13:48:11
-86	data mining	196	render	2013-02-27 13:48:11
-86	data mining	487	render	2013-02-27 13:48:11
-86	data mining	153	render	2013-02-27 13:48:11
-86	data mining	128	render	2013-02-27 13:48:11
-87	google	247	render	2013-02-27 13:48:12
-87	google	250	render	2013-02-27 13:48:12
-87	google	249	render	2013-02-27 13:48:12
-87	google	248	render	2013-02-27 13:48:12
-87	google	433	render	2013-02-27 13:48:12
-87	google	326	render	2013-02-27 13:48:12
-87	google	519	render	2013-02-27 13:48:12
-87	google	52	render	2013-02-27 13:48:12
-87	google	344	render	2013-02-27 13:48:12
-87	google	354	render	2013-02-27 13:48:12
-88	salsa	433	render	2013-02-27 13:48:12
-88	salsa	0	render	2013-02-27 13:48:12
-88	salsa	1	render	2013-02-27 13:48:12
-88	salsa	2	render	2013-02-27 13:48:12
-88	salsa	3	render	2013-02-27 13:48:12
-88	salsa	4	render	2013-02-27 13:48:12
-88	salsa	5	render	2013-02-27 13:48:12
-88	salsa	6	render	2013-02-27 13:48:12
-88	salsa	7	render	2013-02-27 13:48:12
-88	salsa	8	render	2013-02-27 13:48:12
-89	web search	573	render	2013-02-27 13:48:13
-89	web search	637	render	2013-02-27 13:48:13
-89	web search	250	render	2013-02-27 13:48:13
-89	web search	638	render	2013-02-27 13:48:13
-89	web search	92	render	2013-02-27 13:48:13
-89	web search	644	render	2013-02-27 13:48:13
-89	web search	201	render	2013-02-27 13:48:13
-89	web search	634	render	2013-02-27 13:48:13
-89	web search	52	render	2013-02-27 13:48:13
-89	web search	344	render	2013-02-27 13:48:13
-90	bing	357	render	2013-02-27 13:48:13
-90	bing	219	render	2013-02-27 13:48:13
-90	bing	247	render	2013-02-27 13:48:13
-90	bing	648	render	2013-02-27 13:48:13
-90	bing	257	render	2013-02-27 13:48:13
-90	bing	373	render	2013-02-27 13:48:13
-90	bing	535	render	2013-02-27 13:48:13
-90	bing	506	render	2013-02-27 13:48:13
-90	bing	224	render	2013-02-27 13:48:13
-90	bing	135	render	2013-02-27 13:48:13
-91	data mining	357	render	2013-02-27 13:48:14
-91	data mining	219	render	2013-02-27 13:48:14
-91	data mining	247	render	2013-02-27 13:48:14
-91	data mining	648	render	2013-02-27 13:48:14
-91	data mining	257	render	2013-02-27 13:48:14
-91	data mining	373	render	2013-02-27 13:48:14
-91	data mining	535	render	2013-02-27 13:48:14
-91	data mining	506	render	2013-02-27 13:48:14
-91	data mining	224	render	2013-02-27 13:48:14
-91	data mining	135	render	2013-02-27 13:48:14
-92	google	357	render	2013-02-27 13:48:14
-92	google	219	render	2013-02-27 13:48:14
-92	google	247	render	2013-02-27 13:48:14
-92	google	648	render	2013-02-27 13:48:14
-92	google	257	render	2013-02-27 13:48:14
-92	google	373	render	2013-02-27 13:48:14
-92	google	535	render	2013-02-27 13:48:14
-92	google	506	render	2013-02-27 13:48:14
-92	google	224	render	2013-02-27 13:48:14
-92	google	135	render	2013-02-27 13:48:14
-93	salsa	357	render	2013-02-27 13:48:14
-93	salsa	219	render	2013-02-27 13:48:14
-93	salsa	247	render	2013-02-27 13:48:14
-93	salsa	648	render	2013-02-27 13:48:14
-93	salsa	257	render	2013-02-27 13:48:14
-93	salsa	373	render	2013-02-27 13:48:14
-93	salsa	535	render	2013-02-27 13:48:14
-93	salsa	506	render	2013-02-27 13:48:14
-93	salsa	224	render	2013-02-27 13:48:14
-93	salsa	135	render	2013-02-27 13:48:14
-94	web search	357	render	2013-02-27 13:48:15
-94	web search	219	render	2013-02-27 13:48:15
-94	web search	247	render	2013-02-27 13:48:15
-94	web search	648	render	2013-02-27 13:48:15
-94	web search	257	render	2013-02-27 13:48:15
-94	web search	373	render	2013-02-27 13:48:15
-94	web search	535	render	2013-02-27 13:48:15
-94	web search	506	render	2013-02-27 13:48:15
-94	web search	224	render	2013-02-27 13:48:15
-94	web search	135	render	2013-02-27 13:48:15
-95	bing	52	render	2013-02-27 13:48:16
-95	bing	344	render	2013-02-27 13:48:16
-95	bing	354	render	2013-02-27 13:48:16
-95	bing	373	render	2013-02-27 13:48:16
-95	bing	98	render	2013-02-27 13:48:16
-95	bing	637	render	2013-02-27 13:48:16
-95	bing	343	render	2013-02-27 13:48:16
-95	bing	247	render	2013-02-27 13:48:16
-95	bing	492	render	2013-02-27 13:48:16
-95	bing	381	render	2013-02-27 13:48:16
-96	data mining	152	render	2013-02-27 13:48:18
-96	data mining	424	render	2013-02-27 13:48:18
-96	data mining	138	render	2013-02-27 13:48:18
-96	data mining	314	render	2013-02-27 13:48:18
-96	data mining	476	render	2013-02-27 13:48:18
-96	data mining	196	render	2013-02-27 13:48:18
-96	data mining	128	render	2013-02-27 13:48:18
-96	data mining	501	render	2013-02-27 13:48:18
-96	data mining	70	render	2013-02-27 13:48:18
-96	data mining	487	render	2013-02-27 13:48:18
-97	google	247	render	2013-02-27 13:48:19
-97	google	249	render	2013-02-27 13:48:19
-97	google	250	render	2013-02-27 13:48:19
-97	google	433	render	2013-02-27 13:48:19
-97	google	248	render	2013-02-27 13:48:19
-97	google	52	render	2013-02-27 13:48:19
-97	google	219	render	2013-02-27 13:48:19
-97	google	519	render	2013-02-27 13:48:19
-97	google	326	render	2013-02-27 13:48:19
-97	google	373	render	2013-02-27 13:48:19
-98	salsa	433	render	2013-02-27 13:48:21
-98	salsa	357	render	2013-02-27 13:48:21
-98	salsa	219	render	2013-02-27 13:48:21
-98	salsa	247	render	2013-02-27 13:48:21
-98	salsa	648	render	2013-02-27 13:48:21
-98	salsa	257	render	2013-02-27 13:48:21
-98	salsa	373	render	2013-02-27 13:48:21
-98	salsa	535	render	2013-02-27 13:48:21
-98	salsa	506	render	2013-02-27 13:48:21
-98	salsa	224	render	2013-02-27 13:48:21
-99	web search	630	render	2013-02-27 13:48:23
-99	web search	415	render	2013-02-27 13:48:23
-99	web search	247	render	2013-02-27 13:48:23
-99	web search	634	render	2013-02-27 13:48:23
-99	web search	638	render	2013-02-27 13:48:23
-99	web search	637	render	2013-02-27 13:48:23
-99	web search	547	render	2013-02-27 13:48:23
-99	web search	433	render	2013-02-27 13:48:23
-99	web search	654	render	2013-02-27 13:48:23
-99	web search	250	render	2013-02-27 13:48:23
+0	bing	21	render	2013-02-27 13:50:29
+0	bing	35	render	2013-02-27 13:50:29
+0	bing	45	render	2013-02-27 13:50:29
+0	bing	52	render	2013-02-27 13:50:29
+0	bing	75	render	2013-02-27 13:50:29
+0	bing	98	render	2013-02-27 13:50:29
+0	bing	117	render	2013-02-27 13:50:29
+0	bing	152	render	2013-02-27 13:50:29
+0	bing	187	render	2013-02-27 13:50:29
+0	bing	194	render	2013-02-27 13:50:29
+1	data mining	202	render	2013-02-27 13:50:30
+1	data mining	384	render	2013-02-27 13:50:30
+1	data mining	152	render	2013-02-27 13:50:30
+1	data mining	501	render	2013-02-27 13:50:30
+1	data mining	32	render	2013-02-27 13:50:30
+1	data mining	55	render	2013-02-27 13:50:30
+1	data mining	92	render	2013-02-27 13:50:30
+1	data mining	280	render	2013-02-27 13:50:30
+1	data mining	323	render	2013-02-27 13:50:30
+1	data mining	331	render	2013-02-27 13:50:30
+2	google	1	render	2013-02-27 13:50:32
+2	google	4	render	2013-02-27 13:50:32
+2	google	5	render	2013-02-27 13:50:32
+2	google	7	render	2013-02-27 13:50:32
+2	google	8	render	2013-02-27 13:50:32
+2	google	9	render	2013-02-27 13:50:32
+2	google	12	render	2013-02-27 13:50:32
+2	google	15	render	2013-02-27 13:50:32
+2	google	16	render	2013-02-27 13:50:32
+2	google	18	render	2013-02-27 13:50:32
+3	salsa	433	render	2013-02-27 13:50:33
+3	salsa	0	render	2013-02-27 13:50:33
+3	salsa	1	render	2013-02-27 13:50:33
+3	salsa	2	render	2013-02-27 13:50:33
+3	salsa	3	render	2013-02-27 13:50:33
+3	salsa	4	render	2013-02-27 13:50:33
+3	salsa	5	render	2013-02-27 13:50:33
+3	salsa	6	render	2013-02-27 13:50:33
+3	salsa	7	render	2013-02-27 13:50:33
+3	salsa	8	render	2013-02-27 13:50:33
+4	web search	492	render	2013-02-27 13:50:34
+4	web search	493	render	2013-02-27 13:50:34
+4	web search	33	render	2013-02-27 13:50:34
+4	web search	34	render	2013-02-27 13:50:34
+4	web search	48	render	2013-02-27 13:50:34
+4	web search	90	render	2013-02-27 13:50:34
+4	web search	135	render	2013-02-27 13:50:34
+4	web search	161	render	2013-02-27 13:50:34
+4	web search	206	render	2013-02-27 13:50:34
+4	web search	211	render	2013-02-27 13:50:34
+5	bing	52	render	2013-02-27 13:50:35
+5	bing	344	render	2013-02-27 13:50:35
+5	bing	354	render	2013-02-27 13:50:35
+5	bing	98	render	2013-02-27 13:50:35
+5	bing	277	render	2013-02-27 13:50:35
+5	bing	381	render	2013-02-27 13:50:35
+5	bing	343	render	2013-02-27 13:50:35
+5	bing	656	render	2013-02-27 13:50:35
+5	bing	245	render	2013-02-27 13:50:35
+5	bing	637	render	2013-02-27 13:50:35
+6	data mining	138	render	2013-02-27 13:50:36
+6	data mining	314	render	2013-02-27 13:50:36
+6	data mining	424	render	2013-02-27 13:50:36
+6	data mining	196	render	2013-02-27 13:50:36
+6	data mining	152	render	2013-02-27 13:50:36
+6	data mining	476	render	2013-02-27 13:50:36
+6	data mining	501	render	2013-02-27 13:50:36
+6	data mining	139	render	2013-02-27 13:50:36
+6	data mining	128	render	2013-02-27 13:50:36
+6	data mining	70	render	2013-02-27 13:50:36
+7	google	249	render	2013-02-27 13:50:37
+7	google	247	render	2013-02-27 13:50:37
+7	google	250	render	2013-02-27 13:50:37
+7	google	420	render	2013-02-27 13:50:37
+7	google	248	render	2013-02-27 13:50:37
+7	google	98	render	2013-02-27 13:50:37
+7	google	326	render	2013-02-27 13:50:37
+7	google	519	render	2013-02-27 13:50:37
+7	google	619	render	2013-02-27 13:50:37
+7	google	433	render	2013-02-27 13:50:37
+8	salsa	433	render	2013-02-27 13:50:38
+8	salsa	0	render	2013-02-27 13:50:38
+8	salsa	1	render	2013-02-27 13:50:38
+8	salsa	2	render	2013-02-27 13:50:38
+8	salsa	3	render	2013-02-27 13:50:38
+8	salsa	4	render	2013-02-27 13:50:38
+8	salsa	5	render	2013-02-27 13:50:38
+8	salsa	6	render	2013-02-27 13:50:38
+8	salsa	7	render	2013-02-27 13:50:38
+8	salsa	8	render	2013-02-27 13:50:38
+9	web search	415	render	2013-02-27 13:50:40
+9	web search	630	render	2013-02-27 13:50:40
+9	web search	618	render	2013-02-27 13:50:40
+9	web search	388	render	2013-02-27 13:50:40
+9	web search	516	render	2013-02-27 13:50:40
+9	web search	547	render	2013-02-27 13:50:40
+9	web search	515	render	2013-02-27 13:50:40
+9	web search	371	render	2013-02-27 13:50:40
+9	web search	612	render	2013-02-27 13:50:40
+9	web search	533	render	2013-02-27 13:50:40
+10	bing	52	render	2013-02-27 13:50:40
+10	bing	344	render	2013-02-27 13:50:40
+10	bing	354	render	2013-02-27 13:50:40
+10	bing	637	render	2013-02-27 13:50:40
+10	bing	326	render	2013-02-27 13:50:40
+10	bing	519	render	2013-02-27 13:50:40
+10	bing	343	render	2013-02-27 13:50:40
+10	bing	98	render	2013-02-27 13:50:40
+10	bing	373	render	2013-02-27 13:50:40
+10	bing	447	render	2013-02-27 13:50:40
+11	data mining	152	render	2013-02-27 13:50:41
+11	data mining	424	render	2013-02-27 13:50:41
+11	data mining	37	render	2013-02-27 13:50:41
+11	data mining	38	render	2013-02-27 13:50:41
+11	data mining	39	render	2013-02-27 13:50:41
+11	data mining	40	render	2013-02-27 13:50:41
+11	data mining	196	render	2013-02-27 13:50:41
+11	data mining	487	render	2013-02-27 13:50:41
+11	data mining	153	render	2013-02-27 13:50:41
+11	data mining	128	render	2013-02-27 13:50:41
+12	google	247	render	2013-02-27 13:50:42
+12	google	250	render	2013-02-27 13:50:42
+12	google	249	render	2013-02-27 13:50:42
+12	google	248	render	2013-02-27 13:50:42
+12	google	433	render	2013-02-27 13:50:42
+12	google	326	render	2013-02-27 13:50:42
+12	google	519	render	2013-02-27 13:50:42
+12	google	52	render	2013-02-27 13:50:42
+12	google	344	render	2013-02-27 13:50:42
+12	google	354	render	2013-02-27 13:50:42
+13	salsa	433	render	2013-02-27 13:50:42
+13	salsa	0	render	2013-02-27 13:50:42
+13	salsa	1	render	2013-02-27 13:50:42
+13	salsa	2	render	2013-02-27 13:50:42
+13	salsa	3	render	2013-02-27 13:50:42
+13	salsa	4	render	2013-02-27 13:50:42
+13	salsa	5	render	2013-02-27 13:50:42
+13	salsa	6	render	2013-02-27 13:50:42
+13	salsa	7	render	2013-02-27 13:50:42
+13	salsa	8	render	2013-02-27 13:50:42
+14	web search	573	render	2013-02-27 13:50:43
+14	web search	637	render	2013-02-27 13:50:43
+14	web search	250	render	2013-02-27 13:50:43
+14	web search	638	render	2013-02-27 13:50:43
+14	web search	92	render	2013-02-27 13:50:43
+14	web search	644	render	2013-02-27 13:50:43
+14	web search	201	render	2013-02-27 13:50:43
+14	web search	634	render	2013-02-27 13:50:43
+14	web search	52	render	2013-02-27 13:50:43
+14	web search	344	render	2013-02-27 13:50:43
+15	bing	357	render	2013-02-27 13:50:43
+15	bing	219	render	2013-02-27 13:50:43
+15	bing	247	render	2013-02-27 13:50:43
+15	bing	648	render	2013-02-27 13:50:43
+15	bing	257	render	2013-02-27 13:50:43
+15	bing	373	render	2013-02-27 13:50:43
+15	bing	535	render	2013-02-27 13:50:43
+15	bing	506	render	2013-02-27 13:50:43
+15	bing	224	render	2013-02-27 13:50:43
+15	bing	135	render	2013-02-27 13:50:43
+16	data mining	357	render	2013-02-27 13:50:44
+16	data mining	219	render	2013-02-27 13:50:44
+16	data mining	247	render	2013-02-27 13:50:44
+16	data mining	648	render	2013-02-27 13:50:44
+16	data mining	257	render	2013-02-27 13:50:44
+16	data mining	373	render	2013-02-27 13:50:44
+16	data mining	535	render	2013-02-27 13:50:44
+16	data mining	506	render	2013-02-27 13:50:44
+16	data mining	224	render	2013-02-27 13:50:44
+16	data mining	135	render	2013-02-27 13:50:44
+17	google	357	render	2013-02-27 13:50:44
+17	google	219	render	2013-02-27 13:50:44
+17	google	247	render	2013-02-27 13:50:44
+17	google	648	render	2013-02-27 13:50:44
+17	google	257	render	2013-02-27 13:50:44
+17	google	373	render	2013-02-27 13:50:44
+17	google	535	render	2013-02-27 13:50:44
+17	google	506	render	2013-02-27 13:50:44
+17	google	224	render	2013-02-27 13:50:44
+17	google	135	render	2013-02-27 13:50:44
+18	salsa	357	render	2013-02-27 13:50:45
+18	salsa	219	render	2013-02-27 13:50:45
+18	salsa	247	render	2013-02-27 13:50:45
+18	salsa	648	render	2013-02-27 13:50:45
+18	salsa	257	render	2013-02-27 13:50:45
+18	salsa	373	render	2013-02-27 13:50:45
+18	salsa	535	render	2013-02-27 13:50:45
+18	salsa	506	render	2013-02-27 13:50:45
+18	salsa	224	render	2013-02-27 13:50:45
+18	salsa	135	render	2013-02-27 13:50:45
+19	web search	357	render	2013-02-27 13:50:45
+19	web search	219	render	2013-02-27 13:50:45
+19	web search	247	render	2013-02-27 13:50:45
+19	web search	648	render	2013-02-27 13:50:45
+19	web search	257	render	2013-02-27 13:50:45
+19	web search	373	render	2013-02-27 13:50:45
+19	web search	535	render	2013-02-27 13:50:45
+19	web search	506	render	2013-02-27 13:50:45
+19	web search	224	render	2013-02-27 13:50:45
+19	web search	135	render	2013-02-27 13:50:45
+20	bing	52	render	2013-02-27 13:50:47
+20	bing	344	render	2013-02-27 13:50:47
+20	bing	354	render	2013-02-27 13:50:47
+20	bing	373	render	2013-02-27 13:50:47
+20	bing	98	render	2013-02-27 13:50:47
+20	bing	637	render	2013-02-27 13:50:47
+20	bing	343	render	2013-02-27 13:50:47
+20	bing	247	render	2013-02-27 13:50:47
+20	bing	492	render	2013-02-27 13:50:47
+20	bing	381	render	2013-02-27 13:50:47
+21	data mining	152	render	2013-02-27 13:50:48
+21	data mining	424	render	2013-02-27 13:50:48
+21	data mining	138	render	2013-02-27 13:50:48
+21	data mining	314	render	2013-02-27 13:50:48
+21	data mining	476	render	2013-02-27 13:50:48
+21	data mining	196	render	2013-02-27 13:50:48
+21	data mining	128	render	2013-02-27 13:50:48
+21	data mining	501	render	2013-02-27 13:50:48
+21	data mining	70	render	2013-02-27 13:50:48
+21	data mining	487	render	2013-02-27 13:50:48
+22	google	247	render	2013-02-27 13:50:50
+22	google	249	render	2013-02-27 13:50:50
+22	google	250	render	2013-02-27 13:50:50
+22	google	433	render	2013-02-27 13:50:50
+22	google	248	render	2013-02-27 13:50:50
+22	google	52	render	2013-02-27 13:50:50
+22	google	219	render	2013-02-27 13:50:50
+22	google	519	render	2013-02-27 13:50:50
+22	google	326	render	2013-02-27 13:50:50
+22	google	373	render	2013-02-27 13:50:50
+23	salsa	433	render	2013-02-27 13:50:51
+23	salsa	357	render	2013-02-27 13:50:51
+23	salsa	219	render	2013-02-27 13:50:51
+23	salsa	247	render	2013-02-27 13:50:51
+23	salsa	648	render	2013-02-27 13:50:51
+23	salsa	257	render	2013-02-27 13:50:51
+23	salsa	373	render	2013-02-27 13:50:51
+23	salsa	535	render	2013-02-27 13:50:51
+23	salsa	506	render	2013-02-27 13:50:51
+23	salsa	224	render	2013-02-27 13:50:51
+24	web search	630	render	2013-02-27 13:50:53
+24	web search	415	render	2013-02-27 13:50:53
+24	web search	247	render	2013-02-27 13:50:53
+24	web search	634	render	2013-02-27 13:50:53
+24	web search	638	render	2013-02-27 13:50:53
+24	web search	637	render	2013-02-27 13:50:53
+24	web search	547	render	2013-02-27 13:50:53
+24	web search	433	render	2013-02-27 13:50:53
+24	web search	654	render	2013-02-27 13:50:53
+24	web search	250	render	2013-02-27 13:50:53
+10	bing	130	click	2013-02-27 13:51:22
+10	bing	130	click	2013-02-27 13:51:26
+25	bing	21	render	2013-02-27 13:51:56
+25	bing	35	render	2013-02-27 13:51:56
+25	bing	45	render	2013-02-27 13:51:56
+25	bing	52	render	2013-02-27 13:51:56
+25	bing	75	render	2013-02-27 13:51:56
+25	bing	98	render	2013-02-27 13:51:56
+25	bing	117	render	2013-02-27 13:51:56
+25	bing	152	render	2013-02-27 13:51:56
+25	bing	187	render	2013-02-27 13:51:56
+25	bing	194	render	2013-02-27 13:51:56
+26	data mining	202	render	2013-02-27 13:51:59
+26	data mining	384	render	2013-02-27 13:52:00
+26	data mining	152	render	2013-02-27 13:52:00
+26	data mining	501	render	2013-02-27 13:52:00
+26	data mining	32	render	2013-02-27 13:52:00
+26	data mining	55	render	2013-02-27 13:52:00
+26	data mining	92	render	2013-02-27 13:52:00
+26	data mining	280	render	2013-02-27 13:52:00
+26	data mining	323	render	2013-02-27 13:52:00
+26	data mining	331	render	2013-02-27 13:52:00
+27	google	1	render	2013-02-27 13:52:03
+27	google	4	render	2013-02-27 13:52:04
+27	google	5	render	2013-02-27 13:52:04
+27	google	7	render	2013-02-27 13:52:05
+27	google	8	render	2013-02-27 13:52:05
+27	google	9	render	2013-02-27 13:52:05
+27	google	12	render	2013-02-27 13:52:05
+27	google	15	render	2013-02-27 13:52:05
+27	google	16	render	2013-02-27 13:52:05
+27	google	18	render	2013-02-27 13:52:05
+28	salsa	433	render	2013-02-27 13:52:07
+28	salsa	0	render	2013-02-27 13:52:08
+28	salsa	1	render	2013-02-27 13:52:08
+28	salsa	2	render	2013-02-27 13:52:08
+28	salsa	3	render	2013-02-27 13:52:08
+28	salsa	4	render	2013-02-27 13:52:08
+28	salsa	5	render	2013-02-27 13:52:08
+28	salsa	6	render	2013-02-27 13:52:08
+28	salsa	7	render	2013-02-27 13:52:08
+28	salsa	8	render	2013-02-27 13:52:08
+29	web search	492	render	2013-02-27 13:52:10
+29	web search	493	render	2013-02-27 13:52:10
+29	web search	33	render	2013-02-27 13:52:10
+29	web search	34	render	2013-02-27 13:52:10
+29	web search	48	render	2013-02-27 13:52:10
+29	web search	90	render	2013-02-27 13:52:11
+29	web search	135	render	2013-02-27 13:52:11
+29	web search	161	render	2013-02-27 13:52:11
+29	web search	206	render	2013-02-27 13:52:11
+29	web search	211	render	2013-02-27 13:52:11
+30	bing	52	render	2013-02-27 13:52:12
+30	bing	344	render	2013-02-27 13:52:12
+30	bing	354	render	2013-02-27 13:52:12
+30	bing	98	render	2013-02-27 13:52:12
+30	bing	277	render	2013-02-27 13:52:12
+30	bing	381	render	2013-02-27 13:52:12
+30	bing	343	render	2013-02-27 13:52:12
+30	bing	656	render	2013-02-27 13:52:12
+30	bing	245	render	2013-02-27 13:52:12
+30	bing	637	render	2013-02-27 13:52:12
+31	data mining	138	render	2013-02-27 13:52:13
+31	data mining	314	render	2013-02-27 13:52:13
+31	data mining	424	render	2013-02-27 13:52:13
+31	data mining	196	render	2013-02-27 13:52:13
+31	data mining	152	render	2013-02-27 13:52:13
+31	data mining	476	render	2013-02-27 13:52:13
+31	data mining	501	render	2013-02-27 13:52:14
+31	data mining	139	render	2013-02-27 13:52:14
+31	data mining	128	render	2013-02-27 13:52:14
+31	data mining	70	render	2013-02-27 13:52:14
+32	google	249	render	2013-02-27 13:52:15
+32	google	247	render	2013-02-27 13:52:16
+32	google	250	render	2013-02-27 13:52:16
+32	google	420	render	2013-02-27 13:52:16
+32	google	248	render	2013-02-27 13:52:16
+32	google	98	render	2013-02-27 13:52:16
+32	google	326	render	2013-02-27 13:52:16
+32	google	519	render	2013-02-27 13:52:16
+32	google	619	render	2013-02-27 13:52:16
+32	google	433	render	2013-02-27 13:52:16
+33	salsa	433	render	2013-02-27 13:52:19
+33	salsa	0	render	2013-02-27 13:52:20
+33	salsa	1	render	2013-02-27 13:52:20
+33	salsa	2	render	2013-02-27 13:52:20
+33	salsa	3	render	2013-02-27 13:52:20
+33	salsa	4	render	2013-02-27 13:52:20
+33	salsa	5	render	2013-02-27 13:52:20
+33	salsa	6	render	2013-02-27 13:52:20
+33	salsa	7	render	2013-02-27 13:52:20
+33	salsa	8	render	2013-02-27 13:52:20
+34	web search	415	render	2013-02-27 13:52:22
+34	web search	630	render	2013-02-27 13:52:22
+34	web search	618	render	2013-02-27 13:52:22
+34	web search	388	render	2013-02-27 13:52:22
+34	web search	516	render	2013-02-27 13:52:22
+34	web search	547	render	2013-02-27 13:52:22
+34	web search	515	render	2013-02-27 13:52:22
+34	web search	371	render	2013-02-27 13:52:22
+34	web search	612	render	2013-02-27 13:52:22
+34	web search	533	render	2013-02-27 13:52:22
+35	bing	52	render	2013-02-27 13:52:23
+35	bing	344	render	2013-02-27 13:52:23
+35	bing	354	render	2013-02-27 13:52:23
+35	bing	637	render	2013-02-27 13:52:23
+35	bing	326	render	2013-02-27 13:52:23
+35	bing	519	render	2013-02-27 13:52:23
+35	bing	343	render	2013-02-27 13:52:23
+35	bing	98	render	2013-02-27 13:52:23
+35	bing	373	render	2013-02-27 13:52:23
+35	bing	447	render	2013-02-27 13:52:23
+36	data mining	152	render	2013-02-27 13:52:24
+36	data mining	424	render	2013-02-27 13:52:24
+36	data mining	37	render	2013-02-27 13:52:24
+36	data mining	38	render	2013-02-27 13:52:24
+36	data mining	39	render	2013-02-27 13:52:24
+36	data mining	40	render	2013-02-27 13:52:24
+36	data mining	196	render	2013-02-27 13:52:24
+36	data mining	487	render	2013-02-27 13:52:24
+36	data mining	153	render	2013-02-27 13:52:24
+36	data mining	128	render	2013-02-27 13:52:24
+37	google	247	render	2013-02-27 13:52:24
+37	google	250	render	2013-02-27 13:52:24
+37	google	249	render	2013-02-27 13:52:24
+37	google	248	render	2013-02-27 13:52:24
+37	google	433	render	2013-02-27 13:52:24
+37	google	326	render	2013-02-27 13:52:24
+37	google	519	render	2013-02-27 13:52:24
+37	google	52	render	2013-02-27 13:52:24
+37	google	344	render	2013-02-27 13:52:24
+37	google	354	render	2013-02-27 13:52:24
+38	salsa	433	render	2013-02-27 13:52:25
+38	salsa	0	render	2013-02-27 13:52:25
+38	salsa	1	render	2013-02-27 13:52:25
+38	salsa	2	render	2013-02-27 13:52:25
+38	salsa	3	render	2013-02-27 13:52:25
+38	salsa	4	render	2013-02-27 13:52:25
+38	salsa	5	render	2013-02-27 13:52:25
+38	salsa	6	render	2013-02-27 13:52:25
+38	salsa	7	render	2013-02-27 13:52:25
+38	salsa	8	render	2013-02-27 13:52:25
+39	web search	573	render	2013-02-27 13:52:26
+39	web search	637	render	2013-02-27 13:52:26
+39	web search	250	render	2013-02-27 13:52:26
+39	web search	638	render	2013-02-27 13:52:26
+39	web search	92	render	2013-02-27 13:52:26
+39	web search	644	render	2013-02-27 13:52:26
+39	web search	201	render	2013-02-27 13:52:26
+39	web search	634	render	2013-02-27 13:52:26
+39	web search	52	render	2013-02-27 13:52:26
+39	web search	344	render	2013-02-27 13:52:26
+40	bing	357	render	2013-02-27 13:52:26
+40	bing	219	render	2013-02-27 13:52:26
+40	bing	247	render	2013-02-27 13:52:26
+40	bing	648	render	2013-02-27 13:52:26
+40	bing	257	render	2013-02-27 13:52:26
+40	bing	373	render	2013-02-27 13:52:26
+40	bing	535	render	2013-02-27 13:52:26
+40	bing	506	render	2013-02-27 13:52:26
+40	bing	224	render	2013-02-27 13:52:26
+40	bing	135	render	2013-02-27 13:52:26
+41	data mining	357	render	2013-02-27 13:52:26
+41	data mining	219	render	2013-02-27 13:52:26
+41	data mining	247	render	2013-02-27 13:52:27
+41	data mining	648	render	2013-02-27 13:52:27
+41	data mining	257	render	2013-02-27 13:52:27
+41	data mining	373	render	2013-02-27 13:52:27
+41	data mining	535	render	2013-02-27 13:52:27
+41	data mining	506	render	2013-02-27 13:52:27
+41	data mining	224	render	2013-02-27 13:52:27
+41	data mining	135	render	2013-02-27 13:52:27
+42	google	357	render	2013-02-27 13:52:27
+42	google	219	render	2013-02-27 13:52:27
+42	google	247	render	2013-02-27 13:52:27
+42	google	648	render	2013-02-27 13:52:27
+42	google	257	render	2013-02-27 13:52:27
+42	google	373	render	2013-02-27 13:52:27
+42	google	535	render	2013-02-27 13:52:27
+42	google	506	render	2013-02-27 13:52:27
+42	google	224	render	2013-02-27 13:52:27
+42	google	135	render	2013-02-27 13:52:27
+43	salsa	357	render	2013-02-27 13:52:27
+43	salsa	219	render	2013-02-27 13:52:27
+43	salsa	247	render	2013-02-27 13:52:27
+43	salsa	648	render	2013-02-27 13:52:27
+43	salsa	257	render	2013-02-27 13:52:27
+43	salsa	373	render	2013-02-27 13:52:27
+43	salsa	535	render	2013-02-27 13:52:27
+43	salsa	506	render	2013-02-27 13:52:27
+43	salsa	224	render	2013-02-27 13:52:27
+43	salsa	135	render	2013-02-27 13:52:27
+44	web search	357	render	2013-02-27 13:52:28
+44	web search	219	render	2013-02-27 13:52:28
+44	web search	247	render	2013-02-27 13:52:28
+44	web search	648	render	2013-02-27 13:52:28
+44	web search	257	render	2013-02-27 13:52:28
+44	web search	373	render	2013-02-27 13:52:28
+44	web search	535	render	2013-02-27 13:52:28
+44	web search	506	render	2013-02-27 13:52:28
+44	web search	224	render	2013-02-27 13:52:28
+44	web search	135	render	2013-02-27 13:52:28
+45	bing	52	render	2013-02-27 13:52:29
+45	bing	344	render	2013-02-27 13:52:29
+45	bing	354	render	2013-02-27 13:52:29
+45	bing	373	render	2013-02-27 13:52:29
+45	bing	98	render	2013-02-27 13:52:29
+45	bing	637	render	2013-02-27 13:52:29
+45	bing	343	render	2013-02-27 13:52:29
+45	bing	247	render	2013-02-27 13:52:29
+45	bing	492	render	2013-02-27 13:52:29
+45	bing	381	render	2013-02-27 13:52:29
+46	data mining	152	render	2013-02-27 13:52:31
+46	data mining	424	render	2013-02-27 13:52:31
+46	data mining	138	render	2013-02-27 13:52:31
+46	data mining	314	render	2013-02-27 13:52:31
+46	data mining	476	render	2013-02-27 13:52:31
+46	data mining	196	render	2013-02-27 13:52:31
+46	data mining	128	render	2013-02-27 13:52:31
+46	data mining	501	render	2013-02-27 13:52:31
+46	data mining	70	render	2013-02-27 13:52:31
+46	data mining	487	render	2013-02-27 13:52:31
+47	google	247	render	2013-02-27 13:52:32
+47	google	249	render	2013-02-27 13:52:32
+47	google	250	render	2013-02-27 13:52:32
+47	google	433	render	2013-02-27 13:52:32
+47	google	248	render	2013-02-27 13:52:32
+47	google	52	render	2013-02-27 13:52:32
+47	google	219	render	2013-02-27 13:52:32
+47	google	519	render	2013-02-27 13:52:32
+47	google	326	render	2013-02-27 13:52:32
+47	google	373	render	2013-02-27 13:52:32
+48	salsa	433	render	2013-02-27 13:52:34
+48	salsa	357	render	2013-02-27 13:52:34
+48	salsa	219	render	2013-02-27 13:52:34
+48	salsa	247	render	2013-02-27 13:52:34
+48	salsa	648	render	2013-02-27 13:52:34
+48	salsa	257	render	2013-02-27 13:52:34
+48	salsa	373	render	2013-02-27 13:52:34
+48	salsa	535	render	2013-02-27 13:52:34
+48	salsa	506	render	2013-02-27 13:52:34
+48	salsa	224	render	2013-02-27 13:52:34
+49	web search	630	render	2013-02-27 13:52:36
+49	web search	415	render	2013-02-27 13:52:36
+49	web search	247	render	2013-02-27 13:52:36
+49	web search	634	render	2013-02-27 13:52:36
+49	web search	638	render	2013-02-27 13:52:36
+49	web search	637	render	2013-02-27 13:52:36
+49	web search	547	render	2013-02-27 13:52:36
+49	web search	433	render	2013-02-27 13:52:36
+49	web search	654	render	2013-02-27 13:52:36
+49	web search	250	render	2013-02-27 13:52:36
+10	bing	130	click	2013-02-27 13:52:40
+49	web search	130	click	2013-02-27 13:53:01
+0	bing	130	click	2013-02-27 13:53:07
