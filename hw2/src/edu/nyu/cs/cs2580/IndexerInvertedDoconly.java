@@ -1,7 +1,7 @@
 
 package edu.nyu.cs.cs2580;
 
-import java.io.IOException;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -16,17 +16,21 @@ import java.io.FileReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.io.File;
+import java.io.IOException;
 /**
  * @CS2580: Implement this class for HW2.
  */
 public class IndexerInvertedDoconly extends Indexer implements Serializable {
   private static final long serialVersionUID = 1067111905740085030L;
+
   private Map<String, Integer> _dictionary = new HashMap<String, Integer>();
+  private Vector<String> _terms = new Vector<String>();
   private Map<Integer,Integer> _termCorpusFrequency = new HashMap<Integer, Integer>();
   private Map<Integer, Vector<Integer> > _termToDocs =
       new HashMap<Integer, Vector<Integer> > ();
   private Vector<Document> _documents = new Vector<Document>();
-  private Vector<String> _terms = new Vector<String>();
+
 
   public IndexerInvertedDoconly(Options options) {
     super(options);
@@ -35,21 +39,31 @@ public class IndexerInvertedDoconly extends Indexer implements Serializable {
 
   @Override
   public void constructIndex() throws IOException {
-    String corpusFile = _options._corpusPrefix + "/corpus.tsv";
-    System.out.println("Construct index from: " + corpusFile);
+      if (_options._corpusPrefix.equals("data/simple")) {
+          String corpusFile = _options._corpusPrefix + "/corpus.tsv";
+          System.out.println("Construct index from: " + corpusFile);
 
-    BufferedReader reader = new BufferedReader(new FileReader(corpusFile));
-    try {
-      String line = null;
-      while ((line = reader.readLine()) != null) {
-        processDocument(line);
+          BufferedReader reader = new BufferedReader(new FileReader(corpusFile));
+          try {
+              String line = null;
+              while ((line = reader.readLine()) != null) {
+                  processDocument(line);
+              }
+          } finally {
+              reader.close();
+          }
       }
-    } finally {
-      reader.close();
-    }
-    System.out.println(
-        "Indexed " + Integer.toString(_numDocs) + " docs with " +
-        Long.toString(_totalTermFrequency) + " terms.");
+      else {
+          final File folder = new File(_options._corpusPrefix);
+          for (final File fileEntry : folder.listFiles()) {
+              if (!fileEntry.isDirectory()) {
+                  handleFile(fileEntry.getName());
+              }
+          }
+      }
+      System.out.println(
+                         "Indexed " + Integer.toString(_numDocs) + " docs with " +
+                         Long.toString(_totalTermFrequency) + " terms.");
 
     String indexFile = _options._indexPrefix + "/corpus_invertedDoconly.idx";
     System.out.println("Store index to: " + indexFile);
@@ -57,18 +71,23 @@ public class IndexerInvertedDoconly extends Indexer implements Serializable {
         new ObjectOutputStream(new FileOutputStream(indexFile));
     writer.writeObject(this);
     writer.close();
-    output();
+    //    output();
   }
 
+  private void handleFile(String fileName) {
+      if (fileName.equals(".DS_Store"))
+          return;
+      System.out.println(fileName);
+  }
   private void processDocument(String content) {
     Scanner s = new Scanner(content).useDelimiter("\t");
 
     String title = s.next();
     Vector<Integer> titleTokens = new Vector<Integer>();
     readTermVector(title, titleTokens);
-
+    String body = s.next();
     Vector<Integer> bodyTokens = new Vector<Integer>();
-    readTermVector(s.next(), bodyTokens);
+    readTermVector(body, bodyTokens);
 
     int numViews = Integer.parseInt(s.next());
     s.close();
@@ -76,14 +95,14 @@ public class IndexerInvertedDoconly extends Indexer implements Serializable {
     DocumentIndexed doc = new DocumentIndexed (_documents.size(), this);
     doc.setTitle(title);
     doc.setNumViews(numViews);
-    doc.setTitleTokens(titleTokens);
-    doc.setBodyTokens(bodyTokens);
+    //    doc.setTitleTokens(titleTokens);
+    //    doc.setBodyTokens(bodyTokens);
     _documents.add(doc);
     ++_numDocs;
 
     Set<Integer> uniqueTerms = new HashSet<Integer>();
-    updateStatistics(doc.getTitleTokens(), uniqueTerms);
-    updateStatistics(doc.getBodyTokens(), uniqueTerms);
+    updateStatistics(titleTokens, uniqueTerms);
+    updateStatistics(bodyTokens, uniqueTerms);
     int did = _documents.size()-1;
     for (Integer idx : uniqueTerms) {
         _termToDocs.get(idx).add(did);
@@ -161,18 +180,18 @@ public class IndexerInvertedDoconly extends Indexer implements Serializable {
 
   @Override
   public int corpusDocFrequencyByTerm(String term) {
-    if (!_dictionary.containsKey(term))
+      if (!_dictionary.containsKey(term))
         return 0;
-    Integer did = _dictionary.get(term);
-    return _termToDocs.get(did).size();
+    Integer idx = _dictionary.get(term);
+    return _termToDocs.get(idx).size();
   }
 
   @Override
   public int corpusTermFrequency(String term) {
     if (!_dictionary.containsKey(term))
         return 0;
-    Integer did = _dictionary.get(term);
-    return _termCorpusFrequency.get(did);
+    Integer idx = _dictionary.get(term);
+    return _termCorpusFrequency.get(idx);
   }
 
   @Override
