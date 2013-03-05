@@ -22,7 +22,7 @@ class Document implements Serializable {
   // Basic information for display
   private String _title = "";
   private String _url = "";
-  
+
   // Basic information for ranking
   private float _pageRank = 0.0f;
   private int _numViews = 0;

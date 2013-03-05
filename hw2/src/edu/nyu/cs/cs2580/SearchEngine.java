@@ -40,17 +40,17 @@ public class SearchEngine {
     // HW1: We have only one file, corpus.csv.
     // HW2: We have a partial Wikipedia dump.
     public String _corpusPrefix = null;
-    
+
     // The paretn path where the constructed index resides.
     // HW1: n/a
     // HW2: This is where the index is built into and loaded from.
     public String _indexPrefix = null;
-    
+
     // The specific Indexer to be used.
     public String _indexerType = null;
 
     // Additional group specific configuration can be added below.
-    
+
     /**
      * Constructor for options.
      * @param optionFile where all the options must reside
@@ -74,13 +74,13 @@ public class SearchEngine {
         options.put(vals[0].trim(), vals[1].trim());
       }
       reader.close();
-      
+
       // Populate global options.
       _corpusPrefix = options.get("corpus_prefix");
       Check(_corpusPrefix != null, "Missing option: corpus_prefix!");
       _indexPrefix = options.get("index_prefix");
       Check(_indexPrefix != null, "Missing option: index_prefix!");
-      
+
       // Populate specific options.
       _indexerType = options.get("indexer_type");
       Check(_indexerType != null, "Missing option: indexer_type!");

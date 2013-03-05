@@ -19,7 +19,7 @@ import edu.nyu.cs.cs2580.SearchEngine.Options;
 
 /**
  * Instructor's implementation of a simple full scan Indexer, used in HW1.
- * 
+ *
  * @author fdiaz
  * @author congyu
  */
@@ -45,7 +45,7 @@ class IndexerFullScan extends Indexer implements Serializable {
 
   // Provided for serialization
   public IndexerFullScan() { }
-  
+
   // The real constructor
   public IndexerFullScan(Options option) {
     super(option);
@@ -53,7 +53,7 @@ class IndexerFullScan extends Indexer implements Serializable {
   }
 
   ///// Construction related functions.
-  
+
   /**
    * Constructs the index from the corpus file.
    * 
@@ -83,6 +83,7 @@ class IndexerFullScan extends Indexer implements Serializable {
         new ObjectOutputStream(new FileOutputStream(indexFile));
     writer.writeObject(this);
     writer.close();
+    output();
   }
 
   /**
@@ -118,7 +119,7 @@ class IndexerFullScan extends Indexer implements Serializable {
       _termDocFrequency.put(idx, _termDocFrequency.get(idx) + 1);
     }
   }
-  
+
   /**
    * Tokenize {@code content} into terms, translate terms into their integer
    * representation, store the integers in {@code tokens}.
@@ -162,12 +163,12 @@ class IndexerFullScan extends Indexer implements Serializable {
 
   /**
    * Loads the index from the index file.
-   * 
+   *
    * N.B. For this particular implementation, loading the index from the simple
    * serialization format is in fact slower than constructing the index from
    * scratch. For the more efficient indices, loading should be much faster
    * than constructing.
-   * 
+   *
    * @throws IOException, ClassNotFoundException
    */
   @Override
@@ -180,6 +181,7 @@ class IndexerFullScan extends Indexer implements Serializable {
     IndexerFullScan loaded = (IndexerFullScan) reader.readObject();
 
     this._documents = loaded._documents;
+
     // Compute numDocs and totalTermFrequency b/c Indexer is not serializable.
     this._numDocs = _documents.size();
     for (Integer freq : loaded._termCorpusFrequency.values()) {
@@ -235,5 +237,13 @@ class IndexerFullScan extends Indexer implements Serializable {
     }
     return retval;
   }
-
+  public void output() {
+      System.out.println("_numDocs="+Integer.toString(_numDocs));
+      System.out.println("_totalTermFrequency="+Long.toString(_totalTermFrequency));
+      for (int i = 0; i<_terms.size();i++) {
+          System.out.println(_terms.get(i)+
+                           ":"+Integer.toString(corpusTermFrequency(_terms.get(i)))+
+                           ":"+Integer.toString(corpusDocFrequencyByTerm(_terms.get(i))));
+      }
+  }
 }

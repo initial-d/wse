@@ -6,12 +6,12 @@ import edu.nyu.cs.cs2580.SearchEngine.Options;
 
 /**
  * This is the abstract Indexer class for all concrete Indexer implementations.
- * 
+ *
  * Use {@link Indexer.Factory} to create concrete Indexer implementation.
  * Do NOT change the interface of this class.
- * 
+ *
  * In HW1: instructor's {@link IndexerFullScan} is provided as is.
- * 
+ *
  * In HW2: student will implement {@link IndexerInvertedDoconly},
  * {@link IndexerInvertedOccurrence}, and {@link IndexerInvertedCompressed}.
  * See comments below for more info.
@@ -67,7 +67,7 @@ public abstract class Indexer {
   /**
    * Called when the SearchEngine is in {@code Mode.INDEX} mode. Subclass must
    * construct the index from the provided corpus at {@code corpus_prefix}.
-   * 
+   *
    * Document processing must satisfy the following:
    *   1) Non-visible page content is removed, e.g., those inside <script> tags
    *   2) Tokens are stemmed with Step 1 of the Porter's algorithm
@@ -85,7 +85,7 @@ public abstract class Indexer {
    * Called exactly once when the SearchEngine is in {@code Mode.SERVE} mode.
    * Subclass must load the index at {@code index_prefix} to be ready for
    * serving the search traffic.
-   * 
+   *
    * You must load the index from the constructed index above, do NOT try to
    * reconstruct the index from the corpus. When the search engine is run in
    * serve mode, it will NOT have access to the corpus, all grading for serve
@@ -95,11 +95,11 @@ public abstract class Indexer {
 
   /**
    * APIs for statistics needed for ranking.
-   * 
+   *
    * {@link numDocs} and {@link totalTermFrequency} must return correct results
    * for the current state whenever they are called, either during index
    * construction or during serving (obviously).
-   * 
+   *
    * {@link corpusDocFrequencyByTerm}, {@link corpusTermFrequency}, and
    * {@link documentTermFrequency} must return correct results during serving.
    */

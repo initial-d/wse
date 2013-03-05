@@ -17,21 +17,21 @@ import java.util.Scanner;
 class Evaluator {
   public static class DocumentRelevances {
     private Map<Integer, Double> relevances = new HashMap<Integer, Double>();
-    
+
     public DocumentRelevances() { }
-    
+
     public void addDocument(int docid, String grade) {
       relevances.put(docid, convertToBinaryRelevance(grade));
     }
-    
+
     public boolean hasRelevanceForDoc(int docid) {
       return relevances.containsKey(docid);
     }
-    
+
     public double getRelevanceForDoc(int docid) {
       return relevances.get(docid);
     }
-    
+
     private static double convertToBinaryRelevance(String grade) {
       if (grade.equalsIgnoreCase("Perfect") ||
           grade.equalsIgnoreCase("Excellent") ||

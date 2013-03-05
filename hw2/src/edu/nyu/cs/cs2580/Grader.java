@@ -2,11 +2,11 @@ package edu.nyu.cs.cs2580;
 
 /**
  * Grading criteria.
- * 
+ *
  * Grading will be done via the public APIs for the four main classes:
  *   Indexer, Ranker, Document, Query
  * Do NOT change the public APIs for those classes.
- * 
+ *
  * In HW2, we will examine your index implementation through the following
  * tasks. Note that scanning the full set of documents during serving will get
  * ZERO credit.
