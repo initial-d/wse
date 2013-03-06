@@ -74,7 +74,7 @@ public class IndexerInvertedOccurrence extends Indexer implements Serializable{
         writer.close();
     } catch (Exception e) {
     }
-    //    output();
+    output();
   }
 
   private void handleFile(String fileName) {
@@ -223,9 +223,6 @@ public class IndexerInvertedOccurrence extends Indexer implements Serializable{
                            ":"+Integer.toString(corpusDocFrequencyByTerm(_terms.get(i))));
           Vector<DocOccPair> dop = _termToOccus.get(i);
           for (int j = 0;j<dop.size();j++) {
-              //              if (j==0 || dop.get(j-1).getDid()!=dop.get(j).getDid()) {
-              //   System.out.println("\nDoc---:"+((DocumentIndexed)(_documents.get(dop.get(j).getDid()))).getBody()+"\n---\n");
-              // }
               System.out.println(Integer.toString(i)+" "+Integer.toString(dop.get(j).getOcc())+" "+Integer.toString(dop.get(j).getDid()));
           }
           System.out.println("===");

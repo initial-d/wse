@@ -21,166 +21,41 @@ import java.io.IOException;
 /**
  * @CS2580: Implement this class for HW2.
  */
-public class IndexerInvertedDoconly extends Indexer implements Serializable {
+public class IndexerInvertedDoconly extends IndexerInverted implements Serializable {
   private static final long serialVersionUID = 1067111905740085030L;
 
-  private Map<String, Integer> _dictionary = new HashMap<String, Integer>();
-  private Vector<String> _terms = new Vector<String>();
+
+
   private Map<Integer,Integer> _termCorpusFrequency = new HashMap<Integer, Integer>();
   private Map<Integer, Vector<Integer> > _termToDocs =
       new HashMap<Integer, Vector<Integer> > ();
-  private Vector<Document> _documents = new Vector<Document>();
+
 
 
   public IndexerInvertedDoconly(Options options) {
     super(options);
     System.out.println("Using Indexer: " + this.getClass().getSimpleName());
   }
-
   @Override
-  public void constructIndex() throws IOException {
-      if (_options._corpusPrefix.equals("data/simple")) {
-          String corpusFile = _options._corpusPrefix + "/corpus.tsv";
-          System.out.println("Construct index from: " + corpusFile);
-
-          BufferedReader reader = new BufferedReader(new FileReader(corpusFile));
-          try {
-              String line = null;
-              while ((line = reader.readLine()) != null) {
-                  processDocument(line);
-              }
-          } finally {
-              reader.close();
-          }
-      }
-      else {
-          final File folder = new File(_options._corpusPrefix);
-          for (final File fileEntry : folder.listFiles()) {
-              if (!fileEntry.isDirectory()) {
-                  handleFile(fileEntry.getName());
-              }
-          }
-      }
-      System.out.println(
-                         "Indexed " + Integer.toString(_numDocs) + " docs with " +
-                         Long.toString(_totalTermFrequency) + " terms.");
-
-    String indexFile = _options._indexPrefix + "/corpus_invertedDoconly.idx";
-    System.out.println("Store index to: " + indexFile);
-    ObjectOutputStream writer =
-        new ObjectOutputStream(new FileOutputStream(indexFile));
-    writer.writeObject(this);
-    writer.close();
-    //    output();
+  public String getIndexFilePath () {
+      return _options._indexPrefix + "/corpus_invertedDoconly.idx";
   }
-
-  private void handleFile(String fileName) throws IOException{
-      String body = readFile(_options._corpusPrefix+"/"+fileName);
-      //      System.out.println(body);
-      //      System.out.println("---filename---:"+fileName);
-      Vector<Integer> titleTokens = new Vector<Integer>();
-      readTermVectorV2(fileName, titleTokens);
-
-      Vector<Integer> bodyTokens = new Vector<Integer>();
-      readTermVectorV2(body, bodyTokens);
-
-      //int numViews = Integer.parseInt(s.next());
-      //s.close();
-
-      DocumentIndexed doc = new DocumentIndexed (_documents.size(), this);
-      doc.setTitle(fileName);
-      //      doc.setNumViews(numViews);
-      //    doc.setTitleTokens(titleTokens);
-      //    doc.setBodyTokens(bodyTokens);
-      _documents.add(doc);
-      ++_numDocs;
-
-      Set<Integer> uniqueTerms = new HashSet<Integer>();
-      updateStatistics(titleTokens, uniqueTerms);
-      updateStatistics(bodyTokens, uniqueTerms);
-      int did = _documents.size()-1;
-      for (Integer idx : uniqueTerms) {
-          _termToDocs.get(idx).add(did);
-          //      _termDocFrequency.put(idx, _termDocFrequency.get(idx) + 1);
-      }
-  }
-  private String readFile( String file ) throws IOException {
-      BufferedReader reader = new BufferedReader( new FileReader (file));
-      String         line = null;
-      StringBuilder  stringBuilder = new StringBuilder();
-      String         ls = System.getProperty("line.separator");
-      while( ( line = reader.readLine() ) != null ) {
-          stringBuilder.append( line );
-          stringBuilder.append( ls );
-      }
-
-      return stringBuilder.toString();
-  }
-  private void processDocument(String content) {
-    Scanner s = new Scanner(content).useDelimiter("\t");
-
-    String title = s.next();
-    Vector<Integer> titleTokens = new Vector<Integer>();
-    readTermVector(title, titleTokens);
-    String body = s.next();
-    Vector<Integer> bodyTokens = new Vector<Integer>();
-    readTermVector(body, bodyTokens);
-
-    int numViews = Integer.parseInt(s.next());
-    s.close();
-
-    DocumentIndexed doc = new DocumentIndexed (_documents.size(), this);
-    doc.setTitle(title);
-    doc.setNumViews(numViews);
-    //    doc.setTitleTokens(titleTokens);
-    //    doc.setBodyTokens(bodyTokens);
-    _documents.add(doc);
-    ++_numDocs;
-
-    Set<Integer> uniqueTerms = new HashSet<Integer>();
-    updateStatistics(titleTokens, uniqueTerms);
-    updateStatistics(bodyTokens, uniqueTerms);
-    int did = _documents.size()-1;
-    for (Integer idx : uniqueTerms) {
-        _termToDocs.get(idx).add(did);
-        //      _termDocFrequency.put(idx, _termDocFrequency.get(idx) + 1);
+  @Override
+  public void updateStatistics(Vector<Integer> tokens, Set<Integer> uniques) {
+    for (int idx : tokens) {
+      uniques.add(idx);
+      _termCorpusFrequency.put(idx, _termCorpusFrequency.get(idx) + 1);
+      ++_totalTermFrequency;
     }
   }
-  private void readTermVectorV2(String content, Vector<Integer> tokens) {
-      String current = "";
-      int bracketCount = 0;
-      char c;
-      for (int i = 0; i<content.length();i++) {
-          c = content.charAt(i);
-          if ((c<='z'&&c>='a')||(c<='Z'&&c>='A')) {
-              if (bracketCount == 0) {
-                  current = current+c;
-                  //                  current.append(c);
-                  // last character
-                  if (i == content.length()-1) {
-                      String tmp = current;
-                      addToken(tmp,tokens);
-                  }
-              }
-          }
-          else {
-              if (current.length()>0 && bracketCount == 0) {
-                  // valid token
-                  String tmp = current;
-                  addToken(current,tokens);
-              }
-              if (c=='<') {
-                  bracketCount++;
-              }
-              else if (c=='>'&& bracketCount>0) {
-                  bracketCount--;
-              }
-              current = "";
-          }
+  @Override
+  public void updateUniqueTerms(Set<Integer> uniqueTerms,int did) {
+      for (Integer idx : uniqueTerms) {
+          _termToDocs.get(idx).add(did);
       }
   }
-  private void addToken(String token,Vector<Integer> tokens) {
-      //      System.out.println(token+" ");
+  @Override
+  public void addToken(String token,Vector<Integer> tokens) {
       int idx = -1;
       if (_dictionary.containsKey(token)) {
           idx = _dictionary.get(token);
@@ -193,41 +68,21 @@ public class IndexerInvertedDoconly extends Indexer implements Serializable {
       }
       tokens.add(idx);
   }
-  private void readTermVector(String content, Vector<Integer> tokens) {
-    Scanner s = new Scanner(content);  // Uses white space by default.
-    while (s.hasNext()) {
-      String token = s.next();
-      int idx = -1;
-      if (_dictionary.containsKey(token)) {
-        idx = _dictionary.get(token);
-      } else {
-        idx = _terms.size();
-        _terms.add(token);
-        _dictionary.put(token, idx);
-        _termCorpusFrequency.put(idx, 0);
-        _termToDocs.put(idx, new Vector<Integer>());
-      }
-      tokens.add(idx);
-    }
-    return;
-  }
 
-  private void updateStatistics(Vector<Integer> tokens, Set<Integer> uniques) {
-    for (int idx : tokens) {
-      uniques.add(idx);
-      _termCorpusFrequency.put(idx, _termCorpusFrequency.get(idx) + 1);
-      ++_totalTermFrequency;
-    }
-  }
-
-  @Override
-  public void loadIndex() throws IOException, ClassNotFoundException {
-      String indexFile = _options._indexPrefix + "/corpus_invertedDoconly.idx";
+    //  public abstract void loadIndex() throws IOException, ClassNotFoundException;
+    //    @Override
+  public void loadIndex()  {
+      try {
+      String indexFile = getIndexFilePath();
       System.out.println("Load index from: " + indexFile);
 
       ObjectInputStream reader =
           new ObjectInputStream(new FileInputStream(indexFile));
-      IndexerInvertedDoconly loaded = (IndexerInvertedDoconly) reader.readObject();
+      IndexerInvertedDoconly loaded = null;
+      try {
+          loaded = (IndexerInvertedDoconly) reader.readObject();
+      } catch (ClassNotFoundException e) {
+      }
 
       this._documents = loaded._documents;
 
@@ -245,7 +100,11 @@ public class IndexerInvertedDoconly extends Indexer implements Serializable {
       System.out.println(Integer.toString(_numDocs) + " documents loaded " +
                          "with " + Long.toString(_totalTermFrequency) + " terms!");
       //      output();
+      } catch (IOException e) {
+      }
   }
+
+
 
   @Override
   public Document getDoc(int docid) {
@@ -256,7 +115,7 @@ public class IndexerInvertedDoconly extends Indexer implements Serializable {
   /**
    * In HW2, you should be using {@link DocumentIndexed}
    */
-  @Override
+    //  @Override
   public Document nextDoc(Query query, int docid) {
     return null;
   }
@@ -282,6 +141,8 @@ public class IndexerInvertedDoconly extends Indexer implements Serializable {
     SearchEngine.Check(false, "Not implemented!");
     return 0;
   }
+    //  @Override
+  @Override
   public void output() {
       System.out.println("_numDocs="+Integer.toString(_numDocs));
       System.out.println("_totalTermFrequency="+Long.toString(_totalTermFrequency));
