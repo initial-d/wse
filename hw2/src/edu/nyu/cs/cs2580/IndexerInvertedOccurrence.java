@@ -61,15 +61,14 @@ public class IndexerInvertedOccurrence extends Indexer implements Serializable{
               }
           }
       }
-      System.out.println(
-                         "Indexed " + Integer.toString(_numDocs) + " docs with " +
+      System.out.println("Indexed " + Integer.toString(_numDocs) + " docs with " +
                          Long.toString(_totalTermFrequency) + " terms.");
 
     String indexFile = _options._indexPrefix + "/corpus_invertedOccurrence.idx";
     System.out.println("Store index to: " + indexFile);
+    output();
     ObjectOutputStream writer =
         new ObjectOutputStream(new FileOutputStream(indexFile));
-    output();
     try {
         writer.writeObject(this);
         writer.close();
@@ -99,7 +98,7 @@ public class IndexerInvertedOccurrence extends Indexer implements Serializable{
 
     DocumentIndexed doc = new DocumentIndexed (_documents.size(), this);
     doc.setTitle(title);
-    //doc.setBody(body);
+    doc.setBody(body);
     doc.setNumViews(numViews);
     //doc.setTitleTokens(titleTokens);
     //    doc.setBodyTokens(bodyTokens);
@@ -142,6 +141,9 @@ public class IndexerInvertedOccurrence extends Indexer implements Serializable{
                                   int did, int offset) {
     for (int i = 0; i<tokens.size();i++) {
         uniques.add(tokens.get(i));
+        //        System.out.println(Integer.toString(tokens.get(i))+" "+
+        //                 Integer.toString(did)+" "+
+        //                 Integer.toString(offset+i));
         _termToOccus.get(tokens.get(i)).add(new DocOccPair(did,offset+i));
         ++_totalTermFrequency;
     }
@@ -156,7 +158,6 @@ public class IndexerInvertedOccurrence extends Indexer implements Serializable{
           new ObjectInputStream(new FileInputStream(indexFile));
       IndexerInvertedOccurrence loaded = 
           (IndexerInvertedOccurrence) reader.readObject();
-      System.out.println("xxx");
       this._documents = loaded._documents;
       // Compute numDocs and totalTermFrequency b/c Indexer is not serializable.
       this._numDocs = _documents.size();
@@ -174,7 +175,7 @@ public class IndexerInvertedOccurrence extends Indexer implements Serializable{
 
       System.out.println(Integer.toString(_numDocs) + " documents loaded " +
                          "with " + Long.toString(_totalTermFrequency) + " terms!");
-      output();
+      //      output();
   }
 
   @Override
@@ -220,6 +221,14 @@ public class IndexerInvertedOccurrence extends Indexer implements Serializable{
           System.out.println(_terms.get(i)+
                            ":"+Integer.toString(corpusTermFrequency(_terms.get(i)))+
                            ":"+Integer.toString(corpusDocFrequencyByTerm(_terms.get(i))));
+          Vector<DocOccPair> dop = _termToOccus.get(i);
+          for (int j = 0;j<dop.size();j++) {
+              //              if (j==0 || dop.get(j-1).getDid()!=dop.get(j).getDid()) {
+              //   System.out.println("\nDoc---:"+((DocumentIndexed)(_documents.get(dop.get(j).getDid()))).getBody()+"\n---\n");
+              // }
+              System.out.println(Integer.toString(i)+" "+Integer.toString(dop.get(j).getOcc())+" "+Integer.toString(dop.get(j).getDid()));
+          }
+          System.out.println("===");
       }
   }
 }

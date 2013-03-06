@@ -74,10 +74,47 @@ public class IndexerInvertedDoconly extends Indexer implements Serializable {
     //    output();
   }
 
-  private void handleFile(String fileName) {
-      if (fileName.equals(".DS_Store"))
-          return;
-      System.out.println(fileName);
+  private void handleFile(String fileName) throws IOException{
+      String body = readFile(_options._corpusPrefix+"/"+fileName);
+      //      System.out.println(body);
+      //      System.out.println("---filename---:"+fileName);
+      Vector<Integer> titleTokens = new Vector<Integer>();
+      readTermVectorV2(fileName, titleTokens);
+
+      Vector<Integer> bodyTokens = new Vector<Integer>();
+      readTermVectorV2(body, bodyTokens);
+
+      //int numViews = Integer.parseInt(s.next());
+      //s.close();
+
+      DocumentIndexed doc = new DocumentIndexed (_documents.size(), this);
+      doc.setTitle(fileName);
+      //      doc.setNumViews(numViews);
+      //    doc.setTitleTokens(titleTokens);
+      //    doc.setBodyTokens(bodyTokens);
+      _documents.add(doc);
+      ++_numDocs;
+
+      Set<Integer> uniqueTerms = new HashSet<Integer>();
+      updateStatistics(titleTokens, uniqueTerms);
+      updateStatistics(bodyTokens, uniqueTerms);
+      int did = _documents.size()-1;
+      for (Integer idx : uniqueTerms) {
+          _termToDocs.get(idx).add(did);
+          //      _termDocFrequency.put(idx, _termDocFrequency.get(idx) + 1);
+      }
+  }
+  private String readFile( String file ) throws IOException {
+      BufferedReader reader = new BufferedReader( new FileReader (file));
+      String         line = null;
+      StringBuilder  stringBuilder = new StringBuilder();
+      String         ls = System.getProperty("line.separator");
+      while( ( line = reader.readLine() ) != null ) {
+          stringBuilder.append( line );
+          stringBuilder.append( ls );
+      }
+
+      return stringBuilder.toString();
   }
   private void processDocument(String content) {
     Scanner s = new Scanner(content).useDelimiter("\t");
@@ -109,7 +146,53 @@ public class IndexerInvertedDoconly extends Indexer implements Serializable {
         //      _termDocFrequency.put(idx, _termDocFrequency.get(idx) + 1);
     }
   }
-
+  private void readTermVectorV2(String content, Vector<Integer> tokens) {
+      String current = "";
+      int bracketCount = 0;
+      char c;
+      for (int i = 0; i<content.length();i++) {
+          c = content.charAt(i);
+          if ((c<='z'&&c>='a')||(c<='Z'&&c>='A')) {
+              if (bracketCount == 0) {
+                  current = current+c;
+                  //                  current.append(c);
+                  // last character
+                  if (i == content.length()-1) {
+                      String tmp = current;
+                      addToken(tmp,tokens);
+                  }
+              }
+          }
+          else {
+              if (current.length()>0 && bracketCount == 0) {
+                  // valid token
+                  String tmp = current;
+                  addToken(current,tokens);
+              }
+              if (c=='<') {
+                  bracketCount++;
+              }
+              else if (c=='>'&& bracketCount>0) {
+                  bracketCount--;
+              }
+              current = "";
+          }
+      }
+  }
+  private void addToken(String token,Vector<Integer> tokens) {
+      //      System.out.println(token+" ");
+      int idx = -1;
+      if (_dictionary.containsKey(token)) {
+          idx = _dictionary.get(token);
+      } else {
+          idx = _terms.size();
+          _terms.add(token);
+          _dictionary.put(token, idx);
+          _termCorpusFrequency.put(idx, 0);
+          _termToDocs.put(idx, new Vector<Integer>());
+      }
+      tokens.add(idx);
+  }
   private void readTermVector(String content, Vector<Integer> tokens) {
     Scanner s = new Scanner(content);  // Uses white space by default.
     while (s.hasNext()) {
