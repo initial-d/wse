@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.ArrayList;
 import java.util.Vector;
 import java.io.IOException;
 import java.io.BufferedReader;
@@ -21,15 +22,36 @@ import edu.nyu.cs.cs2580.SearchEngine.Options;
 /**
  * @CS2580: Implement this class for HW2.
  */
-public class IndexerInvertedOccurrence extends Indexer implements Serializable{
+public class IndexerInvertedOccurrence extends IndexerInverted implements Serializable{
+
+
+private class DocOccPair implements Serializable{
+    private static final long serialVersionUID = 1027111905740085030L;
+    private int _did;
+    private ArrayList<Integer> _occs = new ArrayList<Integer>();
+    public DocOccPair (int did, int occ) {
+        _did = did;
+        _occs.add(occ);
+    }
+    public int getDid() {
+        return _did;
+    }
+    public void setDid(int did) {
+        _did = did;
+    }
+    public void InsertOcc(int occs) {
+        _occs.add(occs);
+    }
+    public int Frequency() {
+        return _occs.size();
+    }
+}
+
 
   private static final long serialVersionUID = 1057111905740085030L;
-  private Map<String, Integer> _dictionary = new HashMap<String, Integer>();
-  private Vector<String> _terms = new Vector<String>();
-  private Map<Integer, Integer> _termDocFrequency = new HashMap<Integer,Integer>();
-  private Map<Integer, Vector<DocOccPair> > _termToOccus =
-        new HashMap<Integer, Vector<DocOccPair> > ();
-  private Vector<Document> _documents = new Vector<Document>();
+    //  private Map<Integer, Integer> _termDocFrequency = new HashMap<Integer,Integer>();
+  private Map<Integer, ArrayList<DocOccPair> > _termToOccus =
+        new HashMap<Integer, ArrayList<DocOccPair> > ();
 
 
   public IndexerInvertedOccurrence(Options options) {
@@ -38,84 +60,34 @@ public class IndexerInvertedOccurrence extends Indexer implements Serializable{
   }
 
   @Override
-  public void constructIndex() throws IOException {
-      if (_options._corpusPrefix.equals("data/simple")) {
-          String corpusFile = _options._corpusPrefix + "/corpus.tsv";
-          System.out.println("Construct index from: " + corpusFile);
-
-          BufferedReader reader = new BufferedReader(new FileReader(corpusFile));
-          try {
-              String line = null;
-              while ((line = reader.readLine()) != null) {
-                  processDocument(line);
-              }
-          } finally {
-              reader.close();
-          }
-      }
-      else {
-          final File folder = new File(_options._corpusPrefix);
-          for (final File fileEntry : folder.listFiles()) {
-              if (!fileEntry.isDirectory()) {
-                  handleFile(fileEntry.getName());
-              }
-          }
-      }
-      System.out.println("Indexed " + Integer.toString(_numDocs) + " docs with " +
-                         Long.toString(_totalTermFrequency) + " terms.");
-
-    String indexFile = _options._indexPrefix + "/corpus_invertedOccurrence.idx";
-    System.out.println("Store index to: " + indexFile);
-    output();
-    ObjectOutputStream writer =
-        new ObjectOutputStream(new FileOutputStream(indexFile));
-    try {
-        writer.writeObject(this);
-        writer.close();
-    } catch (Exception e) {
+  public String getIndexFilePath() {
+      return _options._indexPrefix + "/corpus_invertedOccurrence.idx";
+  }
+  @Override
+  public void updateStatistics(Vector<Integer> tokens, Set<Integer> uniques,
+                                  int did, int offset) {
+    Integer token;
+    for (int i = 0; i<tokens.size();i++) {
+        uniques.add(tokens.get(i));
+        token = tokens.get(i);
+        ArrayList<DocOccPair> dop = _termToOccus.get(token);
+        if (dop.size()==0 || dop.get(dop.size()-1).getDid()!=did) {
+            dop.add(new DocOccPair(did,offset+i));
+        }
+        else {
+            dop.get(dop.size()-1).InsertOcc(offset+i);
+        }
+        ++_totalTermFrequency;
     }
-    output();
   }
-
-  private void handleFile(String fileName) {
-      if (fileName.equals(".DS_Store"))
-          return;
-      System.out.println(fileName);
+  @Override
+  public void updateUniqueTerms (Set<Integer> uniqueTerms,int did) {
+      //    for (Integer idx : uniqueTerms) {
+      //        _termDocFrequency.put(idx, _termDocFrequency.get(idx) + 1);
+      //    }
   }
-
-  private void processDocument(String content) {
-    Scanner s = new Scanner(content).useDelimiter("\t");
-
-    String title = s.next();
-    Vector<Integer> titleTokens = new Vector<Integer>();
-    readTermVector(title, titleTokens);
-    String body = s.next();
-    Vector<Integer> bodyTokens = new Vector<Integer>();
-    readTermVector(body, bodyTokens);
-
-    int numViews = Integer.parseInt(s.next());
-    s.close();
-
-    DocumentIndexed doc = new DocumentIndexed (_documents.size(), this);
-    doc.setTitle(title);
-    doc.setBody(body);
-    doc.setNumViews(numViews);
-    //doc.setTitleTokens(titleTokens);
-    //    doc.setBodyTokens(bodyTokens);
-    _documents.add(doc);
-    ++_numDocs;
-
-    int did = _documents.size()-1;
-    Set<Integer> uniqueTerms = new HashSet<Integer>();
-    updateStatistics(titleTokens, uniqueTerms,did,0);
-    updateStatistics(bodyTokens, uniqueTerms,did,titleTokens.size());
-    updateUniqueTerms(uniqueTerms);
-  }
-
-  private void readTermVector(String content, Vector<Integer> tokens) {
-    Scanner s = new Scanner(content);  // Uses white space by default.
-    while (s.hasNext()) {
-      String token = s.next();
+  @Override
+  public void addToken(String token, Vector<Integer> tokens) {
       int idx = -1;
       if (_dictionary.containsKey(token)) {
         idx = _dictionary.get(token);
@@ -123,58 +95,41 @@ public class IndexerInvertedOccurrence extends Indexer implements Serializable{
         idx = _terms.size();
         _terms.add(token);
         _dictionary.put(token, idx);
-        _termToOccus.put(idx,new Vector<DocOccPair>());
-        _termDocFrequency.put(idx, 0);
+        _termToOccus.put(idx,new ArrayList<DocOccPair>());
+        //        _termDocFrequency.put(idx, 0);
       }
       tokens.add(idx);
-    }
-    return;
   }
 
-  private void updateUniqueTerms (Set<Integer> uniqueTerms) {
-    for (Integer idx : uniqueTerms) {
-        _termDocFrequency.put(idx, _termDocFrequency.get(idx) + 1);
-    }
-  }
-
-  private void updateStatistics(Vector<Integer> tokens, Set<Integer> uniques,
-                                  int did, int offset) {
-    for (int i = 0; i<tokens.size();i++) {
-        uniques.add(tokens.get(i));
-        //        System.out.println(Integer.toString(tokens.get(i))+" "+
-        //                 Integer.toString(did)+" "+
-        //                 Integer.toString(offset+i));
-        _termToOccus.get(tokens.get(i)).add(new DocOccPair(did,offset+i));
-        ++_totalTermFrequency;
-    }
-  }
-
-  @Override
-  public void loadIndex() throws IOException, ClassNotFoundException {
+  public void loadIndex() {
+      try {
       String indexFile = _options._indexPrefix + "/corpus_invertedOccurrence.idx";
       System.out.println("Load index from: " + indexFile);
 
       ObjectInputStream reader =
           new ObjectInputStream(new FileInputStream(indexFile));
-      IndexerInvertedOccurrence loaded = 
-          (IndexerInvertedOccurrence) reader.readObject();
+      IndexerInvertedOccurrence loaded = null;
+      try {
+          loaded = (IndexerInvertedOccurrence) reader.readObject();
+      } catch (ClassNotFoundException e) {
+      }
+
       this._documents = loaded._documents;
       // Compute numDocs and totalTermFrequency b/c Indexer is not serializable.
       this._numDocs = _documents.size();
-      for (Vector<DocOccPair> freq: loaded._termToOccus.values()) {
+      for (ArrayList<DocOccPair> freq: loaded._termToOccus.values()) {
           this._totalTermFrequency+= freq.size();
       }
-      //      for (Integer freq : loaded._term.values()) {
-      //          this._totalTermFrequency += freq;
-      //      }
       this._dictionary = loaded._dictionary;
       this._terms = loaded._terms;
       this._termToOccus = loaded._termToOccus;
-      this._termDocFrequency = loaded._termDocFrequency;
+      //      this._termDocFrequency = loaded._termDocFrequency;
       reader.close();
 
       System.out.println(Integer.toString(_numDocs) + " documents loaded " +
                          "with " + Long.toString(_totalTermFrequency) + " terms!");
+      } catch (IOException e) {
+      }
       //      output();
   }
 
@@ -197,7 +152,7 @@ public class IndexerInvertedOccurrence extends Indexer implements Serializable{
       if (!_dictionary.containsKey(term))
           return 0;
       Integer idx = _dictionary.get(term);
-      return _termDocFrequency.get(idx);
+      return _termToOccus.get(idx).size();
   }
 
   @Override
@@ -205,8 +160,11 @@ public class IndexerInvertedOccurrence extends Indexer implements Serializable{
       if (!_dictionary.containsKey(term))
           return 0;
       Integer idx = _dictionary.get(term);
-      //return 0;
-      return _termToOccus.get(idx).size();
+      ArrayList<DocOccPair> dops = _termToOccus.get(idx);
+      int ret = 0;
+      for (DocOccPair dop : dops)
+          ret+=dop.Frequency();
+      return ret;
   }
 
   @Override
@@ -221,11 +179,11 @@ public class IndexerInvertedOccurrence extends Indexer implements Serializable{
           System.out.println(_terms.get(i)+
                            ":"+Integer.toString(corpusTermFrequency(_terms.get(i)))+
                            ":"+Integer.toString(corpusDocFrequencyByTerm(_terms.get(i))));
-          Vector<DocOccPair> dop = _termToOccus.get(i);
+          /*          Vector<DocOccPair> dop = _termToOccus.get(i);
           for (int j = 0;j<dop.size();j++) {
               System.out.println(Integer.toString(i)+" "+Integer.toString(dop.get(j).getOcc())+" "+Integer.toString(dop.get(j).getDid()));
           }
-          System.out.println("===");
+          System.out.println("===");*/
       }
   }
 }

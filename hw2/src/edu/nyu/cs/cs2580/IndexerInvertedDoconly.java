@@ -41,7 +41,7 @@ public class IndexerInvertedDoconly extends IndexerInverted implements Serializa
       return _options._indexPrefix + "/corpus_invertedDoconly.idx";
   }
   @Override
-  public void updateStatistics(Vector<Integer> tokens, Set<Integer> uniques) {
+  public void updateStatistics(Vector<Integer> tokens, Set<Integer> uniques,int did,int offset) {
     for (int idx : tokens) {
       uniques.add(idx);
       _termCorpusFrequency.put(idx, _termCorpusFrequency.get(idx) + 1);
@@ -75,7 +75,6 @@ public class IndexerInvertedDoconly extends IndexerInverted implements Serializa
       try {
       String indexFile = getIndexFilePath();
       System.out.println("Load index from: " + indexFile);
-
       ObjectInputStream reader =
           new ObjectInputStream(new FileInputStream(indexFile));
       IndexerInvertedDoconly loaded = null;
@@ -141,7 +140,7 @@ public class IndexerInvertedDoconly extends IndexerInverted implements Serializa
     SearchEngine.Check(false, "Not implemented!");
     return 0;
   }
-    //  @Override
+
   @Override
   public void output() {
       System.out.println("_numDocs="+Integer.toString(_numDocs));
