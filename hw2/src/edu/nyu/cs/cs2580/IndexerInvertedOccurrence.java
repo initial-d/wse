@@ -142,12 +142,10 @@ private class DocOccPair implements Serializable{
   /**
    * In HW2, you should be using {@link DocumentIndexed}.
    */
-  @Override
   public Document nextDoc(Query query, int docid) {
     return null;
   }
 
-  @Override
   public int corpusDocFrequencyByTerm(String term) {
       if (!_dictionary.containsKey(term))
           return 0;
@@ -155,7 +153,6 @@ private class DocOccPair implements Serializable{
       return _termToOccus.get(idx).size();
   }
 
-  @Override
   public int corpusTermFrequency(String term) {
       if (!_dictionary.containsKey(term))
           return 0;
@@ -167,7 +164,6 @@ private class DocOccPair implements Serializable{
       return ret;
   }
 
-  @Override
   public int documentTermFrequency(String term, String url) {
     SearchEngine.Check(false, "Not implemented!");
     return 0;
