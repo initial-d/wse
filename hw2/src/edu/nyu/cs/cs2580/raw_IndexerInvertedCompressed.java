@@ -25,7 +25,7 @@ import edu.nyu.cs.cs2580.SearchEngine.Options;
 /**
  * @CS2580: Implement this class for HW2.
  */
-public class IndexerInvertedCompressed extends Indexer implements Serializable{
+/****public class raw_IndexerInvertedCompressed extends Indexer implements Serializable{
   
 
 	private static final long serialVersionUID = 4574090044401455221L;
@@ -37,7 +37,7 @@ public class IndexerInvertedCompressed extends Indexer implements Serializable{
 	  private Vector<Document> _documents = new Vector<Document>();
 	  private Map<String, ArrayList<Byte>> _termOccCompressed = new HashMap<String,ArrayList<Byte>>();
 	  
-public IndexerInvertedCompressed(Options options) {
+public raw_IndexerInvertedCompressed(Options options) {
     super(options);
     System.out.println("Using Indexer: " + this.getClass().getSimpleName());
   }
@@ -202,7 +202,7 @@ private void compress(){
       this._termDocFrequency.clear();
       this._dictionary.clear();
       this._terms.clear();
-      
+
       Iterator<Entry<String, ArrayList<Byte>>> it=_termOccCompressed.entrySet().iterator();
       while(it.hasNext()){
     	  Map.Entry<String, ArrayList<Byte>> entry=(Map.Entry<String, ArrayList<Byte>>) it.next();
@@ -256,7 +256,7 @@ private void compress(){
   /**
    * In HW2, you should be using {@link DocumentIndexed}
    */
-  @Override
+/****  @Override
   public Document nextDoc(Query query, int docid) {
     return null;
   }
@@ -281,8 +281,8 @@ private void compress(){
   /**
    * @CS2580: Implement this for bonus points.
    */
-  @Override
+/***  @Override
   public int documentTermFrequency(String term, String url) {
     return 0;
   }
-}
+  }***/
