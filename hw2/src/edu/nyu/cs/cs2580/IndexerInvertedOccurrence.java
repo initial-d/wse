@@ -14,45 +14,26 @@ import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.io.File;
 import edu.nyu.cs.cs2580.SearchEngine.Options;
-
+import java.lang.ref.WeakReference;
 /**
  * @CS2580: Implement this class for HW2.
  */
 public class IndexerInvertedOccurrence extends IndexerInverted implements Serializable{
-
-
-private class DocOccPair implements Serializable{
-    private static final long serialVersionUID = 1027111905740085030L;
-    private int _did;
-    private ArrayList<Integer> _occs = new ArrayList<Integer>();
-    public DocOccPair (int did, int occ) {
-        _did = did;
-        _occs.add(occ);
-    }
-    public int getDid() {
-        return _did;
-    }
-    public void setDid(int did) {
-        _did = did;
-    }
-    public void InsertOcc(int occs) {
-        _occs.add(occs);
-    }
-    public int Frequency() {
-        return _occs.size();
-    }
-}
-
-
+  private int tmpFileCount = 0;
   private static final long serialVersionUID = 1057111905740085030L;
-    //  private Map<Integer, Integer> _termDocFrequency = new HashMap<Integer,Integer>();
-  private Map<Integer, ArrayList<DocOccPair> > _termToOccus =
-        new HashMap<Integer, ArrayList<DocOccPair> > ();
+
+    // _termToOccus[0] info for term[0]
+    // _termToOccus[0][0] info for term[0] at a doc
+    // _termToOccus[0][0][0] docid
+    // _termToOccus[0][0][x] position
+  private ArrayList<ArrayList<ArrayList<Integer> > > _termToOccus =
+        new ArrayList<ArrayList<ArrayList<Integer> > > ();
 
 
   public IndexerInvertedOccurrence(Options options) {
@@ -60,19 +41,91 @@ private class DocOccPair implements Serializable{
     System.out.println("Using Indexer: " + this.getClass().getSimpleName());
   }
 
+
   @Override
   public void loadAdditional (BufferedReader reader) {
       System.out.println("to be implemented!");
   }
   @Override
   public void appendToFile(BufferedWriter out) {
-      System.out.println("to be implemented!!!");
+      try {
+      flushToFile();
+      mergeTmps();
+      out.write(Integer.toString(_termToOccus.size())+"\n");
+      for (int i = 0; i<_termToOccus.size();i++) {
+          out.write(Integer.toString(_termToOccus.get(i).size())+"\n");
+          for (int j = 0; j<_termToOccus.get(i).size();j++) {
+              out.write(Integer.toString(_termToOccus.get(i).get(j).size())+"\n");
+              for (int p = 0; p<_termToOccus.get(i).get(j).size();p++)
+                  out.write(Integer.toString(_termToOccus.get(i).get(j).get(p))+" ");
+              out.newLine();
+          }
+          out.flush();
+      }
+      } catch (IOException e) {
+      }
   }
   @Override
   public void removeStopwordsInfo(int idx) {
-      System.out.println("to be implemented!!!");
+      _termToOccus.get(idx).clear();
+      //      System.out.println("to be implemented!!!");
   }
+  private void mergeTmps() throws IOException {
+      System.out.println("merging.....");
+      String fileName="";
+      for (int i = 1; i<=tmpFileCount;i++) {
+          System.out.println(i);
+          fileName = _options._indexPrefix+"/"+Integer.toString(i) + "000s.tmp";
+          FileReader filereader = new FileReader(fileName);
+          BufferedReader bufferedreader = new BufferedReader(filereader);
+          String line = bufferedreader.readLine();
+          String[] poss;
+          int outerSize = Integer.parseInt(line);
+          int docSize;
+          int posSize;
+          for (int terms = 0; terms<outerSize;terms++) {
+              line = bufferedreader.readLine();
+              docSize = Integer.parseInt(line);
+              for (int docs = 0; docs<docSize;docs ++) {
+                  ArrayList<Integer> docInfo = new ArrayList<Integer>();
+                  line = bufferedreader.readLine();
+                  posSize = Integer.parseInt(line);
+                  line = bufferedreader.readLine();
+                  poss = line.split(" ");
+                  for (int posI = 0; posI<posSize;posI++) {
+                      docInfo.add(Integer.parseInt(poss[posI]));
+                  }
+                  _termToOccus.get(terms).add(docInfo);
+              }
+          }
+          bufferedreader.close();
+          gc();
+      }
+  }
+  private void flushToFile() throws IOException{
+      tmpFileCount++;
+      String s = Integer.toString(tmpFileCount) + "000s.tmp";
+      s = _options._indexPrefix +"/"+ s;
+      FileWriter fstream = new FileWriter(s);
+      BufferedWriter out = new BufferedWriter(fstream);
 
+      out.write(Integer.toString(_termToOccus.size())+"\n");
+      for (int i = 0; i<_termToOccus.size();i++) {
+          out.write(Integer.toString(_termToOccus.get(i).size())+"\n");
+          for (int j = 0; j<_termToOccus.get(i).size();j++) {
+              out.write(Integer.toString(_termToOccus.get(i).get(j).size())+"\n");
+              for (int p = 0; p<_termToOccus.get(i).get(j).size();p++)
+                  out.write(Integer.toString(_termToOccus.get(i).get(j).get(p))+" ");
+              out.newLine();
+          }
+          out.flush();
+      }
+      for (int i = 0; i<_termToOccus.size();i++) {
+          _termToOccus.get(i).clear();
+      }
+      out.close();
+      gc();
+  }
   @Override
   public String getIndexFilePath() {
       return _options._indexPrefix + "/corpus_invertedOccurrence.idx";
@@ -82,23 +135,34 @@ private class DocOccPair implements Serializable{
                                   int did, int offset) {
     Integer token;
     for (int i = 0; i<tokens.size();i++) {
-        uniques.add(tokens.get(i));
-        token = tokens.get(i);
-        ArrayList<DocOccPair> dop = _termToOccus.get(token);
-        if (dop.size()==0 || dop.get(dop.size()-1).getDid()!=did) {
-            dop.add(new DocOccPair(did,offset+i));
-        }
-        else {
-            dop.get(dop.size()-1).InsertOcc(offset+i);
+        if (tokens.get(i)>=0){
+            uniques.add(tokens.get(i));
+            token = tokens.get(i);
+            ArrayList<ArrayList<Integer> > dop = _termToOccus.get(token);
+            if (dop.size()==0 || dop.get(dop.size()-1).get(0)!=did) {
+                //empty or last entry is not about did
+                ArrayList<Integer> tmp = new ArrayList<Integer>();
+                tmp.add(did);
+                tmp.add(offset+i);
+                dop.add(tmp);
+            }
+            else {
+                dop.get(dop.size()-1).add(offset+i);
+            }
         }
         ++_totalTermFrequency;
     }
   }
   @Override
+  // this function is called once a file and after all work, good place to
+  // flush
   public void updateUniqueTerms (Set<Integer> uniqueTerms,int did) {
-      //    for (Integer idx : uniqueTerms) {
-      //        _termDocFrequency.put(idx, _termDocFrequency.get(idx) + 1);
-      //    }
+      try {
+          if((did+1)%1000 == 0) {
+              flushToFile();
+          }
+      } catch (Exception e) {
+      }
   }
   @Override
   public void addToken(String token, ArrayList<Integer> tokens) {
@@ -109,42 +173,10 @@ private class DocOccPair implements Serializable{
         idx = _termNum++;
         //        _terms.add(token);
         _dictionary.put(token, idx);
-        _termToOccus.put(idx,new ArrayList<DocOccPair>());
+        _termToOccus.add(idx,new ArrayList<ArrayList<Integer> >());
         //        _termDocFrequency.put(idx, 0);
       }
       tokens.add(idx);
-  }
-
-  public void loadIndex() {
-      try {
-      String indexFile = _options._indexPrefix + "/corpus_invertedOccurrence.idx";
-      System.out.println("Load index from: " + indexFile);
-
-      ObjectInputStream reader =
-          new ObjectInputStream(new FileInputStream(indexFile));
-      IndexerInvertedOccurrence loaded = null;
-      try {
-          loaded = (IndexerInvertedOccurrence) reader.readObject();
-      } catch (ClassNotFoundException e) {
-      }
-
-      this._documents = loaded._documents;
-      // Compute numDocs and totalTermFrequency b/c Indexer is not serializable.
-      this._numDocs = _documents.size();
-      for (ArrayList<DocOccPair> freq: loaded._termToOccus.values()) {
-          this._totalTermFrequency+= freq.size();
-      }
-      this._dictionary = loaded._dictionary;
-      //this._terms = loaded._terms;
-      this._termToOccus = loaded._termToOccus;
-      //      this._termDocFrequency = loaded._termDocFrequency;
-      reader.close();
-
-      System.out.println(Integer.toString(_numDocs) + " documents loaded " +
-                         "with " + Long.toString(_totalTermFrequency) + " terms!");
-      } catch (IOException e) {
-      }
-      //      output();
   }
 
   @Override
@@ -157,6 +189,7 @@ private class DocOccPair implements Serializable{
    * In HW2, you should be using {@link DocumentIndexed}.
    */
   public Document nextDoc(Query query, int docid) {
+      
     return null;
   }
 
@@ -164,6 +197,7 @@ private class DocOccPair implements Serializable{
       if (!_dictionary.containsKey(term))
           return 0;
       Integer idx = _dictionary.get(term);
+      if (idx<0) return 0;
       return _termToOccus.get(idx).size();
   }
 
@@ -171,10 +205,11 @@ private class DocOccPair implements Serializable{
       if (!_dictionary.containsKey(term))
           return 0;
       Integer idx = _dictionary.get(term);
-      ArrayList<DocOccPair> dops = _termToOccus.get(idx);
+      if (idx<0) return 0;
+      ArrayList<ArrayList<Integer> > dops = _termToOccus.get(idx);
       int ret = 0;
-      for (DocOccPair dop : dops)
-          ret+=dop.Frequency();
+      for (ArrayList<Integer> dop : dops)
+          ret+=dop.size()-1;
       return ret;
   }
 
@@ -204,4 +239,14 @@ private class DocOccPair implements Serializable{
           }
           System.out.println("===");*/
   }
+
+    public static void gc() {
+        Object obj = new Object();
+        WeakReference ref = new WeakReference<Object>(obj);
+        obj = null;
+        while(ref.get() != null) {
+            System.gc();
+        }
+    }
+
 }
