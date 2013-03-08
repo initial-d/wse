@@ -10,16 +10,16 @@ public class DocumentIndexed extends Document {
     private static final long serialVersionUID = 9184892508124423115L;
 
     private Indexer _indexer = null;
-    private String _body = null;
+    //private String _body = null;
     //    private Vector<Integer> _titleTokens = new Vector<Integer>();
     //    private Vector<Integer> _bodyTokens = new Vector<Integer>();
-    public String getBody() {
+    /*    public String getBody() {
         return _body;
     }
     public void setBody(String body) {
         _body = body;
     }
-
+    */
     public DocumentIndexed(int docid,Indexer indexer) {
         super(docid);
         _indexer = indexer;

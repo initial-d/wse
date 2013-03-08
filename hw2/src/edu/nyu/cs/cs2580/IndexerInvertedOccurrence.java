@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.ArrayList;
-import java.util.Vector;
+import java.util.Iterator;
 import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -64,7 +64,7 @@ private class DocOccPair implements Serializable{
       return _options._indexPrefix + "/corpus_invertedOccurrence.idx";
   }
   @Override
-  public void updateStatistics(Vector<Integer> tokens, Set<Integer> uniques,
+  public void updateStatistics(ArrayList<Integer> tokens, Set<Integer> uniques,
                                   int did, int offset) {
     Integer token;
     for (int i = 0; i<tokens.size();i++) {
@@ -87,13 +87,13 @@ private class DocOccPair implements Serializable{
       //    }
   }
   @Override
-  public void addToken(String token, Vector<Integer> tokens) {
+  public void addToken(String token, ArrayList<Integer> tokens) {
       int idx = -1;
       if (_dictionary.containsKey(token)) {
         idx = _dictionary.get(token);
       } else {
-        idx = _terms.size();
-        _terms.add(token);
+        idx = _docID++;
+        //        _terms.add(token);
         _dictionary.put(token, idx);
         _termToOccus.put(idx,new ArrayList<DocOccPair>());
         //        _termDocFrequency.put(idx, 0);
@@ -121,7 +121,7 @@ private class DocOccPair implements Serializable{
           this._totalTermFrequency+= freq.size();
       }
       this._dictionary = loaded._dictionary;
-      this._terms = loaded._terms;
+      //this._terms = loaded._terms;
       this._termToOccus = loaded._termToOccus;
       //      this._termDocFrequency = loaded._termDocFrequency;
       reader.close();
@@ -171,15 +171,23 @@ private class DocOccPair implements Serializable{
   public void output() {
       System.out.println("_numDocs="+Integer.toString(_numDocs));
       System.out.println("_totalTermFrequency="+Long.toString(_totalTermFrequency));
-      for (int i = 0; i<_terms.size();i++) {
+      Iterator it = _dictionary.entrySet().iterator();
+      while (it.hasNext()) {
+          Map.Entry pairs = (Map.Entry)it.next();
+          String term= (String)pairs.getKey();
+          System.out.println(pairs.getKey() + ":" + 
+                             Integer.toString(corpusTermFrequency(term))+":"+
+                             Integer.toString(corpusDocFrequencyByTerm(term)));
+          //          it.remove(); // avoids a ConcurrentModificationException
+      }
+      /*      for (int i = 0; i<_terms.size();i++) {
           System.out.println(_terms.get(i)+
                            ":"+Integer.toString(corpusTermFrequency(_terms.get(i)))+
-                           ":"+Integer.toString(corpusDocFrequencyByTerm(_terms.get(i))));
-          /*          Vector<DocOccPair> dop = _termToOccus.get(i);
+                           ":"+Integer.toString(corpusDocFrequencyByTerm(_terms.get(i))));*/
+          /*          ArrayList<DocOccPair> dop = _termToOccus.get(i);
           for (int j = 0;j<dop.size();j++) {
               System.out.println(Integer.toString(i)+" "+Integer.toString(dop.get(j).getOcc())+" "+Integer.toString(dop.get(j).getDid()));
           }
           System.out.println("===");*/
-      }
   }
 }

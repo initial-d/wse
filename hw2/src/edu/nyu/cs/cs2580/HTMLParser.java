@@ -1,7 +1,7 @@
 package edu.nyu.cs.cs2580;
 
 import java.io.*;
-import java.util.Vector;
+import java.util.ArrayList;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -19,7 +19,7 @@ public class HTMLParser {
         a = s.toString();
         return a;
     }
-    public static void parse(String fileName,IndexerInverted indexer,Vector<Integer> tokens) {
+    public static void parse(String fileName,IndexerInverted indexer,ArrayList<Integer> tokens) {
         String current = "";
         int bracketCount = 0;
         char c;

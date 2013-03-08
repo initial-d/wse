@@ -7,7 +7,9 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
-import java.util.Vector;
+import java.util.Iterator;
+import java.util.ArrayList;
+//import java.util.Vector;
 import edu.nyu.cs.cs2580.SearchEngine.Options;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -27,8 +29,8 @@ public class IndexerInvertedDoconly extends IndexerInverted implements Serializa
 
 
   private Map<Integer,Integer> _termCorpusFrequency = new HashMap<Integer, Integer>();
-  private Map<Integer, Vector<Integer> > _termToDocs =
-      new HashMap<Integer, Vector<Integer> > ();
+  private Map<Integer, ArrayList<Integer> > _termToDocs =
+      new HashMap<Integer, ArrayList<Integer> > ();
 
 
 
@@ -41,7 +43,7 @@ public class IndexerInvertedDoconly extends IndexerInverted implements Serializa
       return _options._indexPrefix + "/corpus_invertedDoconly.idx";
   }
   @Override
-  public void updateStatistics(Vector<Integer> tokens, Set<Integer> uniques,int did,int offset) {
+  public void updateStatistics(ArrayList<Integer> tokens, Set<Integer> uniques,int did,int offset) {
     for (int idx : tokens) {
       uniques.add(idx);
       _termCorpusFrequency.put(idx, _termCorpusFrequency.get(idx) + 1);
@@ -55,16 +57,16 @@ public class IndexerInvertedDoconly extends IndexerInverted implements Serializa
       }
   }
   @Override
-  public void addToken(String token,Vector<Integer> tokens) {
+  public void addToken(String token,ArrayList<Integer> tokens) {
       int idx = -1;
       if (_dictionary.containsKey(token)) {
           idx = _dictionary.get(token);
       } else {
-          idx = _terms.size();
-          _terms.add(token);
+          idx = _docID++;
+          //          _terms.add(token);
           _dictionary.put(token, idx);
           _termCorpusFrequency.put(idx, 0);
-          _termToDocs.put(idx, new Vector<Integer>());
+          _termToDocs.put(idx, new ArrayList<Integer>());
       }
       tokens.add(idx);
   }
@@ -91,7 +93,7 @@ public class IndexerInvertedDoconly extends IndexerInverted implements Serializa
           this._totalTermFrequency += freq;
       }
       this._dictionary = loaded._dictionary;
-      this._terms = loaded._terms;
+      //this._terms = loaded._terms;
       this._termCorpusFrequency = loaded._termCorpusFrequency;
       this._termToDocs = loaded._termToDocs;
       reader.close();
@@ -145,10 +147,15 @@ public class IndexerInvertedDoconly extends IndexerInverted implements Serializa
   public void output() {
       System.out.println("_numDocs="+Integer.toString(_numDocs));
       System.out.println("_totalTermFrequency="+Long.toString(_totalTermFrequency));
-      for (int i = 0; i<_terms.size();i++) {
-          System.out.println(_terms.get(i)+
-                           ":"+Integer.toString(corpusTermFrequency(_terms.get(i)))+
-                           ":"+Integer.toString(corpusDocFrequencyByTerm(_terms.get(i))));
+      Iterator it = _dictionary.entrySet().iterator();
+      while (it.hasNext()) {
+          Map.Entry pairs = (Map.Entry)it.next();
+          String term= (String)pairs.getKey();
+          System.out.println(pairs.getKey() + ":" + 
+                             Integer.toString(corpusTermFrequency(term))+":"+
+                             Integer.toString(corpusDocFrequencyByTerm(term)));
+          //   it.remove(); // avoids a ConcurrentModificationException
       }
   }
 }
+

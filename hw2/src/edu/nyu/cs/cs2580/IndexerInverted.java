@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
-import java.util.Vector;
+import java.util.ArrayList;
 import edu.nyu.cs.cs2580.SearchEngine.Options;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -21,20 +21,19 @@ import java.io.IOException;
 public abstract class IndexerInverted extends Indexer implements Serializable {
     private static final long serialVersionUID = 967111905740085030L;
     protected Map<String, Integer> _dictionary = new HashMap<String, Integer>();
-    protected Vector<Document> _documents = new Vector<Document>();
-    protected Vector<String> _terms = new Vector<String>();
-
+    protected ArrayList<Document> _documents = new ArrayList<Document>();
+    protected int _docID = 0;
     public IndexerInverted() {}
     public IndexerInverted(Options options) {
         super(options);
     }
     public abstract String getIndexFilePath();
     //give body or title vectors, update info
-    public abstract  void updateStatistics(Vector<Integer> tokens,Set<Integer> uniques,int did,int offset) ;
+    public abstract  void updateStatistics(ArrayList<Integer> tokens,Set<Integer> uniques,int did,int offset) ;
     //give uniqueterms in the file, update info
     public abstract  void updateUniqueTerms(Set<Integer> uniqueTerms,int did);
     //handle a token just red from file
-    public abstract  void addToken(String token,Vector<Integer> tokens);
+    public abstract  void addToken(String token,ArrayList<Integer> tokens);
     //output info for debug
     public abstract void output() ;
 
@@ -64,7 +63,7 @@ public abstract class IndexerInverted extends Indexer implements Serializable {
         System.out.println(
                            "Indexed " + Integer.toString(_numDocs) + " docs with " +
                            Long.toString(_totalTermFrequency) + " terms, @"+
-                           Integer.toString(_terms.size())+" unique terms.");
+                           Integer.toString(_docID)+" unique terms.");
 
         String indexFile = getIndexFilePath();
 
@@ -80,11 +79,11 @@ public abstract class IndexerInverted extends Indexer implements Serializable {
     private void handleFile(String fileName) throws IOException{
         //      String body = readFile(_options._corpusPrefix+"/"+fileName);
       //      System.out.println(fileName);
-      Vector<Integer> titleTokens = new Vector<Integer>();
-      readTermVectorV2Title(fileName, titleTokens);
+      ArrayList<Integer> titleTokens = new ArrayList<Integer>();
+      readTermArrayListV2Title(fileName, titleTokens);
 
-      Vector<Integer> bodyTokens = new Vector<Integer>();
-      readTermVectorV2Body(_options._corpusPrefix+"/"+fileName, bodyTokens);
+      ArrayList<Integer> bodyTokens = new ArrayList<Integer>();
+      readTermArrayListV2Body(_options._corpusPrefix+"/"+fileName, bodyTokens);
 
       DocumentIndexed doc = new DocumentIndexed (_documents.size(), this);
       doc.setTitle(fileName);
@@ -120,11 +119,11 @@ public abstract class IndexerInverted extends Indexer implements Serializable {
     Scanner s = new Scanner(content).useDelimiter("\t");
 
     String title = s.next();
-    Vector<Integer> titleTokens = new Vector<Integer>();
-    readTermVector(title, titleTokens);
+    ArrayList<Integer> titleTokens = new ArrayList<Integer>();
+    readTermArrayList(title, titleTokens);
     String body = s.next();
-    Vector<Integer> bodyTokens = new Vector<Integer>();
-    readTermVector(body, bodyTokens);
+    ArrayList<Integer> bodyTokens = new ArrayList<Integer>();
+    readTermArrayList(body, bodyTokens);
 
     int numViews = Integer.parseInt(s.next());
     s.close();
@@ -145,7 +144,7 @@ public abstract class IndexerInverted extends Indexer implements Serializable {
     this.updateUniqueTerms(uniqueTerms,did);
   }
 
-  private void readTermVectorV2Title(String content, Vector<Integer> tokens) {
+  private void readTermArrayListV2Title(String content, ArrayList<Integer> tokens) {
       String spl = "[^a-zA-Z0-9]";
       String[] tmp = content.split(spl);
       for (String s:tmp) 
@@ -155,11 +154,11 @@ public abstract class IndexerInverted extends Indexer implements Serializable {
       }
       //      System.out.println();
   }
-  private void readTermVectorV2Body(String path, Vector<Integer> tokens) {
+  private void readTermArrayListV2Body(String path, ArrayList<Integer> tokens) {
       HTMLParser.parse(path,this,tokens);
   }
 
-  private void readTermVector(String content, Vector<Integer> tokens) {
+  private void readTermArrayList(String content, ArrayList<Integer> tokens) {
     Scanner s = new Scanner(content);  // Uses white space by default.
     while (s.hasNext()) {
       String token = s.next();
