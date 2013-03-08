@@ -27,14 +27,14 @@ import java.lang.ref.WeakReference;
 public class IndexerInvertedOccurrence extends IndexerInverted implements Serializable{
   private int tmpFileCount = 0;
   private static final long serialVersionUID = 1057111905740085030L;
-
     // _termToOccus[0] info for term[0]
     // _termToOccus[0][0] info for term[0] at a doc
     // _termToOccus[0][0][0] docid
     // _termToOccus[0][0][x] position
   private ArrayList<ArrayList<ArrayList<Integer> > > _termToOccus =
         new ArrayList<ArrayList<ArrayList<Integer> > > ();
-
+  private ArrayList<Integer> _termDocFreq = new ArrayList<Integer>();
+  private ArrayList<Integer> _termCorFreq = new ArrayList<Integer>();
 
   public IndexerInvertedOccurrence(Options options) {
     super(options);
@@ -44,24 +44,43 @@ public class IndexerInvertedOccurrence extends IndexerInverted implements Serial
 
   @Override
   public void loadAdditional (BufferedReader reader) {
-      System.out.println("to be implemented!");
+      try {
+      String [] tokens;
+      String line = reader.readLine();
+      int size = Integer.parseInt(line);
+      line = reader.readLine();
+      tokens = line.split(" ");
+      for (int i = 0; i<size; i++) {
+          _termDocFreq.add(Integer.parseInt(tokens[i]));
+      }
+
+      line = reader.readLine();
+      size = Integer.parseInt(line);
+      line = reader.readLine();
+      tokens = line.split(" ");
+      for (int i = 0; i<size; i++) {
+          _termCorFreq.add(Integer.parseInt(tokens[i]));
+      }
+      line = reader.readLine();
+      tmpFileCount = Integer.parseInt(line);
+      } catch (IOException e) {
+      }
   }
+
   @Override
   public void appendToFile(BufferedWriter out) {
       try {
       flushToFile();
-      mergeTmps();
-      out.write(Integer.toString(_termToOccus.size())+"\n");
-      for (int i = 0; i<_termToOccus.size();i++) {
-          out.write(Integer.toString(_termToOccus.get(i).size())+"\n");
-          for (int j = 0; j<_termToOccus.get(i).size();j++) {
-              out.write(Integer.toString(_termToOccus.get(i).get(j).size())+"\n");
-              for (int p = 0; p<_termToOccus.get(i).get(j).size();p++)
-                  out.write(Integer.toString(_termToOccus.get(i).get(j).get(p))+" ");
-              out.newLine();
-          }
-          out.flush();
-      }
+      //      mergeTmps();
+      out.write(Integer.toString(_termDocFreq.size())+"\n");
+      for (int i = 0; i<_termDocFreq.size();i++)
+          out.write(Integer.toString(_termDocFreq.get(i))+" ");
+      out.newLine();
+      out.write(Integer.toString(_termCorFreq.size())+"\n");
+      for (int i = 0; i<_termCorFreq.size();i++)
+          out.write(Integer.toString(_termCorFreq.get(i))+" ");
+      out.newLine();
+      out.write(Integer.toString(tmpFileCount)+"\n");
       } catch (IOException e) {
       }
   }
@@ -138,6 +157,7 @@ public class IndexerInvertedOccurrence extends IndexerInverted implements Serial
         if (tokens.get(i)>=0){
             uniques.add(tokens.get(i));
             token = tokens.get(i);
+            _termCorFreq.set(token,_termCorFreq.get(token)+1);
             ArrayList<ArrayList<Integer> > dop = _termToOccus.get(token);
             if (dop.size()==0 || dop.get(dop.size()-1).get(0)!=did) {
                 //empty or last entry is not about did
@@ -157,6 +177,9 @@ public class IndexerInvertedOccurrence extends IndexerInverted implements Serial
   // this function is called once a file and after all work, good place to
   // flush
   public void updateUniqueTerms (Set<Integer> uniqueTerms,int did) {
+      for (Integer dix:uniqueTerms) {
+          _termDocFreq.set(dix,_termDocFreq.get(dix)+1);
+      }
       try {
           if((did+1)%1000 == 0) {
               flushToFile();
@@ -174,7 +197,8 @@ public class IndexerInvertedOccurrence extends IndexerInverted implements Serial
         //        _terms.add(token);
         _dictionary.put(token, idx);
         _termToOccus.add(idx,new ArrayList<ArrayList<Integer> >());
-        //        _termDocFrequency.put(idx, 0);
+        _termDocFreq.add(idx, 0);
+        _termCorFreq.add(idx, 0);
       }
       tokens.add(idx);
   }
@@ -189,7 +213,6 @@ public class IndexerInvertedOccurrence extends IndexerInverted implements Serial
    * In HW2, you should be using {@link DocumentIndexed}.
    */
   public Document nextDoc(Query query, int docid) {
-      
     return null;
   }
 
@@ -198,7 +221,7 @@ public class IndexerInvertedOccurrence extends IndexerInverted implements Serial
           return 0;
       Integer idx = _dictionary.get(term);
       if (idx<0) return 0;
-      return _termToOccus.get(idx).size();
+      return _termDocFreq.get(idx);
   }
 
   public int corpusTermFrequency(String term) {
@@ -206,11 +229,7 @@ public class IndexerInvertedOccurrence extends IndexerInverted implements Serial
           return 0;
       Integer idx = _dictionary.get(term);
       if (idx<0) return 0;
-      ArrayList<ArrayList<Integer> > dops = _termToOccus.get(idx);
-      int ret = 0;
-      for (ArrayList<Integer> dop : dops)
-          ret+=dop.size()-1;
-      return ret;
+      return _termCorFreq.get(idx);
   }
 
   public int documentTermFrequency(String term, String url) {
