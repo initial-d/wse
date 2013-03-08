@@ -24,6 +24,16 @@ public class DocumentIndexed extends Document {
         super(docid);
         _indexer = indexer;
     }
+    public String toString() {
+        String ret = getTitle() + "\n" +
+            getUrl() + "\n" +
+            Integer.toString(_docid)+" "+
+            Float.toString(getPageRank())+" " +
+            Integer.toString(getNumViews())+ "\n";
+        return ret;
+    }
+    public void load(String s) {
+    }
 
     /*    public void setTitleTokens(Vector<Integer> titleTokens) {
         _titleTokens = titleTokens;

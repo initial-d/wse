@@ -12,6 +12,7 @@ import java.util.ArrayList;
 //import java.util.Vector;
 import edu.nyu.cs.cs2580.SearchEngine.Options;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
@@ -28,9 +29,9 @@ public class IndexerInvertedDoconly extends IndexerInverted implements Serializa
 
 
 
-  private Map<Integer,Integer> _termCorpusFrequency = new HashMap<Integer, Integer>();
-  private Map<Integer, ArrayList<Integer> > _termToDocs =
-      new HashMap<Integer, ArrayList<Integer> > ();
+    //  private ArrayList<Integer> _termCorpusFrequency = new ArrayList<Integer>();
+  private ArrayList<ArrayList<Integer> > _termToDocs =
+      new ArrayList<ArrayList<Integer> > ();
 
 
 
@@ -39,14 +40,62 @@ public class IndexerInvertedDoconly extends IndexerInverted implements Serializa
     System.out.println("Using Indexer: " + this.getClass().getSimpleName());
   }
   @Override
+  public void loadAdditional (BufferedReader reader) {
+      try {
+      String line = reader.readLine();
+      int outSize = Integer.parseInt(line);
+      int innerSize;
+      String [] tokens;
+      for (int i = 0; i<outSize; i++) {
+          ArrayList<Integer> list = new ArrayList<Integer>();
+          line = reader.readLine();
+          innerSize = Integer.parseInt(line);
+          line = reader.readLine();
+          tokens = line.split(" ");
+          for (int j = 0; j<innerSize;j++)
+              list.add(Integer.parseInt(tokens[j]));
+          _termToDocs.add(list);
+      }
+      } catch (IOException e) {
+      }
+      /*      for (int i = 0; i<_termToDocs.size();i++) {
+          System.out.println(_termToDocs.get(i).size());
+          for (int j = 0; j<_termToDocs.get(i).size();j++)
+              System.out.print(Integer.toString(_termToDocs.get(i).get(j))+" ");
+          System.out.println();
+          }*/
+  }
+  @Override
+  public void appendToFile(BufferedWriter out) {
+      try {
+      out.write(Integer.toString(_termToDocs.size())+"\n");
+      for (int i = 0; i<_termToDocs.size();i++) {
+          out.write(Integer.toString(_termToDocs.get(i).size())+"\n");
+          for (int j = 0; j<_termToDocs.get(i).size();j++) {
+              out.write(Integer.toString(_termToDocs.get(i).get(j))+" ");
+          }
+          out.newLine();
+          out.flush();
+      }
+      } catch (IOException e) {
+      }
+  }
+  @Override 
+  public void removeStopwordsInfo(int idx) {
+      _termToDocs.get(idx).clear();
+  }
+  @Override
   public String getIndexFilePath () {
       return _options._indexPrefix + "/corpus_invertedDoconly.idx";
   }
   @Override
   public void updateStatistics(ArrayList<Integer> tokens, Set<Integer> uniques,int did,int offset) {
     for (int idx : tokens) {
-      uniques.add(idx);
-      _termCorpusFrequency.put(idx, _termCorpusFrequency.get(idx) + 1);
+        if (idx>=0) {
+            uniques.add(idx);
+            _termToDocs.get(idx).set(0,_termToDocs.get(idx).get(0)+1);
+        }
+      //      _termCorpusFrequency.set(idx, _termCorpusFrequency.get(idx) + 1);
       ++_totalTermFrequency;
     }
   }
@@ -62,49 +111,15 @@ public class IndexerInvertedDoconly extends IndexerInverted implements Serializa
       if (_dictionary.containsKey(token)) {
           idx = _dictionary.get(token);
       } else {
-          idx = _docID++;
+          idx = _termNum++;
           //          _terms.add(token);
           _dictionary.put(token, idx);
-          _termCorpusFrequency.put(idx, 0);
-          _termToDocs.put(idx, new ArrayList<Integer>());
+          //  _termCorpusFrequency.add(idx, 0);
+          _termToDocs.add(idx, new ArrayList<Integer>());
+          _termToDocs.get(idx).add(0,0);
       }
       tokens.add(idx);
   }
-
-    //  public abstract void loadIndex() throws IOException, ClassNotFoundException;
-    //    @Override
-  public void loadIndex()  {
-      try {
-      String indexFile = getIndexFilePath();
-      System.out.println("Load index from: " + indexFile);
-      ObjectInputStream reader =
-          new ObjectInputStream(new FileInputStream(indexFile));
-      IndexerInvertedDoconly loaded = null;
-      try {
-          loaded = (IndexerInvertedDoconly) reader.readObject();
-      } catch (ClassNotFoundException e) {
-      }
-
-      this._documents = loaded._documents;
-
-      // Compute numDocs and totalTermFrequency b/c Indexer is not serializable.
-      this._numDocs = _documents.size();
-      for (Integer freq : loaded._termCorpusFrequency.values()) {
-          this._totalTermFrequency += freq;
-      }
-      this._dictionary = loaded._dictionary;
-      //this._terms = loaded._terms;
-      this._termCorpusFrequency = loaded._termCorpusFrequency;
-      this._termToDocs = loaded._termToDocs;
-      reader.close();
-
-      System.out.println(Integer.toString(_numDocs) + " documents loaded " +
-                         "with " + Long.toString(_totalTermFrequency) + " terms!");
-      //      output();
-      } catch (IOException e) {
-      }
-  }
-
 
 
   @Override
@@ -126,7 +141,8 @@ public class IndexerInvertedDoconly extends IndexerInverted implements Serializa
       if (!_dictionary.containsKey(term))
         return 0;
     Integer idx = _dictionary.get(term);
-    return _termToDocs.get(idx).size();
+    if (idx<0) return 0;
+    return _termToDocs.get(idx).size()-1;
   }
 
   @Override
@@ -134,7 +150,8 @@ public class IndexerInvertedDoconly extends IndexerInverted implements Serializa
     if (!_dictionary.containsKey(term))
         return 0;
     Integer idx = _dictionary.get(term);
-    return _termCorpusFrequency.get(idx);
+    if (idx <0) return 0;
+    return _termToDocs.get(idx).get(0);
   }
 
   @Override

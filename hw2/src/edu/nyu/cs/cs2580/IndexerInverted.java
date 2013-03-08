@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.ArrayList;
+import java.util.Iterator;
 import edu.nyu.cs.cs2580.SearchEngine.Options;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -16,13 +17,15 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
 import java.io.IOException;
 
 public abstract class IndexerInverted extends Indexer implements Serializable {
     private static final long serialVersionUID = 967111905740085030L;
     protected Map<String, Integer> _dictionary = new HashMap<String, Integer>();
     protected ArrayList<Document> _documents = new ArrayList<Document>();
-    protected int _docID = 0;
+    protected int _termNum = 0;
     public IndexerInverted() {}
     public IndexerInverted(Options options) {
         super(options);
@@ -36,6 +39,57 @@ public abstract class IndexerInverted extends Indexer implements Serializable {
     public abstract  void addToken(String token,ArrayList<Integer> tokens);
     //output info for debug
     public abstract void output() ;
+    public abstract void removeStopwordsInfo(int idx) ;
+    public abstract void appendToFile(BufferedWriter out) ;
+    public abstract void loadAdditional(BufferedReader out) ;
+    private void writeToFile () {
+        try{
+            // Create file 
+            FileWriter fstream = new FileWriter(getIndexFilePath());
+            BufferedWriter out = new BufferedWriter(fstream);
+            out.write(Integer.toString(_numDocs)+" "+
+                      Long.toString(_totalTermFrequency)+" "+
+                      Integer.toString(_termNum)+"\n");
+            out.write(Integer.toString(_documents.size())+"\n");
+            for (Document doc : _documents) {
+                out.write(((DocumentIndexed) doc).toString());
+            }
+            out.flush();
+            out.write(Integer.toString(_dictionary.size())+"\n");
+            Iterator it = _dictionary.entrySet().iterator();
+            while (it.hasNext()) {
+                Map.Entry pairs = (Map.Entry)it.next();
+                out.write((String)pairs.getKey() + " " + 
+                          Integer.toString((Integer)pairs.getValue())+"\n");
+            }
+            out.flush();
+            appendToFile(out);
+            //Close the output stream
+            out.close();
+        }catch (Exception e){
+            System.err.println("Error: " + e.getMessage());
+        }
+    }
+    private void filterStopwords(String term) {
+        System.out.println("rm stop word:"+term);
+        int idx = _dictionary.get(term);
+        removeStopwordsInfo(idx);
+        if (idx == 0)
+            idx = -1;
+        _dictionary.put(term,-idx);
+    }
+    private void detectStopWords () {
+        Iterator it = _dictionary.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry pairs = (Map.Entry)it.next();
+            String term= (String)pairs.getKey();
+            int ctf = corpusTermFrequency(term);
+            int cdf = corpusDocFrequencyByTerm(term);
+            if (((double)cdf/(double)_numDocs)>0.9) {
+                filterStopwords(term);
+            }
+        }
+    }
 
     @Override
     public void constructIndex () throws IOException {
@@ -63,16 +117,17 @@ public abstract class IndexerInverted extends Indexer implements Serializable {
         System.out.println(
                            "Indexed " + Integer.toString(_numDocs) + " docs with " +
                            Long.toString(_totalTermFrequency) + " terms, @"+
-                           Integer.toString(_docID)+" unique terms.");
+                           Integer.toString(_termNum)+" unique terms.");
 
         String indexFile = getIndexFilePath();
 
         System.out.println("Store index to: " + indexFile);
-        ObjectOutputStream writer =
+        /*        ObjectOutputStream writer =
             new ObjectOutputStream(new FileOutputStream(indexFile));
         System.out.println("here?");
         writer.writeObject(this);
-        writer.close();
+        writer.close();*/
+        writeToFile();
         output();
     }
 
@@ -98,6 +153,7 @@ public abstract class IndexerInverted extends Indexer implements Serializable {
       updateStatistics(titleTokens, uniqueTerms,did,0);
       updateStatistics(bodyTokens, uniqueTerms,did,titleTokens.size());
       if (_documents.size()%1000==0 ) {
+          detectStopWords();
           System.out.println(Integer.toString(_documents.size()/1000)+"000files");
       }
       this.updateUniqueTerms(uniqueTerms,did);
@@ -168,6 +224,58 @@ public abstract class IndexerInverted extends Indexer implements Serializable {
   }
     //    @Override 
   public void loadIndex() {
+      try {
+      FileReader filereader = new FileReader(getIndexFilePath());
+      BufferedReader bufferedreader = new BufferedReader(filereader);
+      String line = bufferedreader.readLine();
+      String [] firstThree = line.split(" ");
+      _numDocs = Integer.parseInt(firstThree[0]);
+      _totalTermFrequency = Long.parseLong(firstThree[1]);
+      _termNum = Integer.parseInt(firstThree[2]);
+      //      System.out.println(_numDocs);
+      //      System.out.println(_totalTermFrequency);
+      //      System.out.println(_termNum);
+
+      line = bufferedreader.readLine();
+      int dsize = Integer.parseInt(line);
+      String title,url;
+      int docid,numview;
+      Float pagerank;
+      for (int i = 0; i<dsize;i++) {
+          title = bufferedreader.readLine();
+          url = bufferedreader.readLine();
+          line = bufferedreader.readLine();
+          firstThree = line.split(" ");
+          docid = Integer.parseInt(firstThree[0]);
+          pagerank = new Float(firstThree[1]);
+          numview = Integer.parseInt(firstThree[2]);
+          DocumentIndexed doc = new DocumentIndexed(docid,this);
+          doc.setTitle(title);
+          doc.setUrl(url);
+          doc.setPageRank(pagerank);
+          doc.setNumViews(numview);
+          _documents.add(doc);
+          //          System.out.println(doc.toString());
+      }
+      line = bufferedreader.readLine();
+      dsize = Integer.parseInt(line);
+      for (int i = 0; i<dsize;i++) {
+          line = bufferedreader.readLine();
+          firstThree= line.split(" ");
+          _dictionary.put(firstThree[0],Integer.parseInt(firstThree[1]));
+      }
+      /*      Iterator it = _dictionary.entrySet().iterator();
+      while (it.hasNext()) {
+          Map.Entry pairs = (Map.Entry)it.next();
+          System.out.println((String)pairs.getKey() + " " + 
+                    Integer.toString((Integer)pairs.getValue()));
+                    }*/
+      loadAdditional(bufferedreader);
+      bufferedreader.close();
+      } catch (IOException e) {
+          System.out.println("error");
+      }
+      output();
       //      throw new ClassNotFoundException("this should be override");
   }
   public int documentTermFrequency(String s,String s1) {

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.io.IOException;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
@@ -60,6 +61,19 @@ private class DocOccPair implements Serializable{
   }
 
   @Override
+  public void loadAdditional (BufferedReader reader) {
+      System.out.println("to be implemented!");
+  }
+  @Override
+  public void appendToFile(BufferedWriter out) {
+      System.out.println("to be implemented!!!");
+  }
+  @Override
+  public void removeStopwordsInfo(int idx) {
+      System.out.println("to be implemented!!!");
+  }
+
+  @Override
   public String getIndexFilePath() {
       return _options._indexPrefix + "/corpus_invertedOccurrence.idx";
   }
@@ -92,7 +106,7 @@ private class DocOccPair implements Serializable{
       if (_dictionary.containsKey(token)) {
         idx = _dictionary.get(token);
       } else {
-        idx = _docID++;
+        idx = _termNum++;
         //        _terms.add(token);
         _dictionary.put(token, idx);
         _termToOccus.put(idx,new ArrayList<DocOccPair>());

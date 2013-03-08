@@ -161,7 +161,7 @@ public class SearchEngine {
     System.out.println(
         "Listening on port: " + Integer.toString(SearchEngine.PORT));
   }
-  
+
   public static void main(String[] args) {
     try {
       SearchEngine.parseCommandLine(args);
