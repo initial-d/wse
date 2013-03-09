@@ -25,11 +25,13 @@ public class Query {
     if (_query == null) {
       return;
     }
-    Scanner s = new Scanner(_query);
-    while (s.hasNext()) {
-      _tokens.add(s.next());
+    System.out.println("process query?"+_query);
+    String [] tokens = _query.split("[+]");
+    System.out.println("Query:"+tokens.length);
+    for (String token:tokens) {
+        System.out.println("Query:"+token);
+        _tokens.add(token);
     }
-    s.close();
   }
   public Vector<String> getTokens () {
       return _tokens;

@@ -31,6 +31,7 @@ public class IndexerInvertedDoconly extends IndexerInverted implements Serializa
 
 
     //  private ArrayList<Integer> _termCorpusFrequency = new ArrayList<Integer>();
+    // _termToDocs[0][0] is term[0]'s frequency things after 0 are docs
   private ArrayList<ArrayList<Integer> > _termToDocs =
       new ArrayList<ArrayList<Integer> > ();
 
@@ -128,25 +129,58 @@ public class IndexerInvertedDoconly extends IndexerInverted implements Serializa
    */
   private int getNextDoc (Integer idx, int did) {
       ArrayList<Integer> ttd = _termToDocs.get(idx);
-      int ret = Collections.binarySearch(ttd,did);
-      if (ret>=0) return did;
-      else ret = -ret-1;
-      return ttd.get(ret);
+      int head = 1;
+      int tail = ttd.size()-1;
+      int mid;
+      while (head<=tail) {
+          System.out.println("head+tail:"+head+"+"+tail);
+          if (tail - head<5) {
+              for (int i = head;i<=tail;i++)
+                  if (ttd.get(i)>=did)
+                      return ttd.get(i);
+              return -1;
+          }
+          mid = (head+tail)/2;
+          if (ttd.get(mid)==did) {
+              return did;
+          }
+
+          if (ttd.get(mid)<did) {
+              head = mid+1;
+          } else {
+              tail = mid;
+          }
+      }
+      return -1;
   }
     //  @Override
+  private void outDocs(int idx) {
+      ArrayList<Integer> docs = _termToDocs.get(idx);
+      for (int i = 0; i<docs.size();i++)
+          System.out.print(docs.get(i)+" ");
+      System.out.println();
+  }
   public Document nextDoc(Query query, int docid) {
-      Vector<Integer> idxs = convertTermsToIdx( query.getTokens());
+      System.out.println("doconly nextdoc");
+      Vector<Integer> idxs = convertTermsToIdx(query.getTokens());
+
       for (int i = 0; i<idxs.size();i++) {
           if (idxs.get(i)==null)
               return null;
+          System.out.println(idxs.get(i));
+          outDocs(idxs.get(i));
       }
+      int did;
+      int searchID = docid+1;
       int min = _documents.size();
       int max = -1;
-      int did;
-      int searchID = docid;
-      while (min!=max&&min<_documents.size()) {
+
+      while (min!=max&&min>=0) {
+          min = _documents.size();
+          max = -1;
           for (int i = 0; i<idxs.size();i++) {
               did = getNextDoc(idxs.get(i),searchID);
+              System.out.println("Searchon:"+idxs.get(i)+" "+searchID+" "+did);
               if (did>max)
                   max = did;
               if (did<min)
@@ -154,7 +188,8 @@ public class IndexerInvertedDoconly extends IndexerInverted implements Serializa
           }
           searchID = max;
       }
-      if (min == _documents.size())
+      System.out.println(min+" "+max);
+      if (min == -1)
           return null;
       return _documents.get(min);
   }

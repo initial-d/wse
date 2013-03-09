@@ -129,7 +129,7 @@ public abstract class IndexerInverted extends Indexer implements Serializable {
         writer.writeObject(this);
         writer.close();*/
         writeToFile();
-        output();
+        //        output();
     }
 
     private void handleFile(String fileName) throws IOException{
@@ -276,7 +276,7 @@ public abstract class IndexerInverted extends Indexer implements Serializable {
       } catch (IOException e) {
           System.out.println("error");
       }
-      output();
+      //      output();
       //      throw new ClassNotFoundException("this should be override");
   }
   public int documentTermFrequency(String s,String s1) {
@@ -306,7 +306,7 @@ public abstract class IndexerInverted extends Indexer implements Serializable {
   public Vector<Integer> convertTermsToIdx (Vector<String> terms) {
       Vector<Integer> ret = new Vector<Integer>();
       for (String term: terms) {
-          ret.add(_dictionary.get(term));
+          ret.add(_dictionary.get(HTMLParser.stemm(term)));
       }
       return ret;
   }
