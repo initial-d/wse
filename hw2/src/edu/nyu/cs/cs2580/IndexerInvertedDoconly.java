@@ -9,7 +9,8 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.Iterator;
 import java.util.ArrayList;
-//import java.util.Vector;
+import java.util.Vector;
+import java.util.Collections;
 import edu.nyu.cs.cs2580.SearchEngine.Options;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -58,12 +59,6 @@ public class IndexerInvertedDoconly extends IndexerInverted implements Serializa
       }
       } catch (IOException e) {
       }
-      /*      for (int i = 0; i<_termToDocs.size();i++) {
-          System.out.println(_termToDocs.get(i).size());
-          for (int j = 0; j<_termToDocs.get(i).size();j++)
-              System.out.print(Integer.toString(_termToDocs.get(i).get(j))+" ");
-          System.out.println();
-          }*/
   }
   @Override
   public void appendToFile(BufferedWriter out) {
@@ -131,10 +126,39 @@ public class IndexerInvertedDoconly extends IndexerInverted implements Serializa
   /**
    * In HW2, you should be using {@link DocumentIndexed}
    */
+  private int getNextDoc (Integer idx, int did) {
+      ArrayList<Integer> ttd = _termToDocs.get(idx);
+      int ret = Collections.binarySearch(ttd,did);
+      if (ret>=0) return did;
+      else ret = -ret-1;
+      return ttd.get(ret);
+  }
     //  @Override
   public Document nextDoc(Query query, int docid) {
-    return null;
+      Vector<Integer> idxs = convertTermsToIdx( query.getTokens());
+      for (int i = 0; i<idxs.size();i++) {
+          if (idxs.get(i)==null)
+              return null;
+      }
+      int min = _documents.size();
+      int max = -1;
+      int did;
+      int searchID = docid;
+      while (min!=max&&min<_documents.size()) {
+          for (int i = 0; i<idxs.size();i++) {
+              did = getNextDoc(idxs.get(i),searchID);
+              if (did>max)
+                  max = did;
+              if (did<min)
+                  min = did;
+          }
+          searchID = max;
+      }
+      if (min == _documents.size())
+          return null;
+      return _documents.get(min);
   }
+
 
   @Override
   public int corpusDocFrequencyByTerm(String term) {

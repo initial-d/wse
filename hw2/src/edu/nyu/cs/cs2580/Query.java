@@ -31,4 +31,7 @@ public class Query {
     }
     s.close();
   }
+  public Vector<String> getTokens () {
+      return _tokens;
+  }
 }

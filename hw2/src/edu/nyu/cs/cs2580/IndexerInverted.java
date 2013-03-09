@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.ArrayList;
+import java.util.Vector;
 import java.util.Iterator;
 import edu.nyu.cs.cs2580.SearchEngine.Options;
 import java.io.BufferedReader;
@@ -302,5 +303,11 @@ public abstract class IndexerInverted extends Indexer implements Serializable {
        //       throw new ClassNotFoundException("this should be override");
        return null;
   }
-
+  public Vector<Integer> convertTermsToIdx (Vector<String> terms) {
+      Vector<Integer> ret = new Vector<Integer>();
+      for (String term: terms) {
+          ret.add(_dictionary.get(term));
+      }
+      return ret;
+  }
 }
