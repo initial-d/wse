@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.ArrayList;
+import java.util.Vector;
 import java.util.Iterator;
 import java.io.IOException;
 import java.io.BufferedReader;
@@ -26,6 +27,8 @@ import java.lang.ref.WeakReference;
  */
 public class IndexerInvertedOccurrence extends IndexerInverted implements Serializable{
   private int tmpFileCount = 0;
+  private int currentLoaded = -1;
+  private static final int seperateLength = 100000;
   private static final long serialVersionUID = 1057111905740085030L;
     // _termToOccus[0] info for term[0]
     // _termToOccus[0][0] info for term[0] at a doc
@@ -45,24 +48,36 @@ public class IndexerInvertedOccurrence extends IndexerInverted implements Serial
   @Override
   public void loadAdditional (BufferedReader reader) {
       try {
+      System.out.println("load additional!");
       String [] tokens;
       String line = reader.readLine();
       int size = Integer.parseInt(line);
       line = reader.readLine();
       tokens = line.split(" ");
+      System.out.println("term doc freq loading!");
       for (int i = 0; i<size; i++) {
           _termDocFreq.add(Integer.parseInt(tokens[i]));
       }
-
+      System.out.println("term doc freq loaded!");
       line = reader.readLine();
       size = Integer.parseInt(line);
       line = reader.readLine();
       tokens = line.split(" ");
+      System.out.println("term corpus freq loading!");
       for (int i = 0; i<size; i++) {
           _termCorFreq.add(Integer.parseInt(tokens[i]));
       }
+      System.out.println("term corpus freq loaded!");
       line = reader.readLine();
       tmpFileCount = Integer.parseInt(line);
+
+      for (int i = 0; i<size;i++) {
+          _termToOccus.add(new ArrayList<ArrayList<Integer> >());
+      }
+      System.out.println(tmpFileCount);
+      for (int i = 0;i<size;i+=1000) {
+          loadTermI(i);
+      }
       } catch (IOException e) {
       }
   }
@@ -71,7 +86,7 @@ public class IndexerInvertedOccurrence extends IndexerInverted implements Serial
   public void appendToFile(BufferedWriter out) {
       try {
       flushToFile();
-      //      mergeTmps();
+      mergeTmps();
       out.write(Integer.toString(_termDocFreq.size())+"\n");
       for (int i = 0; i<_termDocFreq.size();i++)
           out.write(Integer.toString(_termDocFreq.get(i))+" ");
@@ -89,36 +104,109 @@ public class IndexerInvertedOccurrence extends IndexerInverted implements Serial
       _termToOccus.get(idx).clear();
       //      System.out.println("to be implemented!!!");
   }
+  private void loadTermI (int i) throws IOException{
+      System.out.println("load term:"+i);
+      clearMemory();
+      String fileName = _options._indexPrefix + "/" 
+          + Integer.toString(i/seperateLength+1) + "000terms.idx";
+      BufferedReader reader = new BufferedReader ( new FileReader(fileName));
+      for (int j = 0; j< i%seperateLength; j++ )
+          reader.readLine();
+      ArrayList<ArrayList<Integer> > list = new ArrayList<ArrayList<Integer> >();
+      readDocsAndPosFromFile(reader,list);
+      /*      String fileName="";
+      fileName = _options._indexPrefix+"/"+Integer.toString(i) + "000s.tmp";
+      FileReader filereader = new FileReader(fileName);
+      BufferedReader bufferedreader = new BufferedReader(filereader);
+      String line = bufferedreader.readLine();
+      String[] poss;
+      int outerSize = Integer.parseInt(line);
+      int docSize;
+      int posSize;
+      for (int terms = 0; terms<outerSize;terms++) {
+          line = bufferedreader.readLine();
+          docSize = Integer.parseInt(line);
+          for (int docs = 0; docs<docSize;docs ++) {
+              ArrayList<Integer> docInfo = new ArrayList<Integer>();
+              line = bufferedreader.readLine();
+              posSize = Integer.parseInt(line);
+              line = bufferedreader.readLine();
+              poss = line.split(" ");
+              for (int posI = 0; posI<posSize;posI++) {
+                  docInfo.add(Integer.parseInt(poss[posI]));
+              }
+              _termToOccus.get(terms).add(docInfo);
+          }
+          }*/
+      reader.close();
+      gc();
+  }
+  private void writeDocsAndPosToFile (BufferedWriter writer,
+                                      ArrayList<ArrayList<Integer> >list) 
+    throws IOException{
+      writer.write(Integer.toString(list.size())+" ");
+      for (int i = 0; i<list.size();i++) {
+          writer.write(Integer.toString(list.get(i).size()) + " ");
+          for (int j = 0; j<list.get(i).size(); j++) {
+              writer.write(Integer.toString(list.get(i).get(j)) + " ");
+          }
+      }
+      writer.newLine();
+  }
+  private void readDocsAndPosFromFile(BufferedReader reader,
+                                      ArrayList<ArrayList<Integer> > list) 
+    throws IOException {
+      String line = reader.readLine();
+      if (line == null) return;
+      Scanner s = new Scanner(line);
+      int s1 = s.nextInt ();
+      int s2;
+      //System.out.println(s1);
+      for (int i = 0; i<s1; i++) {
+          ArrayList<Integer> docInfo = new ArrayList<Integer>();
+          s2 = s.nextInt();
+          //  System.out.println(s2);
+          for (int j = 0; j<s2; j++) {
+              int x = s.nextInt();
+              docInfo.add(x);
+              //              System.out.print(x);
+              //              System.out.print(" ");
+          }
+          list.add(docInfo);
+          //          System.out.println();
+      }
+      //      System.out.println("read end");
+  }
+
   private void mergeTmps() throws IOException {
       System.out.println("merging.....");
-      String fileName="";
+      Vector<BufferedReader> reader = new Vector<BufferedReader> ();
       for (int i = 1; i<=tmpFileCount;i++) {
-          System.out.println(i);
-          fileName = _options._indexPrefix+"/"+Integer.toString(i) + "000s.tmp";
-          FileReader filereader = new FileReader(fileName);
-          BufferedReader bufferedreader = new BufferedReader(filereader);
-          String line = bufferedreader.readLine();
-          String[] poss;
-          int outerSize = Integer.parseInt(line);
-          int docSize;
-          int posSize;
-          for (int terms = 0; terms<outerSize;terms++) {
-              line = bufferedreader.readLine();
-              docSize = Integer.parseInt(line);
-              for (int docs = 0; docs<docSize;docs ++) {
-                  ArrayList<Integer> docInfo = new ArrayList<Integer>();
-                  line = bufferedreader.readLine();
-                  posSize = Integer.parseInt(line);
-                  line = bufferedreader.readLine();
-                  poss = line.split(" ");
-                  for (int posI = 0; posI<posSize;posI++) {
-                      docInfo.add(Integer.parseInt(poss[posI]));
-                  }
-                  _termToOccus.get(terms).add(docInfo);
-              }
+          String fileName = _options._indexPrefix + "/" +
+              Integer.toString(i) +"000s.tmp";
+          reader.add(new BufferedReader(new FileReader(fileName)));
+          reader.get(reader.size()-1).readLine();
+      }
+      BufferedWriter writer=null;
+      for (int i = 0; i<_termToOccus.size(); i++) {
+          if (i%seperateLength == 0) {
+              if (writer !=null) writer.close();
+              String fileName = _options._indexPrefix + "/" 
+                  + Integer.toString(i/seperateLength+1) + "000terms.idx";
+              writer = new BufferedWriter ( new FileWriter(fileName));
           }
-          bufferedreader.close();
-          gc();
+          ArrayList<ArrayList<Integer> > tto = new ArrayList<ArrayList<Integer> > ();
+          for (int j = 0; j<tmpFileCount;j++)
+              readDocsAndPosFromFile(reader.get(j),tto);
+          writeDocsAndPosToFile(writer,tto);
+      }
+      writer.close();
+      for (int i = 0; i<tmpFileCount;i++)
+          reader.get(i).close();
+  }
+  private void clearMemory() {
+      for (int i = 0; i<_termToOccus.size();i++) {
+          _termToOccus.get(i).clear();
       }
   }
   private void flushToFile() throws IOException{
@@ -130,19 +218,18 @@ public class IndexerInvertedOccurrence extends IndexerInverted implements Serial
 
       out.write(Integer.toString(_termToOccus.size())+"\n");
       for (int i = 0; i<_termToOccus.size();i++) {
-          out.write(Integer.toString(_termToOccus.get(i).size())+"\n");
+          writeDocsAndPosToFile(out,_termToOccus.get(i));
+          out.flush();
+          /*          out.write(Integer.toString(_termToOccus.get(i).size())+"\n");
           for (int j = 0; j<_termToOccus.get(i).size();j++) {
               out.write(Integer.toString(_termToOccus.get(i).get(j).size())+"\n");
               for (int p = 0; p<_termToOccus.get(i).get(j).size();p++)
                   out.write(Integer.toString(_termToOccus.get(i).get(j).get(p))+" ");
-              out.newLine();
-          }
-          out.flush();
-      }
-      for (int i = 0; i<_termToOccus.size();i++) {
-          _termToOccus.get(i).clear();
+                  out.newLine();*/
+
       }
       out.close();
+      clearMemory();
       gc();
   }
   @Override
@@ -213,6 +300,36 @@ public class IndexerInvertedOccurrence extends IndexerInverted implements Serial
    * In HW2, you should be using {@link DocumentIndexed}.
    */
   public Document nextDoc(Query query, int docid) {
+      /*      Vector<Integer> idxs = convertTermsToIdx(query.getTokens());
+
+      for (int i = 0; i<idxs.size();i++) {
+          if (idxs.get(i)==null)
+              return null;
+          //  System.out.println(idxs.get(i));
+          //          outDocs(idxs.get(i));
+      }
+      int did;
+      int searchID = docid+1;
+      int min = _documents.size();
+      int max = -1;
+
+      while (min!=max&&min>=0) {
+          min = _documents.size();
+          max = -1;
+          for (int i = 0; i<idxs.size();i++) {
+              did = getNextDoc(idxs.get(i),searchID);
+              //              System.out.println("Searchon:"+idxs.get(i)+" "+searchID+" "+did);
+              if (did>max)
+                  max = did;
+              if (did<min)
+                  min = did;
+          }
+          searchID = max;
+      }
+      //      System.out.println(min+" "+max);
+      if (min == -1)
+          return null;
+          return _documents.get(min);*/
     return null;
   }
 

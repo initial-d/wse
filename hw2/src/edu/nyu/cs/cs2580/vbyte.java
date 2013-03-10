@@ -5,23 +5,23 @@ import java.util.Vector;
 
 
 public class vByte {
-  public vByte(){
-		
-	}
-  private LinkedList<Byte> al=new LinkedList<Byte>();
+    public vByte(){
+
+    }
+    private LinkedList<Byte> al=new LinkedList<Byte>();
     private ArrayList<Integer> intal =new ArrayList<Integer>();
     public int isize(){
-    	return intal.size();
+        return intal.size();
     }
     public int bsize(){
-    	return al.size();
+        return al.size();
     }
     public void push(int i){
-    	intal.add(i);
-    	update(i);
+        intal.add(i);
+        update(i);
     }
     private void update(Integer i){
-    	if(i>=1<<21){
+        if(i>=1<<21){
             al.add((byte)(i>>21));
         }
         i&=(1<<21)-1;
@@ -61,7 +61,7 @@ public class vByte {
         return (ArrayList<Integer>) intal.clone();
     }
     public Vector<Integer> getLists(){
-    	return new Vector<Integer>(intal);
+        return new Vector<Integer>(intal);
     }
     public vByte(LinkedList<Byte> bal){
         for(int i=0;i<bal.size();i++){

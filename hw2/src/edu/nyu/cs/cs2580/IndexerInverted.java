@@ -154,7 +154,7 @@ public abstract class IndexerInverted extends Indexer implements Serializable {
       updateStatistics(titleTokens, uniqueTerms,did,0);
       updateStatistics(bodyTokens, uniqueTerms,did,titleTokens.size());
       if (_documents.size()%1000==0 ) {
-          detectStopWords();
+          //          detectStopWords();
           System.out.println(Integer.toString(_documents.size()/1000)+"000files");
       }
       this.updateUniqueTerms(uniqueTerms,did);
@@ -258,6 +258,7 @@ public abstract class IndexerInverted extends Indexer implements Serializable {
           _documents.add(doc);
           //          System.out.println(doc.toString());
       }
+      System.out.println("document loaded!");
       line = bufferedreader.readLine();
       dsize = Integer.parseInt(line);
       for (int i = 0; i<dsize;i++) {
@@ -265,6 +266,7 @@ public abstract class IndexerInverted extends Indexer implements Serializable {
           firstThree= line.split(" ");
           _dictionary.put(firstThree[0],Integer.parseInt(firstThree[1]));
       }
+      System.out.println("dictionary loaded!");
       /*      Iterator it = _dictionary.entrySet().iterator();
       while (it.hasNext()) {
           Map.Entry pairs = (Map.Entry)it.next();

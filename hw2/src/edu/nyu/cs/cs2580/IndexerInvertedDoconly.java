@@ -128,12 +128,13 @@ public class IndexerInvertedDoconly extends IndexerInverted implements Serializa
    * In HW2, you should be using {@link DocumentIndexed}
    */
   private int getNextDoc (Integer idx, int did) {
+      // binary search on term[idx]'s first document whose document >= did
       ArrayList<Integer> ttd = _termToDocs.get(idx);
       int head = 1;
       int tail = ttd.size()-1;
       int mid;
       while (head<=tail) {
-          System.out.println("head+tail:"+head+"+"+tail);
+          //          System.out.println("head+tail:"+head+"+"+tail);
           if (tail - head<5) {
               for (int i = head;i<=tail;i++)
                   if (ttd.get(i)>=did)
@@ -161,14 +162,14 @@ public class IndexerInvertedDoconly extends IndexerInverted implements Serializa
       System.out.println();
   }
   public Document nextDoc(Query query, int docid) {
-      System.out.println("doconly nextdoc");
+      //      System.out.println("doconly nextdoc");
       Vector<Integer> idxs = convertTermsToIdx(query.getTokens());
 
       for (int i = 0; i<idxs.size();i++) {
           if (idxs.get(i)==null)
               return null;
-          System.out.println(idxs.get(i));
-          outDocs(idxs.get(i));
+          //  System.out.println(idxs.get(i));
+          //          outDocs(idxs.get(i));
       }
       int did;
       int searchID = docid+1;
@@ -180,7 +181,7 @@ public class IndexerInvertedDoconly extends IndexerInverted implements Serializa
           max = -1;
           for (int i = 0; i<idxs.size();i++) {
               did = getNextDoc(idxs.get(i),searchID);
-              System.out.println("Searchon:"+idxs.get(i)+" "+searchID+" "+did);
+              //              System.out.println("Searchon:"+idxs.get(i)+" "+searchID+" "+did);
               if (did>max)
                   max = did;
               if (did<min)
@@ -188,7 +189,7 @@ public class IndexerInvertedDoconly extends IndexerInverted implements Serializa
           }
           searchID = max;
       }
-      System.out.println(min+" "+max);
+      //      System.out.println(min+" "+max);
       if (min == -1)
           return null;
       return _documents.get(min);
