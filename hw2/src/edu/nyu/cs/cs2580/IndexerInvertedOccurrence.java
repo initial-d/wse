@@ -28,7 +28,7 @@ import java.lang.ref.WeakReference;
 public class IndexerInvertedOccurrence extends IndexerInverted implements Serializable{
   private int tmpFileCount = 0;
   private int currentLoaded = -1;
-  private static final int seperateLength = 100000;
+  private static final int seperateNum = 20;
   private static final long serialVersionUID = 1057111905740085030L;
     // _termToOccus[0] info for term[0]
     // _termToOccus[0][0] info for term[0] at a doc
@@ -75,7 +75,7 @@ public class IndexerInvertedOccurrence extends IndexerInverted implements Serial
           _termToOccus.add(new ArrayList<ArrayList<Integer> >());
       }
       System.out.println(tmpFileCount);
-      for (int i = 0;i<size;i+=1000) {
+      for (int i = size;i>0;i--) {
           loadTermI(i);
       }
       } catch (IOException e) {
@@ -108,9 +108,9 @@ public class IndexerInvertedOccurrence extends IndexerInverted implements Serial
       System.out.println("load term:"+i);
       clearMemory();
       String fileName = _options._indexPrefix + "/" 
-          + Integer.toString(i/seperateLength+1) + "000terms.idx";
+          + Integer.toString(i%seperateNum+1) + "terms.idx";
       BufferedReader reader = new BufferedReader ( new FileReader(fileName));
-      for (int j = 0; j< i%seperateLength; j++ )
+      for (int j = i%seperateNum; j< i; j+=seperateNum )
           reader.readLine();
       ArrayList<ArrayList<Integer> > list = new ArrayList<ArrayList<Integer> >();
       readDocsAndPosFromFile(reader,list);
@@ -161,19 +161,20 @@ public class IndexerInvertedOccurrence extends IndexerInverted implements Serial
       Scanner s = new Scanner(line);
       int s1 = s.nextInt ();
       int s2;
-      //System.out.println(s1);
+      //      System.out.print(s1);
+      //      System.out.print(" ");
       for (int i = 0; i<s1; i++) {
           ArrayList<Integer> docInfo = new ArrayList<Integer>();
           s2 = s.nextInt();
-          //  System.out.println(s2);
+          //  System.out.print(s2);
+          //          System.out.print(" ");
           for (int j = 0; j<s2; j++) {
               int x = s.nextInt();
               docInfo.add(x);
-              //              System.out.print(x);
+              //  System.out.print(x);
               //              System.out.print(" ");
           }
           list.add(docInfo);
-          //          System.out.println();
       }
       //      System.out.println("read end");
   }
@@ -187,20 +188,22 @@ public class IndexerInvertedOccurrence extends IndexerInverted implements Serial
           reader.add(new BufferedReader(new FileReader(fileName)));
           reader.get(reader.size()-1).readLine();
       }
-      BufferedWriter writer=null;
-      for (int i = 0; i<_termToOccus.size(); i++) {
-          if (i%seperateLength == 0) {
-              if (writer !=null) writer.close();
-              String fileName = _options._indexPrefix + "/" 
-                  + Integer.toString(i/seperateLength+1) + "000terms.idx";
-              writer = new BufferedWriter ( new FileWriter(fileName));
-          }
+      Vector<BufferedWriter> writers = new Vector<BufferedWriter> ();
+      for (int i = 0; i<seperateNum; i++) {
+          String fileName = _options._indexPrefix + "/" 
+              + Integer.toString(i+1) + "terms.idx";
+          writers.add(new BufferedWriter ( new FileWriter(fileName)));
+      }
+      for (int i = 0; i<_termToOccus.size();i++) {
+          if (i%1000 == 0) System.out.println(i+"files");
           ArrayList<ArrayList<Integer> > tto = new ArrayList<ArrayList<Integer> > ();
           for (int j = 0; j<tmpFileCount;j++)
               readDocsAndPosFromFile(reader.get(j),tto);
-          writeDocsAndPosToFile(writer,tto);
+          writeDocsAndPosToFile(writers.get(i%seperateNum),tto);
       }
-      writer.close();
+
+      for (int i = 0; i<seperateNum;i++)
+          writers.get(i).close();
       for (int i = 0; i<tmpFileCount;i++)
           reader.get(i).close();
   }
