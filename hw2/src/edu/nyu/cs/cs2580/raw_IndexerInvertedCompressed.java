@@ -26,7 +26,7 @@ import edu.nyu.cs.cs2580.SearchEngine.Options;
  * @CS2580: Implement this class for HW2.
  */
 /****public class raw_IndexerInvertedCompressed extends Indexer implements Serializable{
-  
+
 
 	private static final long serialVersionUID = 4574090044401455221L;
 	  transient private Map<String, Integer> _dictionary = new HashMap<String, Integer>();
@@ -36,7 +36,7 @@ import edu.nyu.cs.cs2580.SearchEngine.Options;
 	        new HashMap<Integer, Vector<DocOccPair> > ();
 	  private Vector<Document> _documents = new Vector<Document>();
 	  private Map<String, ArrayList<Byte>> _termOccCompressed = new HashMap<String,ArrayList<Byte>>();
-	  
+
 public raw_IndexerInvertedCompressed(Options options) {
     super(options);
     System.out.println("Using Indexer: " + this.getClass().getSimpleName());

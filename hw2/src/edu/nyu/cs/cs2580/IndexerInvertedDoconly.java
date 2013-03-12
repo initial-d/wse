@@ -168,8 +168,6 @@ public class IndexerInvertedDoconly extends IndexerInverted implements Serializa
       for (int i = 0; i<idxs.size();i++) {
           if (idxs.get(i)==null)
               return null;
-          //  System.out.println(idxs.get(i));
-          //          outDocs(idxs.get(i));
       }
       int did;
       int searchID = docid+1;
@@ -181,7 +179,6 @@ public class IndexerInvertedDoconly extends IndexerInverted implements Serializa
           max = -1;
           for (int i = 0; i<idxs.size();i++) {
               did = getNextDoc(idxs.get(i),searchID);
-              //              System.out.println("Searchon:"+idxs.get(i)+" "+searchID+" "+did);
               if (did>max)
                   max = did;
               if (did<min)
@@ -189,7 +186,6 @@ public class IndexerInvertedDoconly extends IndexerInverted implements Serializa
           }
           searchID = max;
       }
-      //      System.out.println(min+" "+max);
       if (min == -1)
           return null;
       return _documents.get(min);

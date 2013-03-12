@@ -1,12 +1,41 @@
 package edu.nyu.cs.cs2580;
 import java.util.LinkedList;
+import java.util.Vector;
 import java.util.ArrayList;
 import java.util.Vector;
+import java.io.UnsupportedEncodingException;
 
 
 public class vByte {
     public vByte(){
 
+    }
+    public String toString(){
+      byte bt[]=new byte[al.size()];
+    	int loc=0;
+    	for(Byte b:al){
+    		bt[loc++]=b;
+    	}
+    	String s=new String(bt);
+    	return s;
+    	
+    }
+    public void loadFromString(String s){
+    	byte[] bt=s.getBytes();
+    	int size=bt.length;
+    	for(int i=0;i<size;i++){
+    		int tmp=0;
+            while(bt[i]>0){
+            	al.add(bt[i]);
+                tmp=tmp<<7;
+                tmp+=bt[i];
+                i++;
+            }
+            al.add(bt[i]);
+            tmp=tmp<<7;
+            tmp+=bt[i]&127;
+            intal.add(tmp);
+    	}
     }
     private LinkedList<Byte> al=new LinkedList<Byte>();
     private ArrayList<Integer> intal =new ArrayList<Integer>();

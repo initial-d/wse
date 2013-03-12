@@ -26,6 +26,7 @@ import java.lang.ref.WeakReference;
  * @CS2580: Implement this class for HW2.
  */
 public class IndexerInvertedOccurrence extends IndexerInverted implements Serializable{
+  private int loadedTermCount = 0;
   private int tmpFileCount = 0;
   private int currentLoaded = -1;
   private static final int seperateNum = 20;
@@ -75,9 +76,7 @@ public class IndexerInvertedOccurrence extends IndexerInverted implements Serial
           _termToOccus.add(new ArrayList<ArrayList<Integer> >());
       }
       System.out.println(tmpFileCount);
-      for (int i = size;i>0;i--) {
-          loadTermI(i);
-      }
+      loadedTermCount = 0;
       } catch (IOException e) {
       }
   }
@@ -104,9 +103,17 @@ public class IndexerInvertedOccurrence extends IndexerInverted implements Serial
       _termToOccus.get(idx).clear();
       //      System.out.println("to be implemented!!!");
   }
+  private void loadTerms (Vector<Integer> idxs) throws IOException{
+      for (int i = 0; i<idxs.size();i++) {
+          if (_termToOccus.get(idxs.get(i)).size()==0) {
+              System.out.println("size term:"+idxs.get(i)+" "+_termToOccus.get(idxs.get(i)).size());
+              loadTermI(idxs.get(i));
+          }
+      }
+  }
   private void loadTermI (int i) throws IOException{
       System.out.println("load term:"+i);
-      clearMemory();
+      //      clearMemory();
       String fileName = _options._indexPrefix + "/" 
           + Integer.toString(i%seperateNum+1) + "terms.idx";
       BufferedReader reader = new BufferedReader ( new FileReader(fileName));
@@ -114,6 +121,8 @@ public class IndexerInvertedOccurrence extends IndexerInverted implements Serial
           reader.readLine();
       ArrayList<ArrayList<Integer> > list = new ArrayList<ArrayList<Integer> >();
       readDocsAndPosFromFile(reader,list);
+      _termToOccus.set(i,list);
+      loadedTermCount++;
       /*      String fileName="";
       fileName = _options._indexPrefix+"/"+Integer.toString(i) + "000s.tmp";
       FileReader filereader = new FileReader(fileName);
@@ -211,6 +220,7 @@ public class IndexerInvertedOccurrence extends IndexerInverted implements Serial
       for (int i = 0; i<_termToOccus.size();i++) {
           _termToOccus.get(i).clear();
       }
+      loadedTermCount = 0;
   }
   private void flushToFile() throws IOException{
       tmpFileCount++;
@@ -302,15 +312,47 @@ public class IndexerInvertedOccurrence extends IndexerInverted implements Serial
   /**
    * In HW2, you should be using {@link DocumentIndexed}.
    */
-  public Document nextDoc(Query query, int docid) {
-      /*      Vector<Integer> idxs = convertTermsToIdx(query.getTokens());
+  private int getNextDoc (Integer idx, int did) {
+      // binary search on term[idx]'s first document whose document >= did
+      ArrayList<ArrayList<Integer> > ttd = _termToOccus.get(idx);
+      int head = 0;
+      int tail = ttd.size()-1;
+      int mid;
+      while (head<=tail) {
+          //          System.out.println("head+tail:"+head+"+"+tail);
+          if (tail - head<5) {
+              for (int i = head;i<=tail;i++)
+                  if (ttd.get(i).get(0)>=did)
+                      return ttd.get(i).get(0);
+              return -1;
+          }
+          mid = (head+tail)/2;
+          if (ttd.get(mid).get(0)==did) {
+              return did;
+          }
 
+          if (ttd.get(mid).get(0)<did) {
+              head = mid+1;
+          } else {
+              tail = mid;
+          }
+      }
+      return -1;
+  }
+  public Document nextDoc(Query query, int docid) {
+      Vector<Integer> idxs = convertTermsToIdx(query.getTokens());
+      if (loadedTermCount>1000) {
+          clearMemory();
+      }
       for (int i = 0; i<idxs.size();i++) {
           if (idxs.get(i)==null)
               return null;
-          //  System.out.println(idxs.get(i));
-          //          outDocs(idxs.get(i));
       }
+      try {
+          loadTerms(idxs);
+      } catch (Exception e) {
+      }
+
       int did;
       int searchID = docid+1;
       int min = _documents.size();
@@ -321,7 +363,7 @@ public class IndexerInvertedOccurrence extends IndexerInverted implements Serial
           max = -1;
           for (int i = 0; i<idxs.size();i++) {
               did = getNextDoc(idxs.get(i),searchID);
-              //              System.out.println("Searchon:"+idxs.get(i)+" "+searchID+" "+did);
+              System.out.println("next doc:"+idxs.get(i)+" "+searchID+" "+did);
               if (did>max)
                   max = did;
               if (did<min)
@@ -329,11 +371,9 @@ public class IndexerInvertedOccurrence extends IndexerInverted implements Serial
           }
           searchID = max;
       }
-      //      System.out.println(min+" "+max);
       if (min == -1)
           return null;
-          return _documents.get(min);*/
-    return null;
+      return _documents.get(min);
   }
 
   public int corpusDocFrequencyByTerm(String term) {
