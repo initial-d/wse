@@ -20,13 +20,16 @@ public class Query {
   public Query(String query) {
     _query = query;
   }
-
+  public Vector<String[]>getPhrases() {
+      return new Vector<String[]>();
+  }
   public void processQuery() {
     if (_query == null) {
       return;
     }
+    _query = _query.replaceAll("%20"," ");
     System.out.println("process query?"+_query);
-    String [] tokens = _query.split("[+]");
+    String [] tokens = _query.split(" ");
     System.out.println("Query:"+tokens.length);
     for (String token:tokens) {
         System.out.println("Query:"+token);

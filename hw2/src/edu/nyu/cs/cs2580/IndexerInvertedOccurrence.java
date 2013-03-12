@@ -105,6 +105,7 @@ public class IndexerInvertedOccurrence extends IndexerInverted implements Serial
   }
   private void loadTerms (Vector<Integer> idxs) throws IOException{
       for (int i = 0; i<idxs.size();i++) {
+          //          System.out.println(i);
           if (_termToOccus.get(idxs.get(i)).size()==0) {
               System.out.println("size term:"+idxs.get(i)+" "+_termToOccus.get(idxs.get(i)).size());
               loadTermI(idxs.get(i));
@@ -112,13 +113,15 @@ public class IndexerInvertedOccurrence extends IndexerInverted implements Serial
       }
   }
   private void loadTermI (int i) throws IOException{
-      System.out.println("load term:"+i);
+      //      System.out.println("load term:"+i);
       //      clearMemory();
       String fileName = _options._indexPrefix + "/" 
           + Integer.toString(i%seperateNum+1) + "terms.idx";
+      //      System.out.println("load term from:"+fileName);
       BufferedReader reader = new BufferedReader ( new FileReader(fileName));
       for (int j = i%seperateNum; j< i; j+=seperateNum )
           reader.readLine();
+
       ArrayList<ArrayList<Integer> > list = new ArrayList<ArrayList<Integer> >();
       readDocsAndPosFromFile(reader,list);
       _termToOccus.set(i,list);
@@ -170,22 +173,15 @@ public class IndexerInvertedOccurrence extends IndexerInverted implements Serial
       Scanner s = new Scanner(line);
       int s1 = s.nextInt ();
       int s2;
-      //      System.out.print(s1);
-      //      System.out.print(" ");
       for (int i = 0; i<s1; i++) {
           ArrayList<Integer> docInfo = new ArrayList<Integer>();
           s2 = s.nextInt();
-          //  System.out.print(s2);
-          //          System.out.print(" ");
           for (int j = 0; j<s2; j++) {
               int x = s.nextInt();
               docInfo.add(x);
-              //  System.out.print(x);
-              //              System.out.print(" ");
           }
           list.add(docInfo);
       }
-      //      System.out.println("read end");
   }
 
   private void mergeTmps() throws IOException {
@@ -204,7 +200,7 @@ public class IndexerInvertedOccurrence extends IndexerInverted implements Serial
           writers.add(new BufferedWriter ( new FileWriter(fileName)));
       }
       for (int i = 0; i<_termToOccus.size();i++) {
-          if (i%1000 == 0) System.out.println(i+"files");
+          if (i%1000 == 0) System.out.println(i+"terms");
           ArrayList<ArrayList<Integer> > tto = new ArrayList<ArrayList<Integer> > ();
           for (int j = 0; j<tmpFileCount;j++)
               readDocsAndPosFromFile(reader.get(j),tto);
@@ -339,12 +335,114 @@ public class IndexerInvertedOccurrence extends IndexerInverted implements Serial
       }
       return -1;
   }
+
+  private Vector<Vector<Integer> > convertPhrases (Vector<String[] > phrases) {
+      Vector<Vector<Integer> > ret = new Vector<Vector<Integer> >();
+      for (int i = 0; i<phrases.size();i++) {
+          Vector<Integer> tmp = new Vector<Integer>();
+          for (int j=0; j<phrases.get(i).length;j++) {
+              tmp.add(_dictionary.get(HTMLParser.stemm(phrases.get(i)[j])));
+          }
+          ret.add(tmp);
+      }
+      return ret;
+  }
+  private ArrayList<Integer> getTermDocInfo(int term, int did) {
+      ArrayList<ArrayList<Integer> > ttd = _termToOccus.get(term);
+      int head = 0;
+      int tail = ttd.size()-1;
+      int mid;
+      while (head<=tail) {
+          if (tail - head<5) {
+              for (int i = head;i<=tail;i++)
+                  if (ttd.get(i).get(0)==did)
+                      return ttd.get(i);
+              return null;
+          }
+          mid = (head+tail)/2;
+          if (ttd.get(mid).get(0)==did) {
+              return ttd.get(mid);
+          }
+
+          if (ttd.get(mid).get(0)<did) {
+              head = mid+1;
+          } else {
+              tail = mid-1;
+          }
+      }
+      return null;
+  }
+  private int docPhraseCount(Vector<Integer> phrase,int did) {
+      int ret = 0;
+      System.out.println("docPhraseCount:"+_documents.get(did).getTitle());
+      Vector<ArrayList<Integer> > termDocInfo = new Vector<ArrayList<Integer> >();
+      Vector<Integer> pointer = new Vector<Integer>();
+
+      for (int i = 0; i<phrase.size();i++) {
+          pointer.add(1);
+          termDocInfo.add(getTermDocInfo(phrase.get(i),did));
+          if (termDocInfo.get(i)==null)
+              return 0;
+          for (int j = 0; j<termDocInfo.get(i).size();j++)
+              System.out.print(termDocInfo.get(i).get(j)+" ");
+          System.out.println();
+      }
+      if (phrase.size()==1)
+          return termDocInfo.get(0).size()-1;
+      System.out.print("Start!");
+      for (int i = 0; i<phrase.size();i++) {
+          System.out.print(termDocInfo.get(i).get(pointer.get(i))+" ");
+      }
+            System.out.println();
+
+
+      while (pointer.get(0)<termDocInfo.get(0).size()) {
+          // check if continus
+          //          System.out.println("ret"+ret);
+
+          // update c
+          for (int i = 1; i<phrase.size();i++) {
+              //              System.out.println(i+"th term");
+              int lastPos = termDocInfo.get(i-1).get(pointer.get(i-1));
+              //              System.out.println("lastPos:"+lastPos);
+              while (pointer.get(i)<termDocInfo.get(i).size() &&
+                     termDocInfo.get(i).get(pointer.get(i))<=lastPos) {
+                  pointer.set(i,pointer.get(i)+1);
+              }
+              //              System.out.println(pointer.get(i));
+              if (pointer.get(i)>=termDocInfo.get(i).size())
+                  return ret;
+          }
+
+          boolean r =true;
+          for (int i = 1; i<phrase.size();i++) {
+              if(termDocInfo.get(i).get(pointer.get(i))!=
+                 termDocInfo.get(i-1).get(pointer.get(i-1))+1) {
+                  r = false;
+              }
+          }
+          if (r) ret++;
+
+          pointer.set(0,pointer.get(0)+1);
+          //          for (int i = 0; i<phrase.size();i++) {
+          //              System.out.print(termDocInfo.get(i).get(pointer.get(i))+" ");
+          //          }
+          //          System.out.println();
+      }
+      return ret;
+  }
+
   public Document nextDoc(Query query, int docid) {
+      //      System.out.println("nextdoc");
       Vector<Integer> idxs = convertTermsToIdx(query.getTokens());
+      Vector<Vector<Integer> > phrases = convertPhrases(query.getPhrases());
+
       if (loadedTermCount>1000) {
           clearMemory();
       }
+      //      System.out.println("idxs:"+idxs.size());
       for (int i = 0; i<idxs.size();i++) {
+          //          System.out.println("idxs:"+idxs.get(i));
           if (idxs.get(i)==null)
               return null;
       }
@@ -357,23 +455,32 @@ public class IndexerInvertedOccurrence extends IndexerInverted implements Serial
       int searchID = docid+1;
       int min = _documents.size();
       int max = -1;
-
-      while (min!=max&&min>=0) {
+      while (true) {
+          while (min!=max&&min>=0) {
+              min = _documents.size();
+              max = -1;
+              for (int i = 0; i<idxs.size();i++) {
+                  did = getNextDoc(idxs.get(i),searchID);
+                  if (did>max)
+                      max = did;
+                  if (did<min)
+                      min = did;
+              }
+              searchID = max;
+          }
+          if (min == -1)
+              return null;
+          int c = 0;
+          for (int i = 0; i <phrases.size();i++) {
+              if (docPhraseCount(phrases.get(i),min)>0)
+                  c++;
+          }
+          if (c==phrases.size())
+              return _documents.get(min);
+          searchID = min+1;
           min = _documents.size();
           max = -1;
-          for (int i = 0; i<idxs.size();i++) {
-              did = getNextDoc(idxs.get(i),searchID);
-              System.out.println("next doc:"+idxs.get(i)+" "+searchID+" "+did);
-              if (did>max)
-                  max = did;
-              if (did<min)
-                  min = did;
-          }
-          searchID = max;
       }
-      if (min == -1)
-          return null;
-      return _documents.get(min);
   }
 
   public int corpusDocFrequencyByTerm(String term) {

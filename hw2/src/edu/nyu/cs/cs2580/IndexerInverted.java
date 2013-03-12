@@ -306,9 +306,11 @@ public abstract class IndexerInverted extends Indexer implements Serializable {
        return null;
   }
   public Vector<Integer> convertTermsToIdx (Vector<String> terms) {
+
       Vector<Integer> ret = new Vector<Integer>();
       for (String term: terms) {
           ret.add(_dictionary.get(HTMLParser.stemm(term)));
+          //          System.out.println(term+" "+ret.get(ret.size()-1));
       }
       return ret;
   }

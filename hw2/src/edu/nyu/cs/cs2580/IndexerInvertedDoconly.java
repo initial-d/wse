@@ -161,11 +161,11 @@ public class IndexerInvertedDoconly extends IndexerInverted implements Serializa
           System.out.print(docs.get(i)+" ");
       System.out.println();
   }
+
   public Document nextDoc(Query query, int docid) {
       //      System.out.println("doconly nextdoc");
       Vector<Integer> idxs = convertTermsToIdx(query.getTokens());
-
-      for (int i = 0; i<idxs.size();i++) {
+        for (int i = 0; i<idxs.size();i++) {
           if (idxs.get(i)==null)
               return null;
       }
