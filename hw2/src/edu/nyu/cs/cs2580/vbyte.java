@@ -6,23 +6,60 @@ import java.util.Vector;
 import java.io.UnsupportedEncodingException;
 
 
-public class vByte {
-    public vByte(){
+public class vbyte {
+    public vbyte(){
 
     }
-    public String toString(){
-      byte bt[]=new byte[al.size()];
+    public String toString(){//add 0 if not size 2X
+    	int size=al.size();
+    	boolean two=false;
+    	if(size%2==0)
+    		two=true;
+    	if(!two)
+    		size+=1;
+    	byte bt[]=new byte[size];
     	int loc=0;
     	for(Byte b:al){
     		bt[loc++]=b;
     	}
-    	String s=new String(bt);
-    	return s;
+    	if(!two)
+    		bt[loc++]=0;
+    	String s;
+    	//s=new String(bt);
+    	//return s;
+    	
+		try {
+			s = new String(bt,"utf-16le");
+			return s;
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	return null;
+    	
     	
     }
     public void loadFromString(String s){
-    	byte[] bt=s.getBytes();
+    	//System.out.println(s);
+    	//byte[] bt=s.getBytes();
+    	
+    	byte[] bt=new byte[1];
+		try {
+			bt = s.getBytes("utf-16le");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+    	//for(Byte b:bt)
+    	//	System.out.println(b);
     	int size=bt.length;
+    	if (size==0)
+    		return;
+    	if(bt[size-1]==0){
+    		size--;
+    	}
+    	
     	for(int i=0;i<size;i++){
     		int tmp=0;
             while(bt[i]>0){
@@ -36,6 +73,7 @@ public class vByte {
             tmp+=bt[i]&127;
             intal.add(tmp);
     	}
+
     }
     private LinkedList<Byte> al=new LinkedList<Byte>();
     private ArrayList<Integer> intal =new ArrayList<Integer>();
@@ -65,7 +103,7 @@ public class vByte {
         i|=128;
         al.add(i.byteValue());
     }
-    public vByte(ArrayList<Integer> ial){
+    public vbyte(ArrayList<Integer> ial){
         for(Integer i:intal){
             if(i>=1<<21){
                 al.add((byte)(i>>21));
@@ -92,7 +130,7 @@ public class vByte {
     public Vector<Integer> getLists(){
         return new Vector<Integer>(intal);
     }
-    public vByte(LinkedList<Byte> bal){
+    public vbyte(LinkedList<Byte> bal){
         for(int i=0;i<bal.size();i++){
             int tmp=0;
             while(bal.get(i)>0){
@@ -103,6 +141,6 @@ public class vByte {
             tmp=tmp<<7;
             tmp+=bal.get(i)&127;
             intal.add(tmp);
-        }//don't let the last byte <0!
+        }//don't let the last byte >0!
     }
 }
