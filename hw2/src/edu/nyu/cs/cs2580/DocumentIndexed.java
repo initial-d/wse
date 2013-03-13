@@ -29,7 +29,8 @@ public class DocumentIndexed extends Document {
             getUrl() + "\n" +
             Integer.toString(_docid)+" "+
             Float.toString(getPageRank())+" " +
-            Integer.toString(getNumViews())+ "\n";
+            Integer.toString(getNumViews())+ " "+
+            Integer.toString(getSize())+"\n";
         return ret;
     }
     public void load(String s) {

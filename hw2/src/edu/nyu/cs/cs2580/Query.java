@@ -20,8 +20,15 @@ public class Query {
   public Query(String query) {
     _query = query;
   }
+  public Vector<String> getTokenNotInPhrase() {
+      return _tokens;
+  }
   public Vector<String[]>getPhrases() {
       return new Vector<String[]>();
+      //   return null;
+  }
+  public Vector<String> getTokens() {
+      return _tokens;
   }
   public void processQuery() {
     if (_query == null) {
@@ -36,7 +43,5 @@ public class Query {
         _tokens.add(token);
     }
   }
-  public Vector<String> getTokens () {
-      return _tokens;
-  }
+
 }

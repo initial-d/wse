@@ -286,8 +286,9 @@ public class IndexerInvertedOccurrence extends IndexerInverted implements Serial
 
   @Override
   public Document getDoc(int docid) {
-    SearchEngine.Check(false, "Do NOT change, not used for this Indexer!");
-    return null;
+      return _documents.get(docid);
+      //    SearchEngine.Check(false, "Do NOT change, not used for this Indexer!");
+      //    return null;
   }
 
   /**
@@ -357,9 +358,9 @@ public class IndexerInvertedOccurrence extends IndexerInverted implements Serial
       }
       return null;
   }
-  private int docPhraseCount(Vector<Integer> phrase,int did) {
+  public int docPhraseCount(Vector<Integer> phrase,int did) {
       int ret = 0;
-      System.out.println("docPhraseCount:"+_documents.get(did).getTitle());
+      //      System.out.println("docPhraseCount:"+_documents.get(did).getTitle());
       Vector<ArrayList<Integer> > termDocInfo = new Vector<ArrayList<Integer> >();
       Vector<Integer> pointer = new Vector<Integer>();
 
@@ -368,17 +369,17 @@ public class IndexerInvertedOccurrence extends IndexerInverted implements Serial
           termDocInfo.add(getTermDocInfo(phrase.get(i),did));
           if (termDocInfo.get(i)==null)
               return 0;
-          for (int j = 0; j<termDocInfo.get(i).size();j++)
-              System.out.print(termDocInfo.get(i).get(j)+" ");
-          System.out.println();
+          //          for (int j = 0; j<termDocInfo.get(i).size();j++)
+          //  System.out.print(termDocInfo.get(i).get(j)+" ");
+          //          System.out.println();
       }
       if (phrase.size()==1)
           return termDocInfo.get(0).size()-1;
-      System.out.print("Start!");
-      for (int i = 0; i<phrase.size();i++) {
-          System.out.print(termDocInfo.get(i).get(pointer.get(i))+" ");
-      }
-            System.out.println();
+      //      System.out.print("Start!");
+      //      for (int i = 0; i<phrase.size();i++) {
+      //          System.out.print(termDocInfo.get(i).get(pointer.get(i))+" ");
+      //      }
+      //            System.out.println();
 
 
       while (pointer.get(0)<termDocInfo.get(0).size()) {
@@ -484,10 +485,28 @@ public class IndexerInvertedOccurrence extends IndexerInverted implements Serial
       return _termCorFreq.get(idx);
   }
 
-  public int documentTermFrequency(String term, String url) {
-    SearchEngine.Check(false, "Not implemented!");
-    return 0;
+    public int documentTermFrequency(String term, String url) {
+        for (int i = 0; i<_documents.size();i++)
+            if (url.equals(_documents.get(i).getTitle()))
+                return documentTermFrequency(term,_documents.get(i)._docid);
+        return 0;
+    }
+
+
+  public int documentTermFrequency(String term, int did) {
+      int dix = _dictionary.get(term);
+      for (int i = 0; i<_termToOccus.get(dix).size();i++)
+          if (_termToOccus.get(dix).get(i).get(0)==did)
+              return _termToOccus.get(dix).size()-1;
+      return 0;
   }
+    public int docPhraseCount(String[] phrase, int did) {
+        Vector<Integer> idsx = new Vector<Integer>();
+        for (String s:phrase) {
+            idsx.add(_dictionary.get(s));
+        }
+        return docPhraseCount(idsx,did);
+    }
   public void output() {
       System.out.println("_numDocs="+Integer.toString(_numDocs));
       System.out.println("_totalTermFrequency="+Long.toString(_totalTermFrequency));

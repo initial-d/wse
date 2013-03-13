@@ -143,6 +143,7 @@ public abstract class IndexerInverted extends Indexer implements Serializable {
 
       DocumentIndexed doc = new DocumentIndexed (_documents.size(), this);
       doc.setTitle(fileName);
+      doc.setSize(titleTokens.size()+bodyTokens.size());
       //      doc.setNumViews(numViews);
       //    doc.setTitleTokens(titleTokens);
       //    doc.setBodyTokens(bodyTokens);
@@ -188,6 +189,8 @@ public abstract class IndexerInverted extends Indexer implements Serializable {
     DocumentIndexed doc = new DocumentIndexed (_documents.size(), this);
     doc.setTitle(title);
     doc.setNumViews(numViews);
+    doc.setSize(titleTokens.size()+bodyTokens.size());
+    System.out.println("Doc Size"+doc.getSize());
     //    doc.setTitleTokens(titleTokens);
     //    doc.setBodyTokens(bodyTokens);
     _documents.add(doc);
@@ -250,11 +253,13 @@ public abstract class IndexerInverted extends Indexer implements Serializable {
           docid = Integer.parseInt(firstThree[0]);
           pagerank = new Float(firstThree[1]);
           numview = Integer.parseInt(firstThree[2]);
+          int size = Integer.parseInt(firstThree[3]);
           DocumentIndexed doc = new DocumentIndexed(docid,this);
           doc.setTitle(title);
           doc.setUrl(url);
           doc.setPageRank(pagerank);
           doc.setNumViews(numview);
+          doc.setSize(size);
           _documents.add(doc);
           //          System.out.println(doc.toString());
       }
@@ -297,6 +302,12 @@ public abstract class IndexerInverted extends Indexer implements Serializable {
       //      throw new ClassNotFoundException("this should be override");
       return 0;
   }
+    public int documentTermFrequency (String term, int did) {
+        return 0;
+    }
+    public int docPhraseCount(String[] phrase, int did) {
+        return 0;
+    }
   public Document nextDoc(Query query, int docid) {
       //      throw new ClassNotFoundException("this should be override");
       return null;

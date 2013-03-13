@@ -52,7 +52,6 @@ class Ranker {
         return ret;
     }
 
-
     private double countBigram (String qv1,String qv2, int did){
         double ret = 0;
         Document d = _index.getDoc(did);

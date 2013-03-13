@@ -13,6 +13,8 @@ import java.util.Iterator;
 import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
@@ -22,7 +24,6 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.io.File;
 import edu.nyu.cs.cs2580.SearchEngine.Options;
-import edu.nyu.cs.cs2580.vByte.Byte;
 import java.lang.ref.WeakReference;
 /**
  * @CS2580: Implement this class for HW2.
@@ -37,6 +38,7 @@ public class IndexerInvertedCompressed extends IndexerInverted implements Serial
     // _termToOccus[0][0] info for term[0] at a doc
     // _termToOccus[0][0][0] docid
     // _termToOccus[0][0][x] position
+    private ArrayList<String> sss = new ArrayList<String>();
     private ArrayList<ArrayList<ArrayList<Integer> > > _termToOccus =
         new ArrayList<ArrayList<ArrayList<Integer> > > ();
     private ArrayList<Integer> _termDocFreq = new ArrayList<Integer>();
@@ -120,7 +122,10 @@ public class IndexerInvertedCompressed extends IndexerInverted implements Serial
         String fileName = getDir() +
             Integer.toString(i%seperateNum+1) + "terms.idx";
         //      System.out.println("load term from:"+fileName);
-        BufferedReader reader = new BufferedReader ( new FileReader(fileName));
+
+        File file = new File(fileName);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), "iso-8859-1"));
+        //        BufferedReader reader = new BufferedReader ( new FileReader(fileName));
         for (int j = i%seperateNum; j< i; j+=seperateNum )
             reader.readLine();
 
@@ -131,91 +136,85 @@ public class IndexerInvertedCompressed extends IndexerInverted implements Serial
         reader.close();
         gc();
     }
-    private void vByteTest() {
-        System.out.println("xxx");
-        ArrayList<Integer> test = new ArrayList<Integer>();
-        test.add(5000000);
-        test.add(8243);
-        test.add(1234);
-
-        System.out.println("Input values: 5 - 824 - 1234");
-        String code = vByte.encodeToString(test);
-        System.out.println("Variable-byte code:");
-        System.out.println(code);
-        ArrayList<Integer> decode = vByte.decodeFromString(code);
-        System.out.println("length"+code.length());
-        System.out.println("After decoding:");
-        for(int i = 0 ; i < decode.size() ; i++){
-            System.out.print(decode.get(i) + " ");
-        }
-        System.out.println();
-
-        /*        for(int i = 0 ; i < code.size() ; i++){
-                  System.out.print(code.get(i).toString() + " ");
-                  }
-                  System.out.println();
-                  /*        String s = vb.toString();
-                  vByte vb2 = new vByte();
-                  vb2.loadFromString(s);
-                  ArrayList<Integer> res = vb2.getInts();
-                  System.out.println("decode");
-                  for (int i = 0; i<res.size();i++)
-                  System.out.println(res.get(i));
-                  System.out.println("yyy");*/
-    }
     private void writeDocsAndPosToFile (BufferedWriter writer,
                                         ArrayList<ArrayList<Integer> >list)
         throws IOException{
         ArrayList<Integer> flattened = new ArrayList<Integer> ();
         vByte vb = new vByte();
         flattened.add(list.size());
+        vb.push(list.size());
+        System.out.println(list.size());
         for (int i = 0;i<list.size();i++) {
             flattened.add(list.get(i).size());
+            vb.push(list.get(i).size());
+            System.out.println(list.get(i).size());
             for (int j = 0; j<list.get(i).size();j++) {
                 flattened.add(list.get(i).get(j));
+                vb.push(list.get(i).get(j));
+                System.out.print(j+":"+flattened.size()+":"+list.get(i).get(j)+" ");
             }
+            System.out.println();
         }
-        /*      System.out.println("Msg:");
-                for (int i = 0; i<flattened.size();i++)
-                System.out.print(flattened.get(i)+" ");
-                System.out.println();
-                String s = vb.encodeToString(flattened);
-                flattened = vb.decodeFromString(s);
-                System.out.println("decode:");
-                for (int i = 0;i<flattened.size();i++) {
-                System.out.print(flattened.get(i)+" ");
-                }
-                System.out.println();*/
-        writer.write(vb.encodeToString(flattened));
+        writer.write(vb.toString());
         writer.newLine();
+
+
+        System.out.println("Msg:");
+        for (int i = 0; i<flattened.size();i++)
+            System.out.print(flattened.get(i)+" ");
+        System.out.println();
+        System.out.println("code:");
+        System.out.println(vb.toString());
+        sss.add(vb.toString());
+        vByte vb2 = new vByte();
+        vb2.loadFromString(vb.toString());
+        flattened = vb2.getInts();
+        System.out.println(flattened.size());
+        System.out.println("decode:");
+        for (int i = 0;i<flattened.size();i++) {
+            System.out.print(flattened.get(i)+" ");
+        }
+        System.out.println();
     }
     private void readDocsAndPosFromFile(BufferedReader reader,
                                         ArrayList<ArrayList<Integer> > list)
         throws IOException {
+        System.out.println("inside read");
         String line = reader.readLine();
-        //      System.out.println(line);
         if (line == null) return;
+        System.out.println(line);
         vByte vb = new vByte();
-        ArrayList<Integer> flattened = vb.decodeFromString(line);
-        //vb.loadFromString(line);
-        //      System.out.println("aaa");
-        //ArrayList<Integer> flat = vb.getInts();
+        vb.loadFromString(line);
+        System.out.println(sss.get(0));
+        if (sss.get(0).equals(line)) {
+            System.out.println("equal!");
+        }
+        else System.out.println("not equal!");
+        ArrayList<Integer> flattened = vb.getInts();
+        for (int i = 0; i<flattened.size();i++)
+            System.out.print(flattened.get(i)+" ");
+        System.out.println();
         int index = 0;
-        //int s1 =  flat.get(0);
         int s1 = flattened.get(0);
         index++;
+        System.out.println(index);
         int s2=0;
+        System.out.println(s1);
         for (int i = 0; i<s1; i++) {
             ArrayList<Integer> docInfo = new ArrayList<Integer>();
+            System.out.println(index);
             s2 = flattened.get(index);
             index++;
+            System.out.println("s2 "+s2);
             for (int j = 0; j<s2; j++) {
+                System.out.print(j+":"+index+":"+flattened.get(index)+" ");
                 docInfo.add(flattened.get(index));
                 index ++;
             }
+            System.out.println();
             list.add(docInfo);
         }
-        //      System.out.println("outside read");
+        System.out.println("outside read");
     }
 
     private void mergeTmps() throws IOException {
@@ -224,14 +223,18 @@ public class IndexerInvertedCompressed extends IndexerInverted implements Serial
         for (int i = 1; i<=tmpFileCount;i++) {
             String fileName = getDir()+
                 Integer.toString(i) +"000s.tmp";
-            reader.add(new BufferedReader(new FileReader(fileName)));
+            File file = new File(fileName);
+            BufferedReader reader1 = new BufferedReader(new InputStreamReader(new FileInputStream(file), "iso-8859-1"));
+            reader.add(reader1);
             reader.get(reader.size()-1).readLine();
         }
         Vector<BufferedWriter> writers = new Vector<BufferedWriter> ();
         for (int i = 0; i<seperateNum; i++) {
             String fileName = getDir() +
                 Integer.toString(i+1) + "terms.idx";
-            writers.add(new BufferedWriter ( new FileWriter(fileName)));
+            BufferedWriter out = new BufferedWriter
+                (new OutputStreamWriter(new FileOutputStream(fileName),"iso-8859-1"));
+            writers.add(out);
         }
         for (int i = 0; i<_termToOccus.size();i++) {
             if (i%1000 == 0) System.out.println(i+"terms");
@@ -262,9 +265,9 @@ public class IndexerInvertedCompressed extends IndexerInverted implements Serial
         tmpFileCount++;
         String s = Integer.toString(tmpFileCount) + "000s.tmp";
         s =  getDir()+ s;
-        FileWriter fstream = new FileWriter(s);
-        BufferedWriter out = new BufferedWriter(fstream);
-
+        //        FileWriter fstream = new FileWriter(s);
+        //        BufferedWriter out = new BufferedWriter(fstream);
+        BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(s),"iso-8859-1"));
         out.write(Integer.toString(_termToOccus.size())+"\n");
         for (int i = 0; i<_termToOccus.size();i++) {
             writeDocsAndPosToFile(out,_termToOccus.get(i));
@@ -575,9 +578,25 @@ public class IndexerInvertedCompressed extends IndexerInverted implements Serial
     }
 
     public int documentTermFrequency(String term, String url) {
-        SearchEngine.Check(false, "Not implemented!");
+        for (int i = 0; i<_documents.size();i++)
+            if (url.equals(_documents.get(i).getTitle()))
+                return documentTermFrequency(term,_documents.get(i)._docid);
         return 0;
     }
 
+  public int documentTermFrequency(String term, int did) {
+      int dix = _dictionary.get(term);
+      for (int i = 0; i<_termToOccus.get(dix).size();i++)
+          if (_termToOccus.get(dix).get(i).get(0)==did)
+              return _termToOccus.get(dix).size()-1;
+      return 0;
+  }
+    public int docPhraseCount(String[] phrase, int did) {
+        Vector<Integer> idsx = new Vector<Integer>();
+        for (String s:phrase) {
+            idsx.add(_dictionary.get(s));
+        }
+        return docPhraseCount(idsx,did);
+    }
 
 }

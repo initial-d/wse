@@ -18,7 +18,7 @@ class Document implements Serializable {
   private static final long serialVersionUID = -539495106357836976L;
 
   public int _docid;
-
+    public int _size;
   // Basic information for display
   private String _title = "";
   private String _url = "";
@@ -62,4 +62,10 @@ class Document implements Serializable {
   public void setNumViews(int numViews) {
     this._numViews = numViews;
   }
+    public void setSize(int size) {
+        _size = size;
+    }
+    public int getSize() {
+        return _size;
+    }
 }
