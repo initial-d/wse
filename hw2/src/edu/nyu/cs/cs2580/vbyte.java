@@ -1,108 +1,131 @@
 package edu.nyu.cs.cs2580;
-import java.util.LinkedList;
-import java.util.Vector;
 import java.util.ArrayList;
 import java.util.Vector;
 import java.io.UnsupportedEncodingException;
-
+import java.util.LinkedList;
 
 public class vByte {
-    public vByte(){
+
+
+    static class Byte {
+        int[] abyte;
+        Byte(){
+            abyte = new int[8];
+        }
+
+        public void readInt(int n) {
+            // n must be less than 128 !!
+            String bin = Integer.toBinaryString(n);
+            for(int i = 0 ; i < (8 - bin.length()) ; i++) {
+                abyte[i] = 0;
+            }
+            for(int i = 0 ; i < bin.length() ; i++){
+                abyte[i + (8 - bin.length())] = bin.charAt(i) - 48; // ASCII code for '0' is 48
+            }
+            //System.out.println(" Byte ***** " + this.toString());
+        }
+
+        public void switchFirst(){
+            abyte[0] = 1;
+        }
+
+        public int toInt(){
+            //System.out.println(" Byte ***** " + this.toString());
+            int res = 0;
+            for (int i = 0 ; i < 8 ; i++){
+                res += abyte[i] * Math.pow(2, (7 - i));
+            }
+            //System.out.println(" Value ***** " + res);
+            return res;
+        }
+
+        public String toString(){
+            String res ="";
+            //            System.out.println("BYTES:");
+            for(int i = 0 ; i < 8 ; i++) {
+                System.out.print(abyte[i]);
+                res += abyte[i];
+            }
+            return res;
+        }
+        public void loadFromChar(char c) {
+            int x = c;
+            for (int i = 0; i<8; i++) {
+                abyte[i] =x / (int)Math.pow(2,(7-i));
+                x = x % (int)Math.pow(2,(7-i));
+            }
+        }
 
     }
-    public String toString(){
-      byte bt[]=new byte[al.size()];
-    	int loc=0;
-    	for(Byte b:al){
-    		bt[loc++]=b;
-    	}
-    	String s=new String(bt);
-    	return s;
-    	
-    }
-    public void loadFromString(String s){
-    	byte[] bt=s.getBytes();
-    	int size=bt.length;
-    	for(int i=0;i<size;i++){
-    		int tmp=0;
-            while(bt[i]>0){
-            	al.add(bt[i]);
-                tmp=tmp<<7;
-                tmp+=bt[i];
-                i++;
-            }
-            al.add(bt[i]);
-            tmp=tmp<<7;
-            tmp+=bt[i]&127;
-            intal.add(tmp);
-    	}
-    }
-    private LinkedList<Byte> al=new LinkedList<Byte>();
-    private ArrayList<Integer> intal =new ArrayList<Integer>();
-    public int isize(){
-        return intal.size();
-    }
-    public int bsize(){
-        return al.size();
-    }
-    public void push(int i){
-        intal.add(i);
-        update(i);
-    }
-    private void update(Integer i){
-        if(i>=1<<21){
-            al.add((byte)(i>>21));
+
+
+    public static LinkedList<Byte> vbEncode(ArrayList<Integer> numbers) {
+        LinkedList<Byte> code = new LinkedList<Byte>();
+        for (int i = 0; i<numbers.size();i++) {
+            int n = numbers.get(i);
+            code.addAll(vbEncodeNumber(n));
         }
-        i&=(1<<21)-1;
-        if(i>=1<<14){
-            al.add((byte)(i>>14));
+        return code;
+    }
+
+    public static LinkedList<Byte> vbEncodeNumber(int n) {
+        LinkedList<Byte> bytestream = new LinkedList<Byte>();
+        int num = n;
+        while (true) {
+            Byte b = new Byte();
+            b.readInt (num%128);
+            bytestream.addFirst(b);
+            if (num < 128) {
+                break;
+            }
+            num /= 128;     //right-shift of length 7 (128 = 2^7)
         }
-        i&=(1<<14)-1;
-        if(i>=1<<7){
-            al.add((byte)(i>>7));
+        Byte last = bytestream.get(bytestream.size() - 1); //retrieving the last byte
+        last.switchFirst(); //setting the continuation bit to 1
+        return bytestream;
+    }
+
+    public static ArrayList<Integer> vbDecode(LinkedList<Byte> code){
+
+        ArrayList<Integer> numbers = new ArrayList<Integer>();
+        int n = 0;
+        for(int i = 0 ; !(code.isEmpty()) ; i++){
+            Byte b = code.poll(); // read leading byte
+            //System.out.println(" Reading byte " + b.toString() );
+            int  bi = b.toInt();  // decimal value of this byte
+            if (bi < 128) {
+                //continuation bit is set to 0
+                n = 128 * n + bi;
+            } else {
+                // continuation bit is set to 1
+                n = 128 * n + (bi - 128);
+                numbers.add(n);   // number is stored
+                n = 0;            // reset
+            }
         }
-        i&=(1<<7)-1;
-        i|=128;
-        al.add(i.byteValue());
+        return numbers;
     }
-    public vByte(ArrayList<Integer> ial){
-        for(Integer i:intal){
-            if(i>=1<<21){
-                al.add((byte)(i>>21));
-            }
-            i&=(1<<21)-1;
-            if(i>=1<<14){
-                al.add((byte)(i>>14));
-            }
-            i&=(1<<14)-1;
-            if(i>=1<<7){
-                al.add((byte)(i>>7));
-            }
-            i&=(1<<7)-1;
-            i|=128;
-            al.add(i.byteValue());
+    public static String encodeToString (ArrayList<Integer> msg) {
+        LinkedList<Byte> list = vbEncode(msg);
+        String ret="";
+        for (int i = 0; i<list.size();i++){
+            ret = ret+(char)list.get(i).toInt();
+            //            System.out.println(ret);
         }
+        return ret;
     }
-    public LinkedList<Byte> getBytes(){
-        return (LinkedList<Byte>) al.clone();
+    public static ArrayList<Integer> decodeFromString(String s) {
+        byte[] bs = s.getBytes();
+        LinkedList<Byte> code = new LinkedList<Byte>();
+        for (int i = 0; i<s.length();i++) {
+            Byte b = new Byte();
+            b.loadFromChar(s.charAt(i));
+            code.add(b);
+        }
+        ArrayList<Integer> ret = vbDecode(code);
+        return ret;
     }
-    public ArrayList<Integer> getInts(){
-        return (ArrayList<Integer>) intal.clone();
-    }
-    public Vector<Integer> getLists(){
-        return new Vector<Integer>(intal);
-    }
-    public vByte(LinkedList<Byte> bal){
-        for(int i=0;i<bal.size();i++){
-            int tmp=0;
-            while(bal.get(i)>0){
-                tmp=tmp<<7;
-                tmp+=bal.get(i);
-                i++;
-            }
-            tmp=tmp<<7;
-            tmp+=bal.get(i)&127;
-            intal.add(tmp);
-        }//don't let the last byte <0!
-    }
+
 }
+
+

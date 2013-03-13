@@ -82,7 +82,7 @@ public class IndexerInvertedDoconly extends IndexerInverted implements Serializa
   }
   @Override
   public String getIndexFilePath () {
-      return _options._indexPrefix + "/corpus_invertedDoconly.idx";
+      return _options._indexPrefix + "/index_doconly/corpus_invertedDoconly.idx";
   }
   @Override
   public void updateStatistics(ArrayList<Integer> tokens, Set<Integer> uniques,int did,int offset) {

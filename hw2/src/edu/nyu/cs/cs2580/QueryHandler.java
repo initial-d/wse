@@ -23,7 +23,7 @@ class QueryHandler implements HttpHandler {
 
   /**
    * CGI arguments provided by the user through the URL. This will determine
-   * which Ranker to use and what output format to adopt. For simplicity, all
+   * which Ranker to use and what output formashet to adopt. For simplicity, all
    * arguments are publicly accessible.
    */
   public static class CgiArguments {

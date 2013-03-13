@@ -115,8 +115,8 @@ public class IndexerInvertedOccurrence extends IndexerInverted implements Serial
   private void loadTermI (int i) throws IOException{
       //      System.out.println("load term:"+i);
       //      clearMemory();
-      String fileName = _options._indexPrefix + "/" 
-          + Integer.toString(i%seperateNum+1) + "terms.idx";
+      String fileName = getDir() + 
+          Integer.toString(i%seperateNum+1) + "terms.idx";
       //      System.out.println("load term from:"+fileName);
       BufferedReader reader = new BufferedReader ( new FileReader(fileName));
       for (int j = i%seperateNum; j< i; j+=seperateNum )
@@ -126,30 +126,6 @@ public class IndexerInvertedOccurrence extends IndexerInverted implements Serial
       readDocsAndPosFromFile(reader,list);
       _termToOccus.set(i,list);
       loadedTermCount++;
-      /*      String fileName="";
-      fileName = _options._indexPrefix+"/"+Integer.toString(i) + "000s.tmp";
-      FileReader filereader = new FileReader(fileName);
-      BufferedReader bufferedreader = new BufferedReader(filereader);
-      String line = bufferedreader.readLine();
-      String[] poss;
-      int outerSize = Integer.parseInt(line);
-      int docSize;
-      int posSize;
-      for (int terms = 0; terms<outerSize;terms++) {
-          line = bufferedreader.readLine();
-          docSize = Integer.parseInt(line);
-          for (int docs = 0; docs<docSize;docs ++) {
-              ArrayList<Integer> docInfo = new ArrayList<Integer>();
-              line = bufferedreader.readLine();
-              posSize = Integer.parseInt(line);
-              line = bufferedreader.readLine();
-              poss = line.split(" ");
-              for (int posI = 0; posI<posSize;posI++) {
-                  docInfo.add(Integer.parseInt(poss[posI]));
-              }
-              _termToOccus.get(terms).add(docInfo);
-          }
-          }*/
       reader.close();
       gc();
   }
@@ -188,15 +164,15 @@ public class IndexerInvertedOccurrence extends IndexerInverted implements Serial
       System.out.println("merging.....");
       Vector<BufferedReader> reader = new Vector<BufferedReader> ();
       for (int i = 1; i<=tmpFileCount;i++) {
-          String fileName = _options._indexPrefix + "/" +
+          String fileName = getDir()+
               Integer.toString(i) +"000s.tmp";
           reader.add(new BufferedReader(new FileReader(fileName)));
           reader.get(reader.size()-1).readLine();
       }
       Vector<BufferedWriter> writers = new Vector<BufferedWriter> ();
       for (int i = 0; i<seperateNum; i++) {
-          String fileName = _options._indexPrefix + "/" 
-              + Integer.toString(i+1) + "terms.idx";
+          String fileName = getDir() +
+              Integer.toString(i+1) + "terms.idx";
           writers.add(new BufferedWriter ( new FileWriter(fileName)));
       }
       for (int i = 0; i<_termToOccus.size();i++) {
@@ -211,6 +187,12 @@ public class IndexerInvertedOccurrence extends IndexerInverted implements Serial
           writers.get(i).close();
       for (int i = 0; i<tmpFileCount;i++)
           reader.get(i).close();
+      for (int i = 1; i<=tmpFileCount;i++) {
+          String fileName = getDir()+
+              Integer.toString(i) +"000s.tmp";
+          File f = new File(fileName);
+          f.delete();
+      }
   }
   private void clearMemory() {
       for (int i = 0; i<_termToOccus.size();i++) {
@@ -221,7 +203,7 @@ public class IndexerInvertedOccurrence extends IndexerInverted implements Serial
   private void flushToFile() throws IOException{
       tmpFileCount++;
       String s = Integer.toString(tmpFileCount) + "000s.tmp";
-      s = _options._indexPrefix +"/"+ s;
+      s =  getDir()+ s;
       FileWriter fstream = new FileWriter(s);
       BufferedWriter out = new BufferedWriter(fstream);
 
@@ -241,9 +223,12 @@ public class IndexerInvertedOccurrence extends IndexerInverted implements Serial
       clearMemory();
       gc();
   }
+  public String getDir() {
+      return _options._indexPrefix+"/index_occurence/";
+  }
   @Override
   public String getIndexFilePath() {
-      return _options._indexPrefix + "/corpus_invertedOccurrence.idx";
+      return _options._indexPrefix + "/index_occurence/corpus_invertedOccurrence.idx";
   }
   @Override
   public void updateStatistics(ArrayList<Integer> tokens, Set<Integer> uniques,
