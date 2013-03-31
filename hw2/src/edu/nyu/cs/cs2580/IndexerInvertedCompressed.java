@@ -11,6 +11,7 @@ import java.util.Vector;
 import java.util.Iterator;
 import java.io.IOException;
 import java.io.BufferedReader;
+import java.nio.ByteBuffer;
 import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -107,8 +108,11 @@ public class IndexerInvertedCompressed extends IndexerInverted implements Serial
   }
   private void loadTerms (Vector<Integer> idxs) throws IOException{
       for (int i = 0; i<idxs.size();i++) {
-          //          System.out.println(i);
+      System.out.println("load term i");
+          System.out.println(i);
+          System.out.println(_termToOccus.get(idxs.get(i)).size());
           if (_termToOccus.get(idxs.get(i)).size()==0) {
+              System.out.println("ininin");
               System.out.println("size term:"+idxs.get(i)+" "+_termToOccus.get(idxs.get(i)).size());
               loadTermI1(idxs.get(i));
           }
@@ -119,7 +123,7 @@ public class IndexerInvertedCompressed extends IndexerInverted implements Serial
                                         ArrayList<ArrayList<Integer> > list)
         throws IOException {
         //        System.out.println("inside read");
-        String t = reader.readLine();
+        /*        String t = reader.readLine();
         if (t==null) return ;
         String line="";
         while (!t.equals("xxx")) {
@@ -129,11 +133,17 @@ public class IndexerInvertedCompressed extends IndexerInverted implements Serial
             t = reader.readLine();
             if (t==null) break;;
         }
-        if (line == "") return;
+        if (line == "") return;*/
+        String line = getLine(reader);
 
         vByte vb = new vByte();
+        System.out.println(line);
         vb.loadFromString(line);
         ArrayList<Integer> flattened = vb.getInts();
+        for (int i = 0; i<flattened.size();i++)
+            System.out.print(flattened.get(i)+" ");
+        System.out.println();
+        System.out.println("xxxx");
         int index = 0;
         int s1 = flattened.get(0);
         index++;
@@ -167,9 +177,7 @@ public class IndexerInvertedCompressed extends IndexerInverted implements Serial
         BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), "ISO-8859-1"));
 
         for (int j = i%seperateNum; j< i; j+=seperateNum ) {
-            String s = reader.readLine();
-            while (!s.equals("xxx"))
-                s = reader.readLine();
+            getLine(reader);
         }
 
         ArrayList<ArrayList<Integer> > list = new ArrayList<ArrayList<Integer> >();
@@ -208,6 +216,44 @@ public class IndexerInvertedCompressed extends IndexerInverted implements Serial
       }
       writer.newLine();
   }
+  private String getLine(BufferedReader reader) {
+      String ret = "";
+      short c = 0;
+      System.out.println("get line");
+      while (true){
+          try {
+              //              System.out.println(ret);
+              c = (short)reader.read();
+              System.out.println(c);
+              //              byte[] b = intToByteArray(c);
+              byte[] b = ByteBuffer.allocate(4).putInt(c).array();
+              String s = new String(b,"iso-8859-1");
+              //              System.out.println(b[0]);
+              //              System.out.println(b[1]);
+              //              System.out.println(b[2]);
+              //              System.out.println(b[3]);
+              //              System.out.println(s);
+              //System.out.println(s);
+              ret = ret+s;
+              //              System.out.println(ret);
+          } catch (IOException e) {
+          }
+          if (ret.length()>=5)
+          if (ret.substring(ret.length()-4,ret.length()).equals("\u1234\u1234\u1234\u1234"))
+              break;
+      }
+      //      System.out.println(ret);
+      ret = ret.substring(0,ret.length()-4);
+      return ret;
+  }
+
+    public static final byte[] intToByteArray(int value) {
+        return new byte[] {
+        (byte)(value >>> 24),
+        (byte)(value >>> 16),
+        (byte)(value >>> 8),
+        (byte)value};
+    }
   private void readDocsAndPosFromFile(BufferedReader reader,
                                       ArrayList<ArrayList<Integer> > list) 
     throws IOException {
@@ -243,8 +289,7 @@ public class IndexerInvertedCompressed extends IndexerInverted implements Serial
         }
         writer.write(vb.toString());
         writer.newLine();
-        writer.write("xxx");
-        writer.newLine();
+        writer.write("\u1234\u1234\u1234\u1234");
     }
 
   private void mergeTmps() throws IOException {
@@ -315,11 +360,11 @@ public class IndexerInvertedCompressed extends IndexerInverted implements Serial
       gc();
   }
   public String getDir() {
-      return _options._indexPrefix+"/index_occurence/";
+      return _options._indexPrefix+"/index_compressed/";
   }
   @Override
   public String getIndexFilePath() {
-      return _options._indexPrefix + "/index_occurence/corpus_invertedOccurrence.idx";
+      return _options._indexPrefix + "/index_compressed/corpus_invertedCompressed.idx";
   }
   @Override
   public void updateStatistics(ArrayList<Integer> tokens, Set<Integer> uniques,
