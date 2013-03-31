@@ -32,7 +32,7 @@ public class IndexerInvertedCompressed extends IndexerInverted implements Serial
   private int loadedTermCount = 0;
   private int tmpFileCount = 0;
   private int currentLoaded = -1;
-  private static final int seperateNum = 50;
+  private static final int seperateNum = 100;
   private static final long serialVersionUID = 1057111905740085030L;
     // _termToOccus[0] info for term[0]
     // _termToOccus[0][0] info for term[0] at a doc
