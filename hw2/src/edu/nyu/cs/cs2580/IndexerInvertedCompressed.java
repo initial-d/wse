@@ -31,7 +31,7 @@ public class IndexerInvertedCompressed extends IndexerInverted implements Serial
   private int loadedTermCount = 0;
   private int tmpFileCount = 0;
   private int currentLoaded = -1;
-  private static final int seperateNum = 50;
+  private static final int seperateNum = 100;
   private static final long serialVersionUID = 1057111905740085030L;
     // _termToOccus[0] info for term[0]
     // _termToOccus[0][0] info for term[0] at a doc
@@ -315,11 +315,11 @@ public class IndexerInvertedCompressed extends IndexerInverted implements Serial
       gc();
   }
   public String getDir() {
-      return _options._indexPrefix+"/index_occurence/";
+      return _options._indexPrefix+"/index_compressed/";
   }
   @Override
   public String getIndexFilePath() {
-      return _options._indexPrefix + "/index_occurence/corpus_invertedOccurrence.idx";
+      return _options._indexPrefix + "/index_compressed/corpus_invertedOccurrence.idx";
   }
   @Override
   public void updateStatistics(ArrayList<Integer> tokens, Set<Integer> uniques,
