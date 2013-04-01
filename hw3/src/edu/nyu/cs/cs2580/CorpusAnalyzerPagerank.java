@@ -2,12 +2,16 @@ package edu.nyu.cs.cs2580;
 
 import java.io.IOException;
 import java.io.File;
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Set;
 import java.util.Iterator;
+
 import edu.nyu.cs.cs2580.SearchEngine.Options;
 
 /**
@@ -57,7 +61,7 @@ public class CorpusAnalyzerPagerank extends CorpusAnalyzer {
                 handleFile(fileEntry.getName());
             }
         }
-        outputInternalGraph();
+        //        outputInternalGraph();
         return;
     }
 
@@ -80,7 +84,7 @@ public class CorpusAnalyzerPagerank extends CorpusAnalyzer {
         for (int i = 0; i<_docOutLinkCount.size();i++) {
             _pageRank.add(score);
         }
-        outputePageRank();
+        //        outputePageRank();
         for (int i = 0; i<ite; i++) {
             ArrayList<Double> newRank = new ArrayList<Double> ();
             for (int j = 0; j<_pageRank.size();j++)
@@ -159,11 +163,24 @@ public class CorpusAnalyzerPagerank extends CorpusAnalyzer {
             System.out.println();
         }
     }
-    private void outputePageRank() {
-        System.out.println("PageRank:");
-        for (int i = 0; i<_pageRank.size();i++) {
-            System.out.print(_pageRank.get(i)+" ");
+    private void outputePageRank() throws IOException{
+        String outputPath =  _options._indexPrefix + 
+            "/corpus_pageRank.idx";
+        FileWriter fstream = new FileWriter(outputPath);
+        BufferedWriter out = new BufferedWriter(fstream);
+        //        System.out.println("PageRank:");
+        Iterator it = _docs.entrySet().iterator();
+        String fileName;
+        int idx;
+        double score;
+        while (it.hasNext()) {
+            Map.Entry pairs = (Map.Entry)it.next();
+            fileName = (String)pairs.getKey();
+            idx = (Integer) pairs.getValue();
+            score = _pageRank.get(idx);
+            out.write(fileName + " " +Double.toString(score));
+            out.newLine();
         }
-        System.out.println();
+        out.close();
     }
 }
