@@ -17,6 +17,9 @@ public class CorpusAnalyzerPagerank extends CorpusAnalyzer {
     private Map<String, Integer> _docs = new HashMap<String, Integer>();
     private ArrayList<Integer> _docOutLinkCount = new ArrayList<Integer>();
     private ArrayList<Set<Integer> > _docInLink = new ArrayList<Set<Integer> >();
+    private ArrayList<Double> _pageRank = new ArrayList<Double> ();
+    private double lambda = 0.9;
+    private int ite = 1;
     public CorpusAnalyzerPagerank(Options options) {
         super(options);
     }
@@ -45,28 +48,16 @@ public class CorpusAnalyzerPagerank extends CorpusAnalyzer {
         System.out.println("Preparing " + this.getClass().getName());
         getDocNames();
         final File folder = new File(_options._corpusPrefix);
-        int i = 0;
+        int docCount = 0;
         for (final File fileEntry : folder.listFiles()) {
-            i++;
-            if (i%1000 == 0 ) System.out.println(i);
+            docCount++;
+            if (docCount%1000 == 0 ) System.out.println(docCount);
 
             if (!fileEntry.isDirectory()) {
                 handleFile(fileEntry.getName());
             }
         }
-
-        /*        System.out.print("Out link count:");
-        for (int i = 0; i<_docOutLinkCount.size();i++) {
-            System.out.print(_docOutLinkCount.get(i)+" ");
-        }
-        System.out.println();
-        for (int i = 0; i<_docInLink.size();i++) {
-            for (Integer source: _docInLink.get(i)) {
-                System.out.print(source+" ");
-            }
-            System.out.println();
-            }*/
-
+        outputInternalGraph();
         return;
     }
 
@@ -85,12 +76,18 @@ public class CorpusAnalyzerPagerank extends CorpusAnalyzer {
      */
     @Override
         public void compute() throws IOException {
-        /*        final File folder = new File(_options._corpusPrefix);
-        for (final File fileEntry : folder.listFiles()) {
-            if (!fileEntry.isDirectory()) {
-                handleFile(fileEntry.getName());
-            }
-            }*/
+        double score = 1.0 / _docOutLinkCount.size();
+        for (int i = 0; i<_docOutLinkCount.size();i++) {
+            _pageRank.add(score);
+        }
+        outputePageRank();
+        for (int i = 0; i<ite; i++) {
+            ArrayList<Double> newRank = new ArrayList<Double> ();
+            for (int j = 0; j<_pageRank.size();j++)
+                newRank.add(newScore(j));
+            _pageRank = newRank;
+        }
+        outputePageRank();
         return;
     }
 
@@ -140,5 +137,33 @@ public class CorpusAnalyzerPagerank extends CorpusAnalyzer {
             System.out.println((String)pairs.getKey() + " " +
                                Integer.toString((Integer)pairs.getValue()));
                                }*/
+    }
+    private double newScore(int inx) {
+        double ret=1.0-lambda;
+        for (Integer source: _docInLink.get(inx)) {
+            ret = ret + lambda*_pageRank.get(source)
+                /_docOutLinkCount.get(source);
+        }
+        return ret;
+    }
+    private void outputInternalGraph() {
+        System.out.print("Out link count:");
+        for (int i = 0; i<_docOutLinkCount.size();i++) {
+            System.out.print(_docOutLinkCount.get(i)+" ");
+        }
+        System.out.println();
+        for (int i = 0; i<_docInLink.size();i++) {
+            for (Integer source: _docInLink.get(i)) {
+                System.out.print(source+" ");
+            }
+            System.out.println();
+        }
+    }
+    private void outputePageRank() {
+        System.out.println("PageRank:");
+        for (int i = 0; i<_pageRank.size();i++) {
+            System.out.print(_pageRank.get(i)+" ");
+        }
+        System.out.println();
     }
 }
