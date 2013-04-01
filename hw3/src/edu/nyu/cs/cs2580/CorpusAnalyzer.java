@@ -13,9 +13,9 @@ import edu.nyu.cs.cs2580.SearchEngine.Options;
  * This is the abstract CorpusAnalyzer class for all concrete CorpusAnalyzer
  * implementations. The goal of the CorpusAnalyzer is to complement the Indexer
  * and compute various document-level quality measures such as PageRank.
- * 
+ *
  * In HW3: students will implement {@link CorpusAnalyzerPagerank}.
- * 
+ *
  * @author congyu
  */
 public abstract class CorpusAnalyzer {
