@@ -130,7 +130,8 @@ public abstract class Indexer {
 
   // Number of times {@code term} appeared in the document {@code url}.
   public abstract int documentTermFrequency(String term, String url);
-
+    public abstract int documentTermFrequency (String term,int did);
+    public abstract int docPhraseCount(String[] phrase,int did);
   /**
    * All Indexers must be created through this factory class based on the
    * provided {@code options}.

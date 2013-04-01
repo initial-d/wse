@@ -20,15 +20,28 @@ public class Query {
   public Query(String query) {
     _query = query;
   }
-
+  public Vector<String> getTokenNotInPhrase() {
+      return _tokens;
+  }
+  public Vector<String[]>getPhrases() {
+      return new Vector<String[]>();
+      //   return null;
+  }
+  public Vector<String> getTokens() {
+      return _tokens;
+  }
   public void processQuery() {
     if (_query == null) {
       return;
     }
-    Scanner s = new Scanner(_query);
-    while (s.hasNext()) {
-      _tokens.add(s.next());
+    _query = _query.replaceAll("%20"," ");
+    System.out.println("process query?"+_query);
+    String [] tokens = _query.split(" ");
+    System.out.println("Query:"+tokens.length);
+    for (String token:tokens) {
+        System.out.println("Query:"+token);
+        _tokens.add(token);
     }
-    s.close();
   }
+
 }

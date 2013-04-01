@@ -23,7 +23,7 @@ class QueryHandler implements HttpHandler {
 
   /**
    * CGI arguments provided by the user through the URL. This will determine
-   * which Ranker to use and what output format to adopt. For simplicity, all
+   * which Ranker to use and what output formashet to adopt. For simplicity, all
    * arguments are publicly accessible.
    */
   public static class CgiArguments {
@@ -34,15 +34,16 @@ class QueryHandler implements HttpHandler {
     
     // The type of the ranker we will be using.
     public enum RankerType {
-      NONE,
-      FULLSCAN,
-      CONJUNCTIVE,
-      FAVORITE,
-      COSINE,
-      PHRASE,
-      QL,
-      LINEAR,
-      COMPREHENSIVE,
+        NONE,
+            FULLSCAN,
+            CONJUNCTIVE,
+            FAVORITE,
+            COSINE,
+            PHRASE,
+            QL,
+            LINEAR,
+            COMPREHENSIVE,
+
     }
     public RankerType _rankerType = RankerType.NONE;
     
@@ -155,7 +156,8 @@ class QueryHandler implements HttpHandler {
     }
 
     // Processing the query.
-    Query processedQuery = new Query(cgiArgs._query);
+    //Query processedQuery = new Query(cgiArgs._query);
+    Query processedQuery = new QueryPhrase(cgiArgs._query);
     processedQuery.processQuery();
 
     // Ranking.

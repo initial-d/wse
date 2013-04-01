@@ -236,4 +236,10 @@ class IndexerFullScan extends Indexer implements Serializable {
     return retval;
   }
 
+    public  int documentTermFrequency (String term,int did) {
+        return 0;
+    }
+    public int docPhraseCount(String[] phrase,int did){
+        return 0;
+    }
 }
