@@ -3,8 +3,10 @@ package edu.nyu.cs.cs2580;
 import java.io.IOException;
 import java.io.File;
 import java.io.BufferedWriter;
+import java.io.BufferedReader;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
+import java.io.FileReader;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.ArrayList;
@@ -80,6 +82,7 @@ public class CorpusAnalyzerPagerank extends CorpusAnalyzer {
      */
     @Override
         public void compute() throws IOException {
+        System.out.println("Computing " + this.getClass().getName());
         double score = 1.0 / _docOutLinkCount.size();
         for (int i = 0; i<_docOutLinkCount.size();i++) {
             _pageRank.add(score);
@@ -103,8 +106,30 @@ public class CorpusAnalyzerPagerank extends CorpusAnalyzer {
      */
     @Override
         public Object load() throws IOException {
-        System.out.println("Loading using " + this.getClass().getName());
-        return null;
+        Map<String, Double> rankScores = new HashMap<String, Double>();
+        String outputPath =  _options._indexPrefix +
+            "/corpus_pageRank.idx";
+        System.out.println("load pagerank from:"+outputPath);
+        FileReader filereader = new FileReader(outputPath);
+        BufferedReader bufferedreader = new BufferedReader(filereader);
+        String line = bufferedreader.readLine();
+        String[] tmp;
+        while (line!=null) {
+            tmp = line.split(" ");
+            rankScores.put(tmp[0],Double.parseDouble(tmp[1]));
+            line = bufferedreader.readLine();
+        }
+        bufferedreader.close();
+
+        /*Iterator it = rankScores.entrySet().iterator();
+        System.out.println("PageRank Load:");
+        while (it.hasNext()) {
+            Map.Entry pairs = (Map.Entry)it.next();
+            System.out.println((String)pairs.getKey() + " " +
+                               Double.toString((Double)pairs.getValue()));
+                               }*/
+
+        return rankScores;
     }
     private void handleFile(String fileName) throws IOException{
         int sourceId = _docs.get(fileName);
@@ -136,11 +161,11 @@ public class CorpusAnalyzerPagerank extends CorpusAnalyzer {
         }
 
         /*        Iterator it = _docs.entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry pairs = (Map.Entry)it.next();
-            System.out.println((String)pairs.getKey() + " " +
-                               Integer.toString((Integer)pairs.getValue()));
-                               }*/
+                  while (it.hasNext()) {
+                  Map.Entry pairs = (Map.Entry)it.next();
+                  System.out.println((String)pairs.getKey() + " " +
+                  Integer.toString((Integer)pairs.getValue()));
+                  }*/
     }
     private double newScore(int inx) {
         double ret=1.0-lambda;
@@ -164,7 +189,7 @@ public class CorpusAnalyzerPagerank extends CorpusAnalyzer {
         }
     }
     private void outputePageRank() throws IOException{
-        String outputPath =  _options._indexPrefix + 
+        String outputPath =  _options._indexPrefix +
             "/corpus_pageRank.idx";
         FileWriter fstream = new FileWriter(outputPath);
         BufferedWriter out = new BufferedWriter(fstream);

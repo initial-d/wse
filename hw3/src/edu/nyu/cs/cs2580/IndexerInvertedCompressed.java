@@ -108,12 +108,12 @@ public class IndexerInvertedCompressed extends IndexerInverted implements Serial
   }
   private void loadTerms (Vector<Integer> idxs) throws IOException{
       for (int i = 0; i<idxs.size();i++) {
-      System.out.println("load term i");
-          System.out.println(i);
-          System.out.println(_termToOccus.get(idxs.get(i)).size());
+          //      System.out.println("load term i");
+          //          System.out.println(i);
+          //          System.out.println(_termToOccus.get(idxs.get(i)).size());
           if (_termToOccus.get(idxs.get(i)).size()==0) {
-              System.out.println("ininin");
-              System.out.println("size term:"+idxs.get(i)+" "+_termToOccus.get(idxs.get(i)).size());
+              //  System.out.println("ininin");
+              //              System.out.println("size term:"+idxs.get(i)+" "+_termToOccus.get(idxs.get(i)).size());
               loadTermI(idxs.get(i));
           }
       }
