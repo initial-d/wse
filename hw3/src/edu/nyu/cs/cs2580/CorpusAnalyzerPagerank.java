@@ -109,7 +109,6 @@ public class CorpusAnalyzerPagerank extends CorpusAnalyzer {
         String outputPath =  _options._indexPrefix +
             "/corpus_pageRank.idx";
         return loadFromFile(outputPath);
-        // fuck this
     }
     public Object loadFromFile(String fileName) throws IOException {
         System.out.println("load pagerank from:"+fileName);

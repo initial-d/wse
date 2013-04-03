@@ -82,7 +82,6 @@ public class LogMinerNumviews extends LogMiner {
             }
         }
     }
-    //    public Object load(String path) throws IO)
     private void processLogs(Map<String, Integer> numViews) throws IOException{
         final File folder = new File(_options._logPrefix);
         FileReader filereader;
