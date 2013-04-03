@@ -41,7 +41,6 @@ public class LogMinerNumviews extends LogMiner {
         getDocNames(numViews);
         processLogs(numViews);
         outputToFile(numViews);
-        outputNumViews(numViews);
         return;
     }
 
@@ -54,11 +53,14 @@ public class LogMinerNumviews extends LogMiner {
     @Override
         public Object load() throws IOException {
         System.out.println("Loading using " + this.getClass().getName());
-        Map<String, Integer> numViews = new HashMap<String, Integer>();
         String outputPath =  _options._indexPrefix +
             "/corpus_numViews.idx";
-        System.out.println("load numviews from:"+outputPath);
-        FileReader filereader = new FileReader(outputPath);
+        return loadFromFile(outputPath);
+    }
+    public Object loadFromFile(String fileName) throws IOException{
+        Map<String, Integer> numViews = new HashMap<String, Integer>();
+        System.out.println("load numviews from:"+fileName);
+        FileReader filereader = new FileReader(fileName);
         BufferedReader bufferedreader = new BufferedReader(filereader);
         String line = bufferedreader.readLine();
         String[] tmp;
@@ -80,6 +82,7 @@ public class LogMinerNumviews extends LogMiner {
             }
         }
     }
+    //    public Object load(String path) throws IO)
     private void processLogs(Map<String, Integer> numViews) throws IOException{
         final File folder = new File(_options._logPrefix);
         FileReader filereader;

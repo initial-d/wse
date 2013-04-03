@@ -106,11 +106,15 @@ public class CorpusAnalyzerPagerank extends CorpusAnalyzer {
      */
     @Override
         public Object load() throws IOException {
-        Map<String, Double> rankScores = new HashMap<String, Double>();
         String outputPath =  _options._indexPrefix +
             "/corpus_pageRank.idx";
-        System.out.println("load pagerank from:"+outputPath);
-        FileReader filereader = new FileReader(outputPath);
+        return loadFromFile(outputPath);
+        // fuck this
+    }
+    public Object loadFromFile(String fileName) throws IOException {
+        System.out.println("load pagerank from:"+fileName);
+        Map<String, Double> rankScores = new HashMap<String, Double>();
+        FileReader filereader = new FileReader(fileName);
         BufferedReader bufferedreader = new BufferedReader(filereader);
         String line = bufferedreader.readLine();
         String[] tmp;
@@ -120,15 +124,7 @@ public class CorpusAnalyzerPagerank extends CorpusAnalyzer {
             line = bufferedreader.readLine();
         }
         bufferedreader.close();
-        // fuck this
-        /*Iterator it = rankScores.entrySet().iterator();
-        System.out.println("PageRank Load:");
-        while (it.hasNext()) {
-            Map.Entry pairs = (Map.Entry)it.next();
-            System.out.println((String)pairs.getKey() + " " +
-                               Double.toString((Double)pairs.getValue()));
-                               }*/
-
+        printPageRank(rankScores);
         return rankScores;
     }
     private void handleFile(String fileName) throws IOException{
@@ -186,6 +182,15 @@ public class CorpusAnalyzerPagerank extends CorpusAnalyzer {
                 System.out.print(source+" ");
             }
             System.out.println();
+        }
+    }
+    private void printPageRank(Map<String,Double> rankScores) {
+        Iterator it = rankScores.entrySet().iterator();
+        System.out.println("PageRank Load:");
+        while (it.hasNext()) {
+            Map.Entry pairs = (Map.Entry)it.next();
+            System.out.println((String)pairs.getKey() + " " +
+                               Double.toString((Double)pairs.getValue()));
         }
     }
     private void outputePageRank() throws IOException{

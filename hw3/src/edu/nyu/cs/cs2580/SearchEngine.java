@@ -159,9 +159,8 @@ public class SearchEngine {
         "Must provide a valid port number (258XX) in serve mode!");
     Check(OPTIONS != null, "Must provide options!");
   }
-  
+
   ///// Main functionalities start
-  
   private static void startMining()
       throws IOException, NoSuchAlgorithmException {
     CorpusAnalyzer analyzer = CorpusAnalyzer.Factory.getCorpusAnalyzerByOption(
@@ -170,7 +169,7 @@ public class SearchEngine {
         "Analyzer " + SearchEngine.OPTIONS._corpusAnalyzerType + " not found!");
     analyzer.prepare();
     analyzer.compute();
-    //    analyzer.load();
+    analyzer.load();
     LogMiner miner = LogMiner.Factory.getLogMinerByOption(SearchEngine.OPTIONS);
     Check(miner != null,
         "Miner " + SearchEngine.OPTIONS._logMinerType + " not found!");
