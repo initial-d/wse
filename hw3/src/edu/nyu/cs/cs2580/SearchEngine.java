@@ -175,6 +175,7 @@ public class SearchEngine {
     Check(miner != null,
         "Miner " + SearchEngine.OPTIONS._logMinerType + " not found!");
     miner.compute();
+    miner.load();
     return;
   }
   
