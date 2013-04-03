@@ -120,7 +120,7 @@ public class CorpusAnalyzerPagerank extends CorpusAnalyzer {
             line = bufferedreader.readLine();
         }
         bufferedreader.close();
-
+        // fuck this
         /*Iterator it = rankScores.entrySet().iterator();
         System.out.println("PageRank Load:");
         while (it.hasNext()) {
