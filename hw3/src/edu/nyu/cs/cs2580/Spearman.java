@@ -139,12 +139,8 @@ public class Spearman {
         calculatePr();
         calculateNr();
         double pz=0,nz=0;
-        for (int i = 0; i<_infosV.size();i++) {
-            pz+=_infosV.get(i)._pR;
-            nz+=_infosV.get(i)._nR;
-        }
-        pz = pz / (double)_infosV.size();
-        nz = nz / (double)_infosV.size();
+        pz = ((double)(1+_infosV.size()))/2.0;
+        nz = pz;
         double up=0,down1=0,down2=0;
         double xx,yy;
         for (int i = 0; i<_infosV.size();i++) {
@@ -164,7 +160,5 @@ public class Spearman {
     public static void main (String [] args) throws IOException{
         Spearman.loadData(args[0],args[1]);
         Spearman.computeRanks();
-        //  Spearman.computeTao ();
-        //        Spearman.computeDocInfos();
     }
 }
