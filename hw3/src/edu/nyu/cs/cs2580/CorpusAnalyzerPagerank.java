@@ -123,7 +123,7 @@ public class CorpusAnalyzerPagerank extends CorpusAnalyzer {
             line = bufferedreader.readLine();
         }
         bufferedreader.close();
-        printPageRank(rankScores);
+        //        printPageRank(rankScores);
         return rankScores;
     }
     private void handleFile(String fileName) throws IOException{

@@ -70,7 +70,7 @@ public class LogMinerNumviews extends LogMiner {
             line = bufferedreader.readLine();
         }
         bufferedreader.close();
-        outputNumViews(numViews);
+        //        outputNumViews(numViews);
         return numViews;
     }
     private void getDocNames(Map<String, Integer> numViews) throws IOException {
@@ -80,6 +80,14 @@ public class LogMinerNumviews extends LogMiner {
             if (!fileEntry.isDirectory()) {
                 numViews.put(fileEntry.getName(),0);
             }
+        }
+    }
+    private boolean isInt(String s) {
+        try {
+            int i = Integer.parseInt(s); return true;
+        }
+        catch(NumberFormatException er) {
+            return false;
         }
     }
     private void processLogs(Map<String, Integer> numViews) throws IOException{
@@ -97,10 +105,10 @@ public class LogMinerNumviews extends LogMiner {
                 while (line!=null) {
                     tmp = line.split(" ");
                     oldValue = numViews.get(tmp[1]);
-                    if (oldValue!=null) {
+                    if (oldValue!=null&&tmp.length == 3&&isInt(tmp[2])) {
                         numViews.put(tmp[1],
-                                      oldValue+
-                                      Integer.parseInt(tmp[2]));
+                                     oldValue+
+                                     Integer.parseInt(tmp[2]));
                     }
                     line = bufferedreader.readLine();
                 }
