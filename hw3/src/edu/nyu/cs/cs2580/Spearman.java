@@ -11,7 +11,8 @@ import java.io.IOException;
 
 public class Spearman {
     private static class DocInfo {
-        public DocInfo () {}
+        public DocInfo (String name) {_name = name;}
+        public String _name;
         public int _numView=0;
         public Double _pageRank=0.0;
         public Double _pR=0.0;
@@ -21,14 +22,14 @@ public class Spearman {
         public int compare(DocInfo doc1, DocInfo doc2) {
             if (doc1._pageRank>doc2._pageRank) return -1;
             if (doc1._pageRank<doc2._pageRank) return 1;
-            return 0;
+            return doc1._name.compareTo(doc2._name);
         }
     }
     public static class numViewComparator implements Comparator<DocInfo> {
         public int compare(DocInfo doc1, DocInfo doc2) {
             if (doc1._numView>doc2._numView) return -1;
             if (doc1._numView<doc2._numView) return 1;
-            return 0;
+            return doc1._name.compareTo(doc2._name);
         }
     }
     private static Vector<DocInfo> _infosV = new Vector<DocInfo>();
@@ -41,7 +42,7 @@ public class Spearman {
             Map.Entry pairs = (Map.Entry)it.next();
             name = (String) pairs.getKey();
             if (infosM.get(name)==null) {
-                DocInfo di = new DocInfo();
+                DocInfo di = new DocInfo(name);
                 di._pageRank = (Double) pairs.getValue();
                 infosM.put(name,di);
             }
@@ -51,7 +52,7 @@ public class Spearman {
             Map.Entry pairs = (Map.Entry)it.next();
             name = (String) pairs.getKey();
             if (infosM.get(name)==null) {
-                DocInfo di = new DocInfo();
+                DocInfo di = new DocInfo(name);
                 di._numView = (Integer) pairs.getValue();
                 infosM.put(name,di);
             } else {
@@ -93,7 +94,7 @@ public class Spearman {
     private static void calculatePr() {
         System.out.println("PR:");
         Collections.sort(_infosV, new pageRankComparator());
-        int head=0,tail=0;
+        /*        int head=0,tail=0;
         double sum;
         while (head<_infosV.size()) {
             tail = head;
@@ -106,17 +107,20 @@ public class Spearman {
             for (int i = head;i<=tail;i++)
                 _infosV.get(i)._pR = sum;
             head = tail + 1;
-        }
+            }*/
         for (int i = 0; i<_infosV.size();i++)
-            System.out.println(_infosV.get(i)._numView+" "+
+            _infosV.get(i)._pR = (double)i+1;
+        for (int i = 0; i<_infosV.size();i++)
+            System.out.println(_infosV.get(i)._name+" "+
+                               _infosV.get(i)._numView+" "+
                                _infosV.get(i)._pageRank +" " +
-                               _infosV.get(i)._nR + " " +
+                               _infosV.get(i)._nR + " "+
                                _infosV.get(i)._pR);
     }
     private static void calculateNr() {
         System.out.println("NR:");
         Collections.sort(_infosV, new numViewComparator());
-        int head=0,tail=0;
+        /*        int head=0,tail=0;
         double sum;
         while (head<_infosV.size()) {
             tail = head;
@@ -128,9 +132,12 @@ public class Spearman {
             for (int i = head;i<=tail;i++)
                 _infosV.get(i)._nR = sum;
             head = tail + 1;
-        }
+            }*/
         for (int i = 0; i<_infosV.size();i++)
-            System.out.println(_infosV.get(i)._numView+" "+
+          _infosV.get(i)._nR = (double)i+1;
+        for (int i = 0; i<_infosV.size();i++)
+            System.out.println(_infosV.get(i)._name+" "+
+                               _infosV.get(i)._numView+" "+
                                _infosV.get(i)._pageRank +" " +
                                _infosV.get(i)._nR + " " +
                                _infosV.get(i)._pR);
@@ -138,7 +145,7 @@ public class Spearman {
     private static void computeRanks() {
         calculatePr();
         calculateNr();
-        double pz=0,nz=0;
+        /*        double pz=0,nz=0;
         pz = ((double)(1+_infosV.size()))/2.0;
         nz = pz;
         double up=0,down1=0,down2=0;
@@ -152,7 +159,16 @@ public class Spearman {
         }
         down1 = Math.sqrt(down1);
         down2 = Math.sqrt(down2);
-        double tao = up/(down1*down2);
+        double tao = up/(down1*down2);*/
+        double up = 0;
+        double tmp;
+        for (int i = 0; i<_infosV.size();i++) {
+            tmp = _infosV.get(i)._pR - _infosV.get(i)._nR;
+            up = up + tmp*tmp;
+        }
+        tmp = _infosV.size();
+        double down = tmp*(tmp*tmp-1);
+        double tao = 1.0 - 6.0*up/down;
         System.out.println(tao);
     }
     //    private static void computeTao() {

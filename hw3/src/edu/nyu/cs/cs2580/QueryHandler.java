@@ -31,7 +31,8 @@ class QueryHandler implements HttpHandler {
     public String _query = "";
     // How many results to return
     private int _numResults = 10;
-    
+    private int _numDocs = 10;
+    private int _numTerms = 10;
     // The type of the ranker we will be using.
     public enum RankerType {
         NONE,
@@ -46,7 +47,12 @@ class QueryHandler implements HttpHandler {
 
     }
     public RankerType _rankerType = RankerType.NONE;
-    
+    public int getNumDocs () {
+        return _numDocs;
+    }
+    public int getNumTerms () {
+        return _numTerms;
+    }
     // The output format.
     public enum OutputFormat {
       TEXT,
@@ -83,6 +89,16 @@ class QueryHandler implements HttpHandler {
           } catch (IllegalArgumentException e) {
             // Ignored, search engine should never fail upon invalid user input.
           }
+        } else if (key.equals("numterms")) {
+            try {
+                _numTerms = Integer.parseInt(val);
+            } catch (IllegalArgumentException e) {
+            }
+        } else if (key.equals("numdocs")) {
+            try {
+                _numDocs = Integer.parseInt(val);
+            } catch (IllegalArgumentException e) {
+            }
         }
       }  // End of iterating over params
     }
@@ -136,7 +152,7 @@ class QueryHandler implements HttpHandler {
     if (uriPath == null || uriQuery == null) {
       respondWithMsg(exchange, "Something wrong with the URI!");
     }
-    if (!uriPath.equals("/search")) {
+    if (!uriPath.equals("/search")&&!uriPath.equals("/prf")) {
       respondWithMsg(exchange, "Only /search is handled!");
     }
     System.out.println("Query: " + uriQuery);
@@ -166,13 +182,13 @@ class QueryHandler implements HttpHandler {
     StringBuffer response = new StringBuffer();
     switch (cgiArgs._outputFormat) {
     case TEXT:
-      constructTextOutput(scoredDocs, response);
-      break;
+        constructTextOutput(scoredDocs, response);
+        break;
     case HTML:
-      // @CS2580: Plug in your HTML output
-      break;
+        // @CS2580: Plug in your HTML output
+        break;
     default:
-      // nothing
+        // nothing
     }
     respondWithMsg(exchange, response.toString());
     System.out.println("Finished query: " + cgiArgs._query);

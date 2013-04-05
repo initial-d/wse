@@ -20,6 +20,9 @@ public class RankerComprehensive extends Ranker {
 
   @Override
   public Vector<ScoredDocument> runQuery(Query query, int numResults) {
+      System.out.println("compehensive:"+
+                         _arguments.getNumDocs()+" "+
+                         _arguments.getNumTerms());
     return null;
   }
 }
