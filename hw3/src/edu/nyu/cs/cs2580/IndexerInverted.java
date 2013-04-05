@@ -44,6 +44,10 @@ public abstract class IndexerInverted extends Indexer implements Serializable {
     public abstract void removeStopwordsInfo(int idx) ;
     public abstract void appendToFile(BufferedWriter out) ;
     public abstract void loadAdditional(BufferedReader out) ;
+    protected int getIndex(String term) {
+        return _dictionary.get(HTMLParser.stemm(term));
+    }
+
     private void writeToFile () {
         try{
             // Create file
@@ -75,7 +79,7 @@ public abstract class IndexerInverted extends Indexer implements Serializable {
     }
     private void filterStopwords(String term) {
         System.out.println("rm stop word:"+term);
-        int idx = _dictionary.get(term);
+        int idx = getIndex(term);
         removeStopwordsInfo(idx);
         if (idx == 0)
             idx = -1;
@@ -89,7 +93,7 @@ public abstract class IndexerInverted extends Indexer implements Serializable {
             String term= (String)pairs.getKey();
             int ctf = corpusTermFrequency(term);
             int cdf = corpusDocFrequencyByTerm(term);
-            if (((double)cdf/(double)_numDocs)>0.9) {
+            if (((double)cdf/(double)_numDocs)>0.7) {
                 _stopWords.add(term);
                 //                filterStopwords(term);
             }
@@ -124,6 +128,7 @@ public abstract class IndexerInverted extends Indexer implements Serializable {
                     handleFile(fileEntry.getName(),pageRank,numViews);
                 }
             }
+            detectStopWords();
         }
         System.out.println(
                            "Indexed " + Integer.toString(_numDocs) + " docs with " +
@@ -161,7 +166,6 @@ public abstract class IndexerInverted extends Indexer implements Serializable {
         updateStatistics(titleTokens, uniqueTerms,did,0);
         updateStatistics(bodyTokens, uniqueTerms,did,titleTokens.size());
         if (_documents.size()%1000==0 ) {
-            detectStopWords();
             System.out.println(Integer.toString(_documents.size()/1000)+"000files");
         }
         this.updateUniqueTerms(uniqueTerms,did);
@@ -321,11 +325,10 @@ public abstract class IndexerInverted extends Indexer implements Serializable {
         return null;
     }
     public Vector<Integer> convertTermsToIdx (Vector<String> terms) {
-
         Vector<Integer> ret = new Vector<Integer>();
         for (String term: terms) {
-            ret.add(_dictionary.get(HTMLParser.stemm(term)));
-            //          System.out.println(term+" "+ret.get(ret.size()-1));
+            ret.add(getIndex(term));
+            //            System.out.println(term+" "+ret.get(ret.size()-1));
         }
         return ret;
     }

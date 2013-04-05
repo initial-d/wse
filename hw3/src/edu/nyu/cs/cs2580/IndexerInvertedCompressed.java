@@ -200,6 +200,8 @@ public class IndexerInvertedCompressed extends IndexerInverted implements Serial
       ArrayList<ArrayList<Integer> > list = new ArrayList<ArrayList<Integer> >();
       readDocsAndPosFromFile(reader,list);
       _termToOccus.set(i,list);
+      System.out.println("Set "+i+":"+_termToOccus.get(i).size());
+      //      list = _termToOccus.get(i);
       loadedTermCount++;
       reader.close();
       gc();
@@ -258,6 +260,7 @@ public class IndexerInvertedCompressed extends IndexerInverted implements Serial
                                       ArrayList<ArrayList<Integer> > list) 
     throws IOException {
       String line = reader.readLine();
+      //      System.out.println(line);
       if (line == null) return;
       Scanner s = new Scanner(line);
       int s1 = s.nextInt ();
@@ -408,7 +411,7 @@ public class IndexerInvertedCompressed extends IndexerInverted implements Serial
   public void addToken(String token, ArrayList<Integer> tokens) {
       int idx = -1;
       if (_dictionary.containsKey(token)) {
-        idx = _dictionary.get(token);
+          idx = getIndex(token);
       } else {
         idx = _termNum++;
         //        _terms.add(token);
@@ -463,7 +466,7 @@ public class IndexerInvertedCompressed extends IndexerInverted implements Serial
       for (int i = 0; i<phrases.size();i++) {
           Vector<Integer> tmp = new Vector<Integer>();
           for (int j=0; j<phrases.get(i).length;j++) {
-              tmp.add(_dictionary.get(HTMLParser.stemm(phrases.get(i)[j])));
+              tmp.add(getIndex(phrases.get(i)[j]));
           }
           ret.add(tmp);
       }
@@ -571,6 +574,7 @@ public class IndexerInvertedCompressed extends IndexerInverted implements Serial
       try {
           loadTerms(idxs);
       } catch (Exception e) {
+          System.out.println("cannot load!");
       }
 
       int did;
@@ -608,7 +612,7 @@ public class IndexerInvertedCompressed extends IndexerInverted implements Serial
   public int corpusDocFrequencyByTerm(String term) {
       if (!_dictionary.containsKey(term))
           return 0;
-      Integer idx = _dictionary.get(term);
+      Integer idx = getIndex(term);
       if (idx<0) return 0;
       return _termDocFreq.get(idx);
   }
@@ -616,7 +620,7 @@ public class IndexerInvertedCompressed extends IndexerInverted implements Serial
   public int corpusTermFrequency(String term) {
       if (!_dictionary.containsKey(term))
           return 0;
-      Integer idx = _dictionary.get(term);
+      Integer idx = getIndex(term);
       if (idx<0) return 0;
       return _termCorFreq.get(idx);
   }
@@ -630,16 +634,17 @@ public class IndexerInvertedCompressed extends IndexerInverted implements Serial
 
 
   public int documentTermFrequency(String term, int did) {
-      int dix = _dictionary.get(term);
-      for (int i = 0; i<_termToOccus.get(dix).size();i++)
+      int dix = getIndex(term);
+      for (int i = 0; i<_termToOccus.get(dix).size();i++) {
           if (_termToOccus.get(dix).get(i).get(0)==did)
               return _termToOccus.get(dix).size()-1;
+      }
       return 0;
   }
     public int docPhraseCount(String[] phrase, int did) {
         Vector<Integer> idsx = new Vector<Integer>();
         for (String s:phrase) {
-            idsx.add(_dictionary.get(s));
+            idsx.add(getIndex(s));
         }
         return docPhraseCount(idsx,did);
     }

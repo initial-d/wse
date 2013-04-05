@@ -8,6 +8,9 @@ import java.util.HashMap;
 import java.util.Collections;
 import java.util.Iterator;
 import java.io.IOException;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
+
 import edu.nyu.cs.cs2580.QueryHandler.CgiArguments;
 import edu.nyu.cs.cs2580.SearchEngine.Options;
 
@@ -46,6 +49,9 @@ public class RankerComprehensive extends Ranker {
         double cq;
         double lambda = 0.5;
         double score = 1.0;
+
+        //        System.out.println(D);
+        //        System.out.println(C);
         for (int i=0; i<qv.size();i++) {
             fq = _indexer.documentTermFrequency(qv.get(i),did);
             cq = _indexer.corpusTermFrequency(qv.get(i));
@@ -83,7 +89,6 @@ public class RankerComprehensive extends Ranker {
             docid = doc._docid;
             //            System.out.println(doc.getTitle());
         }
-        System.out.println("Doc number:"+cc);
         Vector<ScoredDocument> results = new Vector<ScoredDocument>();
         ScoredDocument scoredDoc = null;
         while ((scoredDoc = rankQueue.poll()) != null) {
@@ -91,10 +96,24 @@ public class RankerComprehensive extends Ranker {
         }
         Collections.sort(results, Collections.reverseOrder());
         try {
-            expand(results);
+            Vector<Term> prf = expand(results);
+            writeToFile(prf,query);
         } catch (IOException e) {
         }
         return results;
+    }
+    private void writeToFile(Vector<Term> prf,Query query) throws IOException{
+        int sum = 0;
+        for (int i = 0; i<prf.size();i++)
+            sum += prf.get(i)._count;
+        FileWriter fstream = new FileWriter("data/index/prf/"+query._query+".prf");
+        BufferedWriter out = new BufferedWriter(fstream);
+        double p;
+        for (int i = 0; i<prf.size();i++) {
+            p = ((double)prf.get(i)._count)/(double) sum;
+            out.write(prf.get(i)._term + " " + Double.toString(p)+"\n");
+        }
+        out.close();
     }
     private void handleFile(String filePath,Map<String,Term> terms) {
         Vector<String> words = HTMLParser.parse(filePath);
@@ -108,16 +127,17 @@ public class RankerComprehensive extends Ranker {
             }
         }
     }
-    private void expand(Vector<ScoredDocument> docs) throws IOException{
+    private Vector<Term>  expand(Vector<ScoredDocument> docs) throws IOException{
         Map<String,Term> terms = new HashMap<String,Term> ();
         for (int i = 0; i<docs.size(); i++) {
             handleFile(_options._corpusPrefix+"/"+docs.get(i).getDoc().getTitle(),
                        terms);
         }
         // working on terms
-        System.out.println(terms.size());
+        //        System.out.println(terms.size());
         Iterator it = terms.entrySet().iterator();
         Vector<Term> tV= new Vector<Term>();
+
         while (it.hasNext()) {
             Map.Entry pairs = (Map.Entry)it.next();
             tV.add((Term) pairs.getValue());
@@ -125,12 +145,17 @@ public class RankerComprehensive extends Ranker {
         Collections.sort(tV);
         StopWords stopWords = new StopWords();
         stopWords.load();
-        int j = 0;
+        int j = _arguments.getNumTerms();
+        Vector<Term> result = new Vector<Term> ();
         for (int i = 0; i<tV.size();i++)
-            if (!stopWords.isStopWord(tV.get(i)._term)&&j<20) {
+            if (!stopWords.isStopWord(tV.get(i)._term)&&j>0) {
                 System.out.println(tV.get(i)._term+" "+
-                                   tV.get(i)._count);
-                j++;
+                                   tV.get(i)._count+" "+
+                                   _indexer.corpusTermFrequency(tV.get(i)._term)+" "+
+                                   _indexer.corpusDocFrequencyByTerm(tV.get(i)._term));
+                result.add(tV.get(i));
+                j--;
             }
+        return result;
     }
 }
