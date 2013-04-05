@@ -154,13 +154,6 @@ public class CorpusAnalyzerPagerank extends CorpusAnalyzer {
                 _docInLink.add( new HashSet<Integer>());
             }
         }
-
-        /*        Iterator it = _docs.entrySet().iterator();
-                  while (it.hasNext()) {
-                  Map.Entry pairs = (Map.Entry)it.next();
-                  System.out.println((String)pairs.getKey() + " " +
-                  Integer.toString((Integer)pairs.getValue()));
-                  }*/
     }
     private double newScore(int inx) {
         double ret=1.0-lambda;

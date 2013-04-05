@@ -85,11 +85,6 @@ public class Spearman {
         if (Double.toString(a).compareTo(Double.toString(b))==0)
             return true;
         return false;
-        /*        double c= (a-b);
-        if (c<0) c = -c;
-        if (c/a<0.00000000001&&c/b<0.00000000001)
-            return true;
-            return false;*/
     }
     private static void calculatePr() {
         System.out.println("PR:");
@@ -171,8 +166,6 @@ public class Spearman {
         double tao = 1.0 - 6.0*up/down;
         System.out.println(tao);
     }
-    //    private static void computeTao() {
-    //    }
     public static void main (String [] args) throws IOException{
         Spearman.loadData(args[0],args[1]);
         Spearman.computeRanks();

@@ -23,6 +23,7 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 
 public abstract class IndexerInverted extends Indexer implements Serializable {
+    private StopWords _stopWords = new StopWords();
     private static final long serialVersionUID = 967111905740085030L;
     protected Map<String, Integer> _dictionary = new HashMap<String, Integer>();
     protected ArrayList<Document> _documents = new ArrayList<Document>();
@@ -46,6 +47,7 @@ public abstract class IndexerInverted extends Indexer implements Serializable {
     private void writeToFile () {
         try{
             // Create file
+            _stopWords.writeToFile();
             FileWriter fstream = new FileWriter(getIndexFilePath());
             BufferedWriter out = new BufferedWriter(fstream);
             out.write(Integer.toString(_numDocs)+" "+
@@ -80,6 +82,7 @@ public abstract class IndexerInverted extends Indexer implements Serializable {
         _dictionary.put(term,-idx);
     }
     private void detectStopWords () {
+        System.out.println("stopwords");
         Iterator it = _dictionary.entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry pairs = (Map.Entry)it.next();
@@ -87,9 +90,11 @@ public abstract class IndexerInverted extends Indexer implements Serializable {
             int ctf = corpusTermFrequency(term);
             int cdf = corpusDocFrequencyByTerm(term);
             if (((double)cdf/(double)_numDocs)>0.9) {
-                filterStopwords(term);
+                _stopWords.add(term);
+                //                filterStopwords(term);
             }
         }
+        System.out.println("stopwords end");
     }
 
     @Override
@@ -156,7 +161,7 @@ public abstract class IndexerInverted extends Indexer implements Serializable {
         updateStatistics(titleTokens, uniqueTerms,did,0);
         updateStatistics(bodyTokens, uniqueTerms,did,titleTokens.size());
         if (_documents.size()%1000==0 ) {
-            //          detectStopWords();
+            detectStopWords();
             System.out.println(Integer.toString(_documents.size()/1000)+"000files");
         }
         this.updateUniqueTerms(uniqueTerms,did);
@@ -260,7 +265,7 @@ public abstract class IndexerInverted extends Indexer implements Serializable {
                 doc.setNumViews(numview);
                 doc.setSize(size);
                 _documents.add(doc);
-                System.out.println(doc.toString());
+                //        System.out.println(doc.toString());
             }
             System.out.println("document loaded!");
             line = bufferedreader.readLine();
