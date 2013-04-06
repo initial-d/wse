@@ -200,7 +200,7 @@ public class IndexerInvertedCompressed extends IndexerInverted implements Serial
       ArrayList<ArrayList<Integer> > list = new ArrayList<ArrayList<Integer> >();
       readDocsAndPosFromFile(reader,list);
       _termToOccus.set(i,list);
-      System.out.println("Set "+i+":"+_termToOccus.get(i).size());
+      //      System.out.println("Set "+i+":"+_termToOccus.get(i).size());
       //      list = _termToOccus.get(i);
       loadedTermCount++;
       reader.close();

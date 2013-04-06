@@ -106,7 +106,10 @@ public class RankerComprehensive extends Ranker {
         int sum = 0;
         for (int i = 0; i<prf.size();i++)
             sum += prf.get(i)._count;
-        FileWriter fstream = new FileWriter("data/index/prf/"+query._query+".prf");
+        String name = query._query;
+        name = name.replace(" ","_");
+        //        name = name.replace("\"","_\"");
+        FileWriter fstream = new FileWriter("data/index/prf/"+name+".prf");
         BufferedWriter out = new BufferedWriter(fstream);
         double p;
         for (int i = 0; i<prf.size();i++) {
