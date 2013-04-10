@@ -24,12 +24,12 @@ public class RankerFavorite extends Ranker {
     private double jmsScore (Query query, int did) {
         Vector<String[]> qp = query.getPhrases();
         Vector<String> qv = query.getTokenNotInPhrase();
-        for (int i = 0; i<qv.size();i++)
+        /*        for (int i = 0; i<qv.size();i++)
             qv.set(i,HTMLParser.stemm(qv.get(i)));
         for (int i = 0; i<qp.size();i++)
             for (int j = 0; j<qp.get(i).length;j++)
                 qp.get(i)[j] = HTMLParser.stemm(qp.get(i)[j]);
-
+        */
         double D = _indexer.getDoc(did).getSize();
         double C = _indexer.totalTermFrequency();
         double fq;

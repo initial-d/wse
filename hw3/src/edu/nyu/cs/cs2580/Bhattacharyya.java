@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
 import java.lang.Math;
+
 public class Bhattacharyya {
     private static Vector<PRF> _prfs = new Vector<PRF>();
     private static class PRF {
@@ -40,7 +41,7 @@ public class Bhattacharyya {
                 term = (String)pairs.getKey();
                 prob = (Double) pairs.getValue();
                 if (p2._prob.get(term)!=null) {
-                    ret = ret + prob *(Double) p2._prob.get(term);
+                    ret = ret +Math.sqrt( prob *(Double) p2._prob.get(term));
                 }
             }
             return ret;

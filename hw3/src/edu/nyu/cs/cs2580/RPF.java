@@ -70,7 +70,7 @@ class RPF {
         int j = _arguments.getNumTerms();
         Vector<Term> result = new Vector<Term> ();
         for (int i = 0; i<tV.size();i++)
-            if (!stopWords.isStopWord(tV.get(i)._term)&&j>0&&tV.get(i)._term.length()>2) {
+            if (!stopWords.isStopWord(tV.get(i)._term)&&j>0&&tV.get(i)._term.length()>3) {
                 /*                System.out.println(tV.get(i)._term+" "+
                                    tV.get(i)._count+" "+
                                    _indexer.corpusTermFrequency(tV.get(i)._term)+" "+
