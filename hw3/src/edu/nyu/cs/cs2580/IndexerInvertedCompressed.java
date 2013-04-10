@@ -465,6 +465,7 @@ public class IndexerInvertedCompressed extends IndexerInverted implements Serial
       for (int i = 0; i<phrases.size();i++) {
           Vector<Integer> tmp = new Vector<Integer>();
           for (int j=0; j<phrases.get(i).length;j++) {
+              //              tmp.add(_dictionary.get(phrases.get(i)[j]));
               tmp.add(getIndex(phrases.get(i)[j]));
           }
           ret.add(tmp);

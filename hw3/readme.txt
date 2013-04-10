@@ -23,3 +23,20 @@ lambda iteration  result
 0.9    2          0.45987263063866546
 0.1    1          0.45909605396622954
 0.1    2          0.4547137514318028
+
+
+As the grading script Bhattacharyya will take an file name as input argument whose format is
+ <query>:<prf file>
+
+where prf is the output of prf? command of corresponding query
+
+e.g
+
+assume prf.tsv is the input file it should be like
+google:prf-1.tsv
+bing:prf-2.tsv
+salsa:prf-3.tsv
+data mining:prf-4.tsv
+web search:prf-5.tsv
+
+That prf-1..5.tsv are the prf output of prf?query=google,bing...
