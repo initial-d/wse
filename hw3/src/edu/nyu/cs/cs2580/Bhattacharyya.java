@@ -15,15 +15,17 @@ public class Bhattacharyya {
     private static class PRF {
         public String _name;
         public Map<String,Double> _prob = new HashMap<String,Double>();
-        public void load(File file) throws IOException{
-            _name = file.getName();
+        public void load(File file,String term) throws IOException{
+            _name = term;
             FileReader filereader = new FileReader(file);
             BufferedReader bufferedreader = new BufferedReader(filereader);
             String line = bufferedreader.readLine();
             String[] tmp;
             while (line!=null) {
-                tmp = line.split(" ");
-                _prob.put(tmp[0],Double.parseDouble(tmp[1]));
+                tmp = line.split("[\t]");
+                if (tmp.length>1) {
+                    _prob.put(tmp[0],Double.parseDouble(tmp[1]));
+                }
                 line = bufferedreader.readLine();
             }
             bufferedreader.close();
@@ -45,14 +47,20 @@ public class Bhattacharyya {
         }
     }
     private static void loadData (String path) throws IOException{
-        final File folder = new File(path);
-        for (final File fileEntry : folder.listFiles()) {
-            if (!fileEntry.isDirectory()) {
-                PRF prf = new PRF();
-                prf.load(fileEntry);
-                _prfs.add(prf);
-            }
+        System.out.println(path);
+        FileReader filereader = new FileReader(path);
+        BufferedReader bufferedreader = new BufferedReader(filereader);
+        String line = bufferedreader.readLine();
+        String[] tmp;
+        while (line!=null) {
+            tmp = line.split(":");
+            File fileEntry = new File(tmp[1]);
+            PRF prf = new PRF();
+            prf.load(fileEntry,tmp[0]);
+            _prfs.add(prf);
+            line = bufferedreader.readLine();
         }
+        bufferedreader.close();
     }
     private static void compute(String path) throws IOException {
         FileWriter fstream = new FileWriter(path);
