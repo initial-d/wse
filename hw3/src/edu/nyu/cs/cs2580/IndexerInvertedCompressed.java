@@ -401,7 +401,7 @@ public class IndexerInvertedCompressed extends IndexerInverted implements Serial
           _termDocFreq.set(dix,_termDocFreq.get(dix)+1);
       }
       try {
-          if((did+1)%1000 == 0) {
+          if((did+1)%500 == 0) {
               flushToFile();
           }
       } catch (Exception e) {
