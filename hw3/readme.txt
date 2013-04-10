@@ -40,3 +40,8 @@ data mining:prf-4.tsv
 web search:prf-5.tsv
 
 That prf-1..5.tsv are the prf output of prf?query=google,bing...
+
+
+in comprehensive I calculate the score by
+
+score = log2(ql) + 0.1*log2(page_rank) + 0.1*log2(num_view)
