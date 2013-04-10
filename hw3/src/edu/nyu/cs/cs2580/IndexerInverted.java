@@ -45,7 +45,9 @@ public abstract class IndexerInverted extends Indexer implements Serializable {
     public abstract void appendToFile(BufferedWriter out) ;
     public abstract void loadAdditional(BufferedReader out) ;
     protected int getIndex(String term) {
-        //        System.out.println(HTMLParser.stemm(term));
+        //        System.out.println("stemmed:"+HTMLParser.stemm(term));
+        if (_dictionary.get(term)!=null)
+            return _dictionary.get(term);
         return _dictionary.get(HTMLParser.stemm(term));
     }
 
@@ -310,7 +312,6 @@ public abstract class IndexerInverted extends Indexer implements Serializable {
     public Vector<Integer> convertTermsToIdx (Vector<String> terms) {
         Vector<Integer> ret = new Vector<Integer>();
         for (String term: terms) {
-            //ret.add(term);
             ret.add(getIndex(term));
             //            ret.add(_dictionary.get(term));
             //            System.out.println(term+" "+ret.get(ret.size()-1));

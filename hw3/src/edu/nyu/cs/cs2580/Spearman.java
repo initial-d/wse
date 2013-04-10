@@ -87,7 +87,7 @@ public class Spearman {
         return false;
     }
     private static void calculatePr() {
-        System.out.println("PR:");
+        //        System.out.println("PR:");
         Collections.sort(_infosV, new pageRankComparator());
         /*        int head=0,tail=0;
         double sum;
@@ -105,15 +105,15 @@ public class Spearman {
             }*/
         for (int i = 0; i<_infosV.size();i++)
             _infosV.get(i)._pR = (double)i+1;
-        for (int i = 0; i<_infosV.size();i++)
+        /*        for (int i = 0; i<_infosV.size();i++)
             System.out.println(_infosV.get(i)._name+" "+
                                _infosV.get(i)._numView+" "+
                                _infosV.get(i)._pageRank +" " +
                                _infosV.get(i)._nR + " "+
-                               _infosV.get(i)._pR);
+                               _infosV.get(i)._pR);*/
     }
     private static void calculateNr() {
-        System.out.println("NR:");
+        //        System.out.println("NR:");
         Collections.sort(_infosV, new numViewComparator());
         /*        int head=0,tail=0;
         double sum;
@@ -130,12 +130,12 @@ public class Spearman {
             }*/
         for (int i = 0; i<_infosV.size();i++)
           _infosV.get(i)._nR = (double)i+1;
-        for (int i = 0; i<_infosV.size();i++)
+        /*        for (int i = 0; i<_infosV.size();i++)
             System.out.println(_infosV.get(i)._name+" "+
                                _infosV.get(i)._numView+" "+
                                _infosV.get(i)._pageRank +" " +
                                _infosV.get(i)._nR + " " +
-                               _infosV.get(i)._pR);
+                               _infosV.get(i)._pR);*/
     }
     private static void computeRanks() {
         calculatePr();

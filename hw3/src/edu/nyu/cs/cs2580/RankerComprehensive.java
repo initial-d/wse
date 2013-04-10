@@ -10,7 +10,7 @@ import java.util.Iterator;
 import java.io.IOException;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
-
+import java.lang.Math;
 import edu.nyu.cs.cs2580.QueryHandler.CgiArguments;
 import edu.nyu.cs.cs2580.SearchEngine.Options;
 
@@ -43,17 +43,17 @@ public class RankerComprehensive extends Ranker {
     private double jmsScore (Query query, int did) {
         Vector<String[]> qp = query.getPhrases();
         Vector<String> qv = query.getTokenNotInPhrase();
-        for (int i = 0; i<qv.size();i++)
+        /*        for (int i = 0; i<qv.size();i++)
             qv.set(i,HTMLParser.stemm(qv.get(i)));
         for (int i = 0; i<qp.size();i++)
             for (int j = 0; j<qp.get(i).length;j++)
                 qp.get(i)[j] = HTMLParser.stemm(qp.get(i)[j]);
-
+        */
         double D = _indexer.getDoc(did).getSize();
         double C = _indexer.totalTermFrequency();
         double fq;
         double cq;
-        double lambda = 0.5;
+        double lambda = 0.8;
         double score = 1.0;
 
         for (int i=0; i<qv.size();i++) {
@@ -68,7 +68,12 @@ public class RankerComprehensive extends Ranker {
             double ret = fq/D;
             score *=ret;
         }
+        Document doc = _indexer.getDoc(did);
+        double pg = doc.getPageRank();
+        double nv = doc.getNumViews();
         score = Math.log(score)/Math.log(2.0);
+        score = score + 0.1*Math.log(pg+1)/Math.log(2.0);
+        score = score + 0.1*Math.log(nv+1)/Math.log(2.0);
         return score;
     }
 

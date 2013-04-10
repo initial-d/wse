@@ -66,7 +66,6 @@ public class RankerFavorite extends Ranker {
               rankQueue.poll();
           }
           docid = doc._docid;
-          System.out.println(doc.getTitle());
       }
 
       Vector<ScoredDocument> results = new Vector<ScoredDocument>();
