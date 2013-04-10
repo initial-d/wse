@@ -411,7 +411,7 @@ public class IndexerInvertedCompressed extends IndexerInverted implements Serial
   public void addToken(String token, ArrayList<Integer> tokens) {
       int idx = -1;
       if (_dictionary.containsKey(token)) {
-          idx = getIndex(token);
+          idx = _dictionary.get(token);
       } else {
         idx = _termNum++;
         //        _terms.add(token);
@@ -612,7 +612,7 @@ public class IndexerInvertedCompressed extends IndexerInverted implements Serial
   public int corpusDocFrequencyByTerm(String term) {
       if (!_dictionary.containsKey(term))
           return 0;
-      Integer idx = getIndex(term);
+      Integer idx = _dictionary.get(term);//getIndex(term);
       if (idx<0) return 0;
       return _termDocFreq.get(idx);
   }
@@ -620,7 +620,7 @@ public class IndexerInvertedCompressed extends IndexerInverted implements Serial
   public int corpusTermFrequency(String term) {
       if (!_dictionary.containsKey(term))
           return 0;
-      Integer idx = getIndex(term);
+      Integer idx = _dictionary.get(term);//getIndex(term);
       if (idx<0) return 0;
       return _termCorFreq.get(idx);
   }
@@ -634,7 +634,7 @@ public class IndexerInvertedCompressed extends IndexerInverted implements Serial
 
 
   public int documentTermFrequency(String term, int did) {
-      int dix = getIndex(term);
+      int dix = _dictionary.get(term);//getIndex(term);
       for (int i = 0; i<_termToOccus.get(dix).size();i++) {
           if (_termToOccus.get(dix).get(i).get(0)==did)
               return _termToOccus.get(dix).size()-1;
@@ -644,7 +644,7 @@ public class IndexerInvertedCompressed extends IndexerInverted implements Serial
     public int docPhraseCount(String[] phrase, int did) {
         Vector<Integer> idsx = new Vector<Integer>();
         for (String s:phrase) {
-            idsx.add(getIndex(s));
+            idsx.add(_dictionary.get(s));
         }
         return docPhraseCount(idsx,did);
     }

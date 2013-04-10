@@ -45,6 +45,7 @@ public abstract class IndexerInverted extends Indexer implements Serializable {
     public abstract void appendToFile(BufferedWriter out) ;
     public abstract void loadAdditional(BufferedReader out) ;
     protected int getIndex(String term) {
+        //        System.out.println(HTMLParser.stemm(term));
         return _dictionary.get(HTMLParser.stemm(term));
     }
 
@@ -103,38 +104,22 @@ public abstract class IndexerInverted extends Indexer implements Serializable {
 
     @Override
         public void constructIndex () throws IOException {
-        if (_options._corpusPrefix.equals("data/simple")) {
-            String corpusFile = _options._corpusPrefix + "/corpus.tsv";
-            System.out.println("Construct index from: " + corpusFile);
-            BufferedReader reader = new BufferedReader(new FileReader(corpusFile));
-            try {
-                String line = null;
-                while ((line = reader.readLine()) != null) {
-                    processDocument(line);
-                }
-            } finally {
-                reader.close();
+        CorpusAnalyzer analyzer = CorpusAnalyzer.Factory.getCorpusAnalyzerByOption(
+                                                                                   SearchEngine.OPTIONS);
+        Map<String,Double> pageRank = (HashMap<String,Double>) analyzer.load();
+        LogMiner miner = LogMiner.Factory.getLogMinerByOption(SearchEngine.OPTIONS);
+        Map<String,Integer> numViews = (HashMap<String,Integer>) miner.load();
+        final File folder = new File(_options._corpusPrefix);
+        for (final File fileEntry : folder.listFiles()) {
+            if (!fileEntry.isDirectory()) {
+                handleFile(fileEntry.getName(),pageRank,numViews);
             }
         }
-        else {
-            CorpusAnalyzer analyzer = CorpusAnalyzer.Factory.getCorpusAnalyzerByOption(
-                SearchEngine.OPTIONS);
-            Map<String,Double> pageRank = (HashMap<String,Double>) analyzer.load();
-            LogMiner miner = LogMiner.Factory.getLogMinerByOption(SearchEngine.OPTIONS);
-            Map<String,Integer> numViews = (HashMap<String,Integer>) miner.load();
-            final File folder = new File(_options._corpusPrefix);
-            for (final File fileEntry : folder.listFiles()) {
-                if (!fileEntry.isDirectory()) {
-                    handleFile(fileEntry.getName(),pageRank,numViews);
-                }
-            }
-            detectStopWords();
-        }
+        detectStopWords();
         System.out.println(
                            "Indexed " + Integer.toString(_numDocs) + " docs with " +
                            Long.toString(_totalTermFrequency) + " terms, @"+
                            Integer.toString(_termNum)+" unique terms.");
-
         String indexFile = getIndexFilePath();
         System.out.println("Store index to: " + indexFile);
         writeToFile();
@@ -151,16 +136,14 @@ public abstract class IndexerInverted extends Indexer implements Serializable {
         DocumentIndexed doc = new DocumentIndexed (_documents.size(), this);
         doc.setTitle(fileName);
         doc.setSize(titleTokens.size()+bodyTokens.size());
+
+
         if (pageRank.get(fileName)!=null)
             doc.setPageRank((float)(double)pageRank.get(fileName));
         if (numViews.get(fileName)!=null)
             doc.setNumViews((Integer)numViews.get(fileName));
-        //      doc.setNumViews(numViews);
-        //    doc.setTitleTokens(titleTokens);
-        //    doc.setBodyTokens(bodyTokens);
         _documents.add(doc);
         ++_numDocs;
-
         Set<Integer> uniqueTerms = new HashSet<Integer>();
         int did = _documents.size()-1;
         updateStatistics(titleTokens, uniqueTerms,did,0);

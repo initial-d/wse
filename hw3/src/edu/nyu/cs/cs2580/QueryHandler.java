@@ -132,6 +132,14 @@ class QueryHandler implements HttpHandler {
     response.append(response.length() > 0 ? "\n" : "");
   }
 
+  private void constructTextOutput(Vector<String> terms,
+                                   Vector<Double> probs,
+                                   StringBuffer response) {
+      for (int i = 0; i<terms.size();i++)
+          response.append(terms.get(i)).append("\t").append(probs.get(i)).append("\n");
+      response.append(response.length() > 0 ? "\n" : "");
+  }
+
   public void handle(HttpExchange exchange) throws IOException {
     String requestMethod = exchange.getRequestMethod();
     if (!requestMethod.equalsIgnoreCase("GET")) { // GET requests only.
@@ -177,18 +185,28 @@ class QueryHandler implements HttpHandler {
     processedQuery.processQuery();
 
     // Ranking.
-    Vector<ScoredDocument> scoredDocs =
-        ranker.runQuery(processedQuery, cgiArgs._numResults);
     StringBuffer response = new StringBuffer();
-    switch (cgiArgs._outputFormat) {
-    case TEXT:
-        constructTextOutput(scoredDocs, response);
-        break;
-    case HTML:
-        // @CS2580: Plug in your HTML output
-        break;
-    default:
-        // nothing
+    if (uriPath.equals("/search")) {
+        Vector<ScoredDocument> scoredDocs 
+            = ranker.runQuery(processedQuery, cgiArgs._numResults);
+        switch (cgiArgs._outputFormat) {
+        case TEXT:
+            constructTextOutput(scoredDocs, response);
+            break;
+        case HTML:
+            // @CS2580: Plug in your HTML output
+            break;
+        default:
+            // nothing
+        }
+    } else {
+        Vector<ScoredDocument>scoredDocs 
+            = ranker.runQuery(processedQuery, cgiArgs._numDocs);
+        Vector<String> terms = new Vector<String> ();
+        Vector<Double> probs = new Vector<Double> ();
+        RPF rpf = new RPF(cgiArgs,SearchEngine.OPTIONS,_indexer);
+        rpf.rpf(scoredDocs,terms,probs);
+        constructTextOutput(terms,probs, response);
     }
     respondWithMsg(exchange, response.toString());
     System.out.println("Finished query: " + cgiArgs._query);

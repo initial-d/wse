@@ -43,6 +43,12 @@ public class RankerComprehensive extends Ranker {
     private double jmsScore (Query query, int did) {
         Vector<String[]> qp = query.getPhrases();
         Vector<String> qv = query.getTokenNotInPhrase();
+        for (int i = 0; i<qv.size();i++)
+            qv.set(i,HTMLParser.stemm(qv.get(i)));
+        for (int i = 0; i<qp.size();i++)
+            for (int j = 0; j<qp.get(i).length;j++)
+                qp.get(i)[j] = HTMLParser.stemm(qp.get(i)[j]);
+
         double D = _indexer.getDoc(did).getSize();
         double C = _indexer.totalTermFrequency();
         double fq;
@@ -50,8 +56,6 @@ public class RankerComprehensive extends Ranker {
         double lambda = 0.5;
         double score = 1.0;
 
-        //        System.out.println(D);
-        //        System.out.println(C);
         for (int i=0; i<qv.size();i++) {
             fq = _indexer.documentTermFrequency(qv.get(i),did);
             cq = _indexer.corpusTermFrequency(qv.get(i));
@@ -95,70 +99,6 @@ public class RankerComprehensive extends Ranker {
             results.add(scoredDoc);
         }
         Collections.sort(results, Collections.reverseOrder());
-        try {
-            Vector<Term> prf = expand(results);
-            writeToFile(prf,query);
-        } catch (IOException e) {
-        }
         return results;
-    }
-    private void writeToFile(Vector<Term> prf,Query query) throws IOException{
-        int sum = 0;
-        for (int i = 0; i<prf.size();i++)
-            sum += prf.get(i)._count;
-        String name = query._query;
-        name = name.replace(" ","_");
-        //        name = name.replace("\"","_\"");
-        FileWriter fstream = new FileWriter("data/index/prf/"+name+".prf");
-        BufferedWriter out = new BufferedWriter(fstream);
-        double p;
-        for (int i = 0; i<prf.size();i++) {
-            p = ((double)prf.get(i)._count)/(double) sum;
-            out.write(prf.get(i)._term + " " + Double.toString(p)+"\n");
-        }
-        out.close();
-    }
-    private void handleFile(String filePath,Map<String,Term> terms) {
-        Vector<String> words = HTMLParser.parse(filePath);
-        for (int i = 0; i<words.size();i++) {
-            Term t = terms.get(words.get(i));
-            if (t==null) {
-                t = new Term(words.get(i),1);
-                terms.put(words.get(i),t);
-            } else {
-                t._count++;
-            }
-        }
-    }
-    private Vector<Term>  expand(Vector<ScoredDocument> docs) throws IOException{
-        Map<String,Term> terms = new HashMap<String,Term> ();
-        for (int i = 0; i<docs.size(); i++) {
-            handleFile(_options._corpusPrefix+"/"+docs.get(i).getDoc().getTitle(),
-                       terms);
-        }
-        // working on terms
-        //        System.out.println(terms.size());
-        Iterator it = terms.entrySet().iterator();
-        Vector<Term> tV= new Vector<Term>();
-
-        while (it.hasNext()) {
-            Map.Entry pairs = (Map.Entry)it.next();
-            tV.add((Term) pairs.getValue());
-        }
-        Collections.sort(tV);
-        StopWords stopWords = new StopWords();
-        stopWords.load();
-        int j = _arguments.getNumTerms();
-        Vector<Term> result = new Vector<Term> ();
-        for (int i = 0; i<tV.size();i++)
-            if (!stopWords.isStopWord(tV.get(i)._term)&&j>0) {
-                System.out.println(tV.get(i)._term+" "+
-                                   tV.get(i)._count+" "+
-                                   _indexer.corpusTermFrequency(tV.get(i)._term)+" "+
-                                   _indexer.corpusDocFrequencyByTerm(tV.get(i)._term));
-                result.add(tV.get(i));
-                j--;
-            }
-        return result;
     }
 }

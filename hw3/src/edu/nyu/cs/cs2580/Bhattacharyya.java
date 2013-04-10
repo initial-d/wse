@@ -58,7 +58,8 @@ public class Bhattacharyya {
         FileWriter fstream = new FileWriter(path);
         BufferedWriter out = new BufferedWriter(fstream);
         for (int i = 0; i<_prfs.size();i++)
-            for (int j = i+1; j<_prfs.size();j++) {
+            for (int j = 0; j<_prfs.size();j++) 
+                if (i!=j){
                 double simi = _prfs.get(i).similarity(_prfs.get(j));
                 out.write(_prfs.get(i)._name+"\t"+
                           _prfs.get(j)._name+"\t"+

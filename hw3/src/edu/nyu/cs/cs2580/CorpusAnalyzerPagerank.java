@@ -25,7 +25,7 @@ public class CorpusAnalyzerPagerank extends CorpusAnalyzer {
     private ArrayList<Set<Integer> > _docInLink = new ArrayList<Set<Integer> >();
     private ArrayList<Double> _pageRank = new ArrayList<Double> ();
     private double lambda = 0.9;
-    private int ite = 1;
+    private int ite = 2;
     public CorpusAnalyzerPagerank(Options options) {
         super(options);
     }
@@ -58,7 +58,6 @@ public class CorpusAnalyzerPagerank extends CorpusAnalyzer {
         for (final File fileEntry : folder.listFiles()) {
             docCount++;
             if (docCount%1000 == 0 ) System.out.println(docCount);
-
             if (!fileEntry.isDirectory()) {
                 handleFile(fileEntry.getName());
             }
@@ -83,11 +82,10 @@ public class CorpusAnalyzerPagerank extends CorpusAnalyzer {
     @Override
         public void compute() throws IOException {
         System.out.println("Computing " + this.getClass().getName());
-        double score = 1.0 / _docOutLinkCount.size();
+        double score = 1.0;// _docOutLinkCount.size();
         for (int i = 0; i<_docOutLinkCount.size();i++) {
             _pageRank.add(score);
         }
-        //        outputePageRank();
         for (int i = 0; i<ite; i++) {
             ArrayList<Double> newRank = new ArrayList<Double> ();
             for (int j = 0; j<_pageRank.size();j++)
@@ -156,7 +154,7 @@ public class CorpusAnalyzerPagerank extends CorpusAnalyzer {
         }
     }
     private double newScore(int inx) {
-        double ret=1.0-lambda;
+        double ret=(1.0-lambda);//_docInLink.size();
         for (Integer source: _docInLink.get(inx)) {
             ret = ret + lambda*_pageRank.get(source)
                 /_docOutLinkCount.get(source);
@@ -195,14 +193,17 @@ public class CorpusAnalyzerPagerank extends CorpusAnalyzer {
         String fileName;
         int idx;
         double score;
+        double sum = 0;
         while (it.hasNext()) {
             Map.Entry pairs = (Map.Entry)it.next();
             fileName = (String)pairs.getKey();
             idx = (Integer) pairs.getValue();
             score = _pageRank.get(idx);
+            sum  = sum + score;
             out.write(fileName + " " +Double.toString(score));
             out.newLine();
         }
         out.close();
+        System.out.println("SUm of page rank:"+sum);
     }
 }
