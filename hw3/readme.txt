@@ -25,13 +25,19 @@ lambda iteration  result
 0.1    2          0.4547137514318028
 
 
-As the grading script Bhattacharyya will take an file name as input argument whose format is
+There is a script  at hw3/bb.sh, to run it first start server, it will load queries in hw3/queries.tsv
+
+$  java -cp src -Xmx256m edu.nyu.cs.cs2580.SearchEngine --mode=serve --port=25809 --options=conf/engine.conf
+Then run
+
+$ bash -x bb.sh
+
+As the grading script, Bhattacharyya will take an file name as input argument whose format is
  <query>:<prf file>
 
 where prf is the output of prf? command of corresponding query
 
 e.g
-
 assume prf.tsv is the input file it should be like
 google:prf-1.tsv
 bing:prf-2.tsv
