@@ -104,7 +104,6 @@ public class IndexerInvertedCompressed extends IndexerInverted implements Serial
   @Override
   public void removeStopwordsInfo(int idx) {
       _termToOccus.get(idx).clear();
-      //      System.out.println("to be implemented!!!");
   }
   private void loadTerms (Vector<Integer> idxs) throws IOException{
       for (int i = 0; i<idxs.size();i++) {
@@ -549,25 +548,18 @@ public class IndexerInvertedCompressed extends IndexerInverted implements Serial
           if (r) ret++;
 
           pointer.set(0,pointer.get(0)+1);
-          //          for (int i = 0; i<phrase.size();i++) {
-          //              System.out.print(termDocInfo.get(i).get(pointer.get(i))+" ");
-          //          }
-          //          System.out.println();
       }
       return ret;
   }
 
   public Document nextDoc(Query query, int docid) {
-      //      System.out.println("nextdoc");
       Vector<Integer> idxs = convertTermsToIdx(query.getTokens());
       Vector<Vector<Integer> > phrases = convertPhrases(query.getPhrases());
 
       if (loadedTermCount>1000) {
           clearMemory();
       }
-      //      System.out.println("idxs:"+idxs.size());
       for (int i = 0; i<idxs.size();i++) {
-          //          System.out.println("idxs:"+idxs.get(i));
           if (idxs.get(i)==null)
               return null;
       }
